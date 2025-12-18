@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Learn CSS -->
+    <link rel="stylesheet" href="../../../style/learn.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="learn-logo-section">
+                <div class="learn-logo">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-link learn-dropdown-btn" type="button" id="learnModeDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span data-i18n="learn">Learn</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="learnModeDropdown">
+                        <li><a class="dropdown-item" href="#" data-i18n="learn">Learn</a></li>
+                        <li><a class="dropdown-item" href="#" data-i18n="flashcards">Flashcards</a></li>
+                        <li><a class="dropdown-item" href="#" data-i18n="write">Write</a></li>
+                        <li><a class="dropdown-item" href="#" data-i18n="test">Test</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-center">
+            <!-- Progress Bar -->
+            <div class="learn-progress-container">
+                <div class="learn-progress-line">
+                    <div class="learn-progress-fill" id="progressFill"></div>
+                    <div class="progress-badge progress-badge-current" id="currentProgress">1</div>
+                    <div class="progress-badge progress-badge-total" id="totalProgress">4</div>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-trial" data-i18n="startFreeTrial">Start free trial</button>
+            <button class="btn-settings">
+                <i class="bi bi-gear"></i>
+            </button>
+            <button class="btn-close-learn" onclick="window.location.href='flashcards.html'">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="learn-main">
+        <!-- Question Card -->
+        <div class="learn-container" id="questionCard">
+            <div class="learn-card">
+                <div class="learn-question-section">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <h3 class="question-label mb-0" data-i18n="definition">Definition</h3>
+                        <button class="btn-speaker" type="button">
+                            <i class="bi bi-volume-up-fill"></i>
+                        </button>
+                    </div>
+                    <p class="question-text" id="questionText">Est debitis qui beat.</p>
+                </div>
+
+                <div class="learn-answers-section">
+                    <h3 class="answers-label" id="answersLabel" data-i18n="chooseAnswer">Choose an answer</h3>
+                    <div class="answers-list" id="answersList">
+                        <button class="answer-btn" onclick="selectAnswer(this, 1)">
+                            <span class="answer-number">1</span>
+                            <span class="answer-text">Dolor vitae ut quo c.</span>
+                        </button>
+                        <button class="answer-btn" onclick="selectAnswer(this, 2)">
+                            <span class="answer-number">2</span>
+                            <span class="answer-text">Excepturi exercitati.</span>
+                        </button>
+                        <button class="answer-btn" onclick="selectAnswer(this, 3)">
+                            <span class="answer-number">3</span>
+                            <span class="answer-text">Deleniti soluta duis.</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="learn-footer">
+                    <button class="btn-flip-card">
+                        <i class="bi bi-arrow-up-right-square"></i>
+                    </button>
+                    <button class="btn-dont-know">
+                        <i class="bi bi-bookmark"></i>
+                        <span data-i18n="dontKnow">Don't know?</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completion Card -->
+        <div class="learn-container" id="completionCard" style="display: none;">
+            <div class="completion-card">
+                <h1 class="completion-heading">Going strong. You can do this!</h1>
+                <p class="completion-progress-text">Total set progress: <span id="progressPercentage">0%</span></p>
+
+                <div class="completion-progress-bar-container">
+                    <div class="completion-progress-bar">
+                        <div class="completion-progress-fill" id="completionProgressFill"></div>
+                    </div>
+                    <div class="completion-badges-wrapper">
+                        <div class="completion-badge completion-badge-correct" id="correctBadge">
+                            <span class="badge-number" id="correctCount">0</span>
+                            <span class="badge-label">Correct</span>
+                        </div>
+                        <div class="completion-badge completion-badge-total" id="totalBadge">
+                            <span class="badge-number" id="totalCount">0</span>
+                            <span class="badge-label">Total questions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terms-studied-section">
+                    <h3 class="terms-studied-heading">Terms studied in this round</h3>
+                    <div class="terms-list" id="termsList">
+                        <!-- Terms will be dynamically added here -->
+                    </div>
+                </div>
+
+                <div class="completion-footer">
+                    <p class="press-key-text">Press any key to continue</p>
+                    <button class="btn-continue" onclick="restartQuiz()">Continue</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Dashboard JS -->
+    <script src="../../../style/dashboard.js"></script>
+    <!-- Learn JS -->
+    <script src="../../../style/learn.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <button class="btn-upgrade" data-i18n="upgrade">
+                Upgrade: free 7-day trial
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <!-- Profile Dropdown Menu -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span data-i18n="achievements">Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="settings">Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span data-i18n="lightMode">Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item no-icon" data-i18n="logOut">Log out</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="privacyPolicy">Privacy policy</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="helpFeedback">Help and feedback</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="upgradeBtn">Upgrade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i class="bi bi-house-door"></i>
+                    <span data-i18n="home">Home</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span data-i18n="yourLibrary">Your library</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-bell"></i>
+                    <span data-i18n="notifications">Notifications</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-plus-circle"></i>
+                    <span data-i18n="newFolder">New folder</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="startHere">Start here</div>
+                <a href="flashcards.html" class="nav-item">
+                    <i class="bi bi-card-text"></i>
+                    <span data-i18n="flashcards">Flashcards</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-book"></i>
+                    <span data-i18n="expertSolutions">Expert Solutions</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Jump back in Section -->
+            <section class="jump-back-section">
+                <h2 class="section-title" data-i18n="jumpBackIn">Jump back in</h2>
+                <div class="jump-back-slider-wrapper">
+                    <div class="jump-back-cards" id="jumpBackCards">
+                        <!-- Cards will be dynamically loaded here -->
+                    </div>
+                </div>
+                <div class="jump-back-pagination" id="jumpBackPagination">
+                    <!-- Pagination dots will be dynamically loaded here -->
+                </div>
+            </section>
+
+            <!-- Recents Section -->
+            <section class="recents-section">
+                <h2 class="section-title" data-i18n="recents">Recents</h2>
+                <div class="recents-list">
+                    <a href="#" class="recent-item">
+                        <i class="bi bi-card-text recent-icon"></i>
+                        <div class="recent-content">
+                            <div class="recent-title">World flags</div>
+                            <div class="recent-meta">59 cards • by Quizlet</div>
+                        </div>
+                    </a>
+                    <a href="#" class="recent-item">
+                        <i class="bi bi-card-text recent-icon"></i>
+                        <div class="recent-content">
+                            <div class="recent-title">Communication & Language Vocabulary, 1. Readi...</div>
+                            <div class="recent-meta">100 cards • by quizlette77757375</div>
+                        </div>
+                    </a>
+                    <a href="#" class="recent-item">
+                        <i class="bi bi-card-text recent-icon"></i>
+                        <div class="recent-content">
+                            <div class="recent-title">hjhj</div>
+                            <div class="recent-meta">2 cards • by you</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Game Section -->
+            <section class="game-section">
+                <h2 class="section-title">Switch it up with a game</h2>
+                <div class="game-card">
+                    <button class="card-menu-btn">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <div class="game-icon">
+                        <div class="icon-grid">
+                            <div class="grid-square blue"></div>
+                            <div class="grid-square white"></div>
+                            <div class="grid-square blue"></div>
+                            <div class="grid-square white"></div>
+                            <div class="grid-square blue"></div>
+                            <div class="grid-square white"></div>
+                            <div class="grid-square blue"></div>
+                            <div class="grid-square white"></div>
+                            <div class="grid-square blue"></div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Communication & Language Vocabulary, 1. Reading: Craft and Structure, SAT
+                            Reading and Writing</h3>
+                        <p class="card-subtitle">Get more moves by answering correctly</p>
+                        <button class="btn-play-blocks">Play Blocks</button>
+                    </div>
+                    <div class="game-blocks">
+                        <img src="../../../assets/admin/images/blocks_new.png" alt="Game Blocks" class="blocks-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Staff Picks Section -->
+            <section class="staff-picks-section">
+                <div class="staff-picks-header">
+                    <div class="staff-picks-title-group">
+                        <span class="staff-picks-label">Staff picks</span>
+                        <h2 class="staff-picks-title">Try out these flashcard sets</h2>
+                    </div>
+                    <button class="section-options-btn">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                </div>
+                <div class="staff-picks-container">
+                    <div class="staff-picks-scroll">
+                        <div class="staff-pick-card">
+                            <i class="bi bi-card-text staff-pick-icon"></i>
+                            <div class="staff-pick-content">
+                                <h3 class="staff-pick-title">Quizlet basics</h3>
+                                <div class="staff-pick-meta">11 cards • by Quizlet</div>
+                            </div>
+                            <button class="card-options-btn">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                        </div>
+                        <div class="staff-pick-card">
+                            <i class="bi bi-card-text staff-pick-icon"></i>
+                            <div class="staff-pick-content">
+                                <h3 class="staff-pick-title">Common Quizlet questions</h3>
+                                <div class="staff-pick-meta">15 cards • by Quizlet</div>
+                            </div>
+                            <button class="card-options-btn">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                        </div>
+                        <div class="staff-pick-card">
+                            <i class="bi bi-card-text staff-pick-icon"></i>
+                            <div class="staff-pick-content">
+                                <h3 class="staff-pick-title">Effective study strategies</h3>
+                                <div class="staff-pick-meta">12 cards • by Quizlet</div>
+                            </div>
+                            <button class="card-options-btn">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                        </div>
+                        <div class="staff-pick-card">
+                            <i class="bi bi-card-text staff-pick-icon"></i>
+                            <div class="staff-pick-content">
+                                <h3 class="staff-pick-title">Study tips and tricks</h3>
+                                <div class="staff-pick-meta">18 cards • by Quizlet</div>
+                            </div>
+                            <button class="card-options-btn">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="staff-picks-next-btn">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Blast Game Section -->
+            <section class="game-section">
+                <h2 class="section-title">Switch it up with a game</h2>
+                <div class="game-card">
+                    <button class="card-menu-btn">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <div class="game-icon">
+                        <i class="bi bi-rocket-takeoff" style="font-size: 1.5rem; color: #60a5fa;"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hello In different languages</h3>
+                        <p class="card-subtitle">Blast correct answers before time's up</p>
+                        <button class="btn-play-blocks">Play Blast</button>
+                    </div>
+                    <div class="game-blocks">
+                        <img src="../../../assets/admin/images/blast_new.png" alt="Blast Game" class="blocks-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Personalize Content Section -->
+            <section class="personalize-section">
+                <h2 class="section-title">Personalize your content</h2>
+                <div class="personalize-card">
+                    <button class="card-menu-btn">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <div class="personalize-content">
+                        <div class="personalize-icon">
+                            <span class="logo-q-large">Q</span>
+                        </div>
+                        <div class="personalize-text">
+                            <p class="personalize-placeholder">Add your exams to get recommended content</p>
+                            <button class="btn-add-exams">Add standardized exams</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+        </div>
+        <div class="footer-language">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle language-btn" type="button"
+                    id="footerLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    English (USA)
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="footerLanguageDropdown">
+                    <li><a class="dropdown-item" href="#">English (UK)</a></li>
+                    <li><a class="dropdown-item" href="#">Español</a></li>
+                    <li><a class="dropdown-item" href="#">Français</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Dashboard JS -->
+    <script src="../../../style/dashboard.js"></script>
+</body>
+
+</html>

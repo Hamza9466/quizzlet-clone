@@ -1,0 +1,683 @@
+/* Flashcards Page Styles - Minimal custom CSS, using Bootstrap */
+
+/* Button Styles */
+.btn-visibility,
+.btn.btn-outline-secondary.btn-sm.d-inline-flex {
+    background: transparent !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-visibility:hover,
+.btn.btn-outline-secondary.btn-sm.d-inline-flex:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.btn-visibility i,
+.btn.btn-outline-secondary.btn-sm.d-inline-flex i {
+    color: #ffffff !important;
+}
+
+.btn-create-set,
+.btn.btn-outline-secondary.btn-sm:not(.d-inline-flex) {
+    background: transparent !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 6px !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-create-set:hover,
+.btn.btn-outline-secondary.btn-sm:not(.d-inline-flex):hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.btn-create-practice,
+.btn.btn-primary.btn-sm {
+    background: #1a56db !important;
+    border: none !important;
+    color: #ffffff !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 6px !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-create-practice:hover,
+.btn.btn-primary.btn-sm:hover {
+    background: #1548b8 !important;
+    color: #ffffff !important;
+}
+
+/* Input Fields */
+.form-control.bg-dark,
+.form-control {
+    background-color: #2E3856 !important;
+    border-color: #2E3856 !important;
+    color: #ffffff !important;
+}
+
+.form-control.bg-dark:focus,
+.form-control:focus {
+    background-color: #2E3856 !important;
+    border-color: #7c3aed !important;
+    box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.25);
+    color: #ffffff !important;
+}
+
+.form-control.bg-dark::placeholder,
+.form-control::placeholder {
+    color: #ffffff !important;
+}
+
+/* Flashcard input fields */
+textarea.form-control {
+    background-color: #2E3856 !important;
+    border-color: #2E3856 !important;
+    color: #ffffff !important;
+}
+
+textarea.form-control:focus {
+    background-color: #2E3856 !important;
+    border-color: #7c3aed !important;
+    box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.25);
+    color: #ffffff !important;
+}
+
+textarea.form-control::placeholder {
+    color: #ffffff !important;
+}
+
+/* Toggle Switch (needs custom CSS) */
+
+.toggle-switch {
+    width: 44px;
+    height: 24px;
+    background: #2E3856;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.toggle-switch.active {
+    background: #7c3aed;
+}
+
+.toggle-slider {
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(20px);
+}
+
+.btn-icon-tool {
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-icon-tool:hover {
+    border-color: #7c3aed;
+    background: #3d3d3d;
+    color: #ffffff;
+}
+
+.btn-icon-tool i {
+    color: #ffffff;
+}
+
+/* Flashcards List */
+.flashcards-list {
+    margin-bottom: 2rem;
+}
+
+.flashcard-item,
+.bg-dark {
+    background: #0A092D !important;
+    border: 2px solid #2E3856 !important;
+}
+
+.flashcard-item {
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.flashcard-number {
+    position: absolute;
+    left: -15px;
+    top: 1.5rem;
+    width: 30px;
+    height: 30px;
+    background: #7c3aed;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.flashcard-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-left: 1rem;
+}
+
+.flashcard-term,
+.flashcard-definition {
+    display: flex;
+    flex-direction: column;
+}
+
+.flashcard-field-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.flashcard-field-label a {
+    color: #7c3aed;
+    text-decoration: none;
+    font-size: 0.7rem;
+    text-transform: none;
+}
+
+.flashcard-field-label a:hover {
+    text-decoration: underline;
+}
+
+.flashcard-input {
+    width: 100%;
+    background: #2E3856;
+    border: 1px solid #4a4a4a;
+    border-radius: 4px;
+    padding: 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    min-height: 120px;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+}
+
+.flashcard-input:focus {
+    outline: none;
+    border-color: #7c3aed;
+}
+
+.flashcard-input::placeholder {
+    color: #ffffff;
+}
+
+.flashcard-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.flashcard-action-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.flashcard-action-btn:hover {
+    background: #2E3856;
+    color: #ffffff;
+}
+
+.flashcard-action-btn i {
+    color: #ffffff;
+}
+
+.flashcard-image-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #2E3856;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    min-width: 100px;
+}
+
+.flashcard-image-btn:hover {
+    border-color: #7c3aed;
+    background: #3d3d3d;
+}
+
+.flashcard-image-btn i {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.flashcard-image-btn span {
+    font-size: 0.75rem;
+    color: #ffffff;
+}
+
+.flashcard-tools {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.flashcard-tool-btn {
+    background: transparent;
+    border: 1px solid #4a4a4a;
+    color: #9ca3af;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.flashcard-tool-btn:hover {
+    border-color: #6a6a6a;
+    background: #2E3856;
+    color: #ffffff;
+}
+
+.flashcard-tool-btn.premium {
+    border-color: #fbbf24;
+}
+
+.flashcard-tool-btn.premium i {
+    color: #fbbf24;
+}
+
+/* Add Card Section */
+.add-card-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.btn-add-card {
+    background: #2E3856;
+    border: 2px dashed #586380;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-add-card:hover {
+    border-color: #7c3aed;
+    background: #3d3d3d;
+}
+
+/* Bottom Actions */
+.flashcards-bottom-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 2rem;
+    border-top: 1px solid #2E3856;
+}
+
+/* Image Button Styles */
+.btn-outline-secondary.d-flex.flex-column {
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.d-flex.flex-column i {
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.d-flex.flex-column small {
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.d-flex.flex-column:hover {
+    border-color: #7c3aed !important;
+    background-color: #3d3d3d !important;
+}
+
+/* Tool Buttons - White Icons */
+.btn-outline-secondary.btn-sm i {
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.btn-sm {
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.btn-sm:hover {
+    border-color: #7c3aed !important;
+    background-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.btn-sm:hover i {
+    color: #ffffff !important;
+}
+
+/* Action Buttons - White Icons */
+.btn-link.text-secondary {
+    color: #ffffff !important;
+}
+
+.btn-link.text-secondary i {
+    color: #ffffff !important;
+}
+
+.btn-link.text-secondary:hover {
+    color: #ffffff !important;
+}
+
+.btn-link.text-secondary:hover i {
+    color: #ffffff !important;
+}
+
+/* Image Button - Bootstrap Button Override */
+.btn-outline-secondary.d-flex.flex-column.image-upload-btn {
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    background-color: transparent !important;
+    cursor: pointer;
+}
+
+.btn-outline-secondary.d-flex.flex-column.image-upload-btn:hover {
+    border-color: #7c3aed !important;
+    background-color: #3d3d3d !important;
+}
+
+.btn-outline-secondary.d-flex.flex-column.image-upload-btn .uploaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.btn-outline-secondary.d-flex.flex-column i {
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.d-flex.flex-column small {
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.d-flex.flex-column:hover {
+    border-color: #7c3aed !important;
+    background-color: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary.d-flex.flex-column:hover i,
+.btn-outline-secondary.d-flex.flex-column:hover small {
+    color: #ffffff !important;
+}
+
+/* Light Theme Overrides */
+.light-theme .toggle-switch {
+    background: #e0e0e0;
+}
+
+.light-theme .toggle-switch.active {
+    background: #7c3aed;
+}
+
+.light-theme .bg-dark,
+.light-theme .flashcard-item {
+    background-color: #ffffff !important;
+    border-color: #e0e0e0 !important;
+}
+
+.light-theme .border-secondary {
+    border-color: #e0e0e0 !important;
+}
+
+.light-theme .text-white {
+    color: #1a1a1a !important;
+}
+
+.light-theme .text-secondary {
+    color: #6b7280 !important;
+}
+
+/* Manage Access Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.access-modal {
+    background: #0A092D;
+    border: 2px solid #2E3856;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.access-modal .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 1.5rem 0;
+}
+
+.access-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.access-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.access-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.access-dropdown-btn {
+    background: #2E3856 !important;
+    border: 1px solid #7c3aed !important;
+    color: #ffffff !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 6px !important;
+    font-size: 0.875rem !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s ease;
+    position: relative;
+}
+
+.access-dropdown-btn::after {
+    content: '\f282' !important;
+    font-family: 'bootstrap-icons' !important;
+    border: none !important;
+    width: auto !important;
+    height: auto !important;
+    position: absolute;
+    right: 1rem;
+    color: #ffffff !important;
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+}
+
+.access-dropdown-btn:hover,
+.access-dropdown-btn:focus {
+    background: #2E3856 !important;
+    border-color: #7c3aed !important;
+    color: #ffffff !important;
+}
+
+.access-help-text {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.access-modal .dropdown-menu {
+    background: #2E3856;
+    border: 1px solid #2E3856;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.access-modal .dropdown-item {
+    color: #ffffff;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+}
+
+.access-modal .dropdown-item:hover {
+    background: #3d3d3d;
+    color: #ffffff;
+}
+
+.access-modal .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.access-modal .btn-modal-save {
+    background: #1a56db;
+    border: none;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.access-modal .btn-modal-save:hover {
+    background: #1548b8;
+}
+
+/* Light theme for access modal */
+.light-theme .access-modal {
+    background: #ffffff;
+    border-color: #e0e0e0;
+}
+
+.light-theme .access-modal .modal-title {
+    color: #1a1a1a;
+}
+
+.light-theme .access-label {
+    color: #1a1a1a;
+}
+
+.light-theme .access-dropdown-btn {
+    background: #f0f0f0 !important;
+    border-color: #e0e0e0 !important;
+    color: #1a1a1a !important;
+}
+
+.light-theme .access-dropdown-btn:hover,
+.light-theme .access-dropdown-btn:focus {
+    background: #f0f0f0 !important;
+    border-color: #1a56db !important;
+}
+
+.light-theme .access-help-text {
+    color: #6b7280;
+}
+
+.light-theme .access-modal .dropdown-menu {
+    background: #ffffff;
+    border-color: #e0e0e0;
+}
+
+.light-theme .access-modal .dropdown-item {
+    color: #1a1a1a;
+}
+
+.light-theme .access-modal .dropdown-item:hover {
+    background: #f0f0f0;
+}

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizzLet-Clone</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../../style/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-4 shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="#" style="color: #1a56db; font-size: 1.5rem;">
+                Quizlet
+            </a>
+
+            <!-- Navbar Toggler for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto align-items-center">
+                    <!-- Study Tools Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-normal" href="#" id="studyToolsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Study tools
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="studyToolsDropdown">
+                            <li><a class="dropdown-item" href="#">Flashcards</a></li>
+                            <li><a class="dropdown-item" href="#">Learn</a></li>
+                            <li><a class="dropdown-item" href="#">Test</a></li>
+                            <li><a class="dropdown-item" href="#">Match</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Subjects Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-normal" href="#" id="subjectsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Subjects
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="subjectsDropdown">
+                            <li><a class="dropdown-item" href="#">Math</a></li>
+                            <li><a class="dropdown-item" href="#">Science</a></li>
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">History</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Search Bar -->
+                <div class="search-container mx-auto">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-secondary"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0" placeholder="Search for flashcards"
+                            aria-label="Search for flashcards">
+                    </div>
+                </div>
+
+                <!-- Right Side Actions -->
+                <div class="d-flex align-items-center ms-auto">
+                    <a href="signup.html" class="text-decoration-none me-4 fw-normal" style="color: #1a56db;">
+                        <i class="bi bi-plus-circle me-1"></i>Create
+                    </a>
+                    <a href="login.html" class="btn btn-primary rounded-pill px-4 text-decoration-none">
+                        Log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content text-center">
+                <h1 class="hero-title">How do you want to study?</h1>
+                <p class="hero-description">Master whatever you're learning with Quizlet's interactive flashcards,
+                    practice tests, and study activities.</p>
+                <button class="btn btn-primary btn-signup rounded-pill">Sign up for free</button>
+                <div class="mt-3">
+                    <a href="#" class="teacher-link">I'm a teacher</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Cards Section -->
+    <section class="study-cards-section py-5">
+        <div class="cards-container">
+            <div class="cards-wrapper" id="cardsWrapper">
+                <div class="cards-slider" id="cardsSlider">
+                    <a href="#" class="study-card-link">
+                        <div class="study-card" style="background: #423ED8;">
+                            <p class="card-title" style="color: white;">Flashcards</p>
+                            <img src="../../../assets/website/image/ZpFuUR5LeNNTxHxc_2Flashcards@2x.avif"
+                                alt="Flashcards">
+                        </div>
+                    </a>
+
+                    <a href="#" class="study-card-link">
+                        <div class="study-card" style="background: #FFC38C;">
+                            <p class="card-title" style="color: black;">Practice Tests</p>
+                            <img src="../../../assets/website/image/ZpFuYB5LeNNTxHxd_3PracticeTests@2x.avif"
+                                alt="Practice Tests">
+                        </div>
+                    </a>
+
+                    <a href="#" class="study-card-link">
+                        <div class="study-card" style="background: #98F1D1;">
+                            <p class="card-title" style="color: black;">Expert Solutions</p>
+                            <img src="../../../assets/website/image/ZpWg2x5LeNNTxK_n_5Expertsolutions@2x.avif"
+                                alt="Expert Solutions">
+                        </div>
+                    </a>
+
+                    <a href="#" class="study-card-link">
+                        <div class="study-card" style="background: #98E3FF;">
+                            <p class="card-title" style="color: black;">Learn</p>
+                            <img src="../../../assets/website/image/ZpFubx5LeNNTxHxg_4Learn@2x.avif" alt="Learn">
+                        </div>
+                    </a>
+
+                    <a href="#" class="study-card-link">
+                        <div class="study-card" style="background: #d0b3ff;">
+                            <p class="card-title" style="color: black;">Study Guides</p>
+                            <img src="../../../assets/website/image/ZpFuOB5LeNNTxHxU_1SG@2x.avif" alt="Study Guides">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <button type="button" class="arrow-btn left-arrow" id="prevBtn">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button type="button" class="arrow-btn right-arrow" id="nextBtn">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <section class="py-5">
+        <div class="container-fluid section-container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="p-4 p-lg-5 bg-white rounded-3 h-100 d-flex flex-column justify-content-center">
+                        <h2 class="fw-bold text-dark mb-4 fs-1 fs-md-2">Every class, every test, one ultimate study app
+                        </h2>
+                        <p class="text-secondary mb-4 fs-5 fs-md-6">Create your own flashcards or find sets made by
+                            teachers,
+                            students, and experts. Study them anytime, anywhere with our free app.</p>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="#">
+                                <img src="../../../assets/website/image/apple.4170bb1a.png"
+                                    alt="Download on the App Store" class="app-download-img">
+                            </a>
+                            <a href="#">
+                                <img src="../../../assets/website/image/google_play.fca45251.png"
+                                    alt="Get it on Google Play" class="app-download-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="p-4 d-flex align-items-center justify-content-center">
+                        <img src="../../../assets/website/image/ZpWfER5LeNNTxK_S_flashcards-image.avif"
+                            alt="Quizlet App" class="img-fluid app-mockup-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Guides Section -->
+    <section class="py-5">
+        <div class="container-fluid section-container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="p-4 d-flex align-items-center justify-content-center">
+                        <img src="../../../assets/website/image/ZpWfEh5LeNNTxK_T_study-guides-image.avif"
+                            alt="Study Guides" class="img-fluid study-guides-img">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-4 p-lg-5 bg-white rounded-3 h-100 d-flex flex-column justify-content-center">
+                        <h2 class="fw-bold text-dark mb-4 fs-1">Make class material instantly studiable</h2>
+                        <p class="text-secondary mb-4 fs-5">Turn your slides, videos, and notes into flashcard sets,
+                            practice tests, and study guides.</p>
+                        <button class="btn btn-primary rounded-pill px-4 align-self-start study-guides-btn">Try it
+                            out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Prep Section -->
+    <section class="py-5">
+        <div class="container-fluid section-container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="p-4 p-lg-5 bg-white rounded-3 h-100 d-flex flex-column justify-content-center">
+                        <h2 class="fw-bold text-dark mb-4 fs-1">Test prep for any subject</h2>
+                        <p class="text-secondary mb-4 fs-5">Memorize anything with personalized practice tests and study
+                            sessions in Learn. 98% of students say Quizlet has improved their understanding.</p>
+                        <button class="btn btn-primary rounded-pill px-4 align-self-start test-prep-btn">Get
+                            started</button>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="p-4 d-flex align-items-center justify-content-center">
+                        <img src="../../../assets/website/image/ZpWfEx5LeNNTxK_U_learn-image.avif" alt="Test Prep"
+                            class="img-fluid test-prep-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="py-5" style="background: #decef8;">
+        <div class="container-fluid section-container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="p-4 p-lg-5 h-100 d-flex flex-column justify-content-center">
+                        <span class="small fw-bold text-dark text-uppercase mb-2">TEACHERS</span>
+                        <h2 class="fw-bold text-dark mb-4 fs-1">Empower your students</h2>
+                        <p class="text-dark mb-4 fs-5">Help every student confidently learn anything. With free
+                            flashcard sets, study modes, and in-class games like Quizlet Live, you can instantly create
+                            a more engaged classroom.</p>
+                        <button class="btn btn-primary rounded-pill px-4 align-self-start mb-3 teachers-btn">Sign up as
+                            a
+                            teacher</button>
+                        <a href="#" class="text-primary text-decoration-none fw-medium">See how teachers use Quizlet</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="p-4 d-flex align-items-center justify-content-center">
+                        <img src="../../../assets/website/image/ZpFqjB5LeNNTxHvk_teacher-image-LOH.avif" alt="Teachers"
+                            class="img-fluid rounded-3 teachers-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Flashcard Sets Section -->
+    <section class="py-5 flashcard-sets-section">
+        <div class="container-fluid flashcard-sets-container">
+            <h2 class="fw-bold text-dark mb-4 text-center">Popular flashcard sets</h2>
+            <div class="row g-4 flashcard-sets-row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">The Call of the Wild Vocabulary</h3>
+                            <span class="badge flashcard-badge rounded-pill">35 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">kayselavin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="flashcard-title flex-grow-1">ZhenBang Level 1 Unit 5 Lesson B 季节</h3>
+                                <img src="../../../assets/website/image/jYw9jNGtBOLpHRBHkSK-rw_m.jpg" alt="Strawberry"
+                                    class="flashcard-small-image">
+                            </div>
+                            <span class="badge flashcard-badge rounded-pill">39 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">JaneWang6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="flashcard-title flex-grow-1">GED Social Studies</h3>
+                                <img src="../../../assets/website/image/OWqN-Xv7cO2ykHp1HcG-Ww_m.jpg"
+                                    alt="Social Studies" class="flashcard-small-image">
+                            </div>
+                            <span class="badge flashcard-badge rounded-pill">23 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">jennifer_teknipp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">ELA Practice Exam</h3>
+                            <span class="badge flashcard-badge rounded-pill">112 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">dingmann_hudson</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Ch. 36 Quiz Review</h3>
+                            <span class="badge flashcard-badge rounded-pill">20 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">Adamcito12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="flashcard-title flex-grow-1">Unit 6 Test Review: The Federalist Era</h3>
+                                <img src="../../../assets/website/image/CaDQQYj73AfhEpicYmiwVg_m.jpg" alt="Produce"
+                                    class="flashcard-small-image">
+                            </div>
+                            <span class="badge flashcard-badge rounded-pill">34 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">Kellie_Greenfield</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Biology Chapter 5: Cell Structure</h3>
+                            <span class="badge flashcard-badge rounded-pill">45 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">sarah_bio123</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="flashcard-title flex-grow-1">World History: Ancient Civilizations</h3>
+                                <img src="../../../assets/website/image/jYw9jNGtBOLpHRBHkSK-rw_m.jpg" alt="History"
+                                    class="flashcard-small-image">
+                            </div>
+                            <span class="badge flashcard-badge rounded-pill">67 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">history_teacher</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Spanish Vocabulary: Food & Dining</h3>
+                            <span class="badge flashcard-badge rounded-pill">28 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">spanish_learner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Chemistry: Periodic Table Elements</h3>
+                            <span class="badge flashcard-badge rounded-pill">118 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">chem_student</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="flashcard-title flex-grow-1">French Grammar: Verb Conjugations</h3>
+                                <img src="../../../assets/website/image/OWqN-Xv7cO2ykHp1HcG-Ww_m.jpg" alt="French"
+                                    class="flashcard-small-image">
+                            </div>
+                            <span class="badge flashcard-badge rounded-pill">52 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">french_tutor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Physics: Newton's Laws of Motion</h3>
+                            <span class="badge flashcard-badge rounded-pill">31 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">physics_pro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Literature: Shakespeare's Sonnets</h3>
+                            <span class="badge flashcard-badge rounded-pill">42 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">lit_enthusiast</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="flashcard-title flex-grow-1">Geography: World Capitals</h3>
+                                <img src="../../../assets/website/image/CaDQQYj73AfhEpicYmiwVg_m.jpg" alt="Geography"
+                                    class="flashcard-small-image">
+                            </div>
+                            <span class="badge flashcard-badge rounded-pill">195 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">geo_explorer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Mathematics: Algebra Basics</h3>
+                            <span class="badge flashcard-badge rounded-pill">38 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">math_wizard</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Art History: Renaissance Period</h3>
+                            <span class="badge flashcard-badge rounded-pill">56 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">art_lover</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="flashcard-title flex-grow-1">Psychology: Cognitive Development</h3>
+                                <img src="../../../assets/website/image/jYw9jNGtBOLpHRBHkSK-rw_m.jpg" alt="Psychology"
+                                    class="flashcard-small-image">
+                            </div>
+                            <span class="badge flashcard-badge rounded-pill">49 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">psych_student</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="flashcard-card">
+                        <div class="flashcard-content">
+                            <h3 class="flashcard-title">Computer Science: Data Structures</h3>
+                            <span class="badge flashcard-badge rounded-pill">63 terms</span>
+                            <div class="flashcard-user mt-2">
+                                <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="User avatar"
+                                    class="user-avatar">
+                                <span class="user-name">code_master</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
+                <button class="btn btn-outline-secondary rounded-circle pagination-btn" id="flashcardPrevBtn"
+                    type="button">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <span class="pagination-text" id="flashcardPageText">1/3</span>
+                <button class="btn btn-outline-secondary rounded-circle pagination-btn" id="flashcardNextBtn"
+                    type="button">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">About us</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">About Quizlet</a></li>
+                        <li><a href="#">How Quizlet works</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Advertise with us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">For students</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Flashcards</a></li>
+                        <li><a href="#">Test</a></li>
+                        <li><a href="#">Learn</a></li>
+                        <li><a href="#">Study groups</a></li>
+                        <li><a href="#">Solutions</a></li>
+                        <li><a href="#">Modern Learning Lab</a></li>
+                        <li><a href="#">Quizlet Plus</a></li>
+                        <li><a href="#">Study Guides</a></li>
+                        <li><a href="#">Pomodoro timer</a></li>
+                        <li><a href="#">Learning games</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">For teachers</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Live</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Be the Change</a></li>
+                        <li><a href="#">Quizlet Plus for teachers</a></li>
+                        <li><a href="#">Teachers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">Resources</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Help center</a></li>
+                        <li><a href="#">Sign up</a></li>
+                        <li><a href="#">Honor code</a></li>
+                        <li><a href="#">Community guidelines</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">California Privacy</a></li>
+                        <li><a href="#">Your Privacy/Cookie Choices <i
+                                    class="bi bi-check-circle-fill text-primary"></i></a></li>
+                        <li><a href="#">Ads and Cookie Settings</a></li>
+                        <li><a href="#">Interest-Based Advertising</a></li>
+                        <li><a href="#">Quizlet for Schools</a></li>
+                        <li><a href="#">Parents</a></li>
+                        <li><a href="#">Content hub</a></li>
+                        <li><a href="#">AI tools</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">Language</h5>
+                    <select class="form-select mb-3" style="max-width: 200px;">
+                        <option>English (USA)</option>
+                        <option>English (UK)</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                        <option>Deutsch</option>
+                    </select>
+                    <div class="qr-code-section">
+                        <div class="qr-code-placeholder bg-light d-inline-block p-2 rounded mb-2"
+                            style="width: 80px; height: 80px;">
+                            <div class="d-flex align-items-center justify-content-center h-100 text-muted small">QR Code
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0">Get the app</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row py-3">
+                <div class="col-12 mb-3">
+                    <h5 class="footer-heading mb-3">Country</h5>
+                    <div class="country-list">
+                        <a href="#" class="country-link">United States</a>
+                        <a href="#" class="country-link">Canada</a>
+                        <a href="#" class="country-link">United Kingdom</a>
+                        <a href="#" class="country-link">Australia</a>
+                        <a href="#" class="country-link">New Zealand</a>
+                        <a href="#" class="country-link">Germany</a>
+                        <a href="#" class="country-link">France</a>
+                        <a href="#" class="country-link">Spain</a>
+                        <a href="#" class="country-link">Italy</a>
+                        <a href="#" class="country-link">Japan</a>
+                        <a href="#" class="country-link">South Korea</a>
+                        <a href="#" class="country-link">India</a>
+                        <a href="#" class="country-link">China</a>
+                        <a href="#" class="country-link">Mexico</a>
+                        <a href="#" class="country-link">Sweden</a>
+                        <a href="#" class="country-link">Netherlands</a>
+                        <a href="#" class="country-link">Switzerland</a>
+                        <a href="#" class="country-link">Brazil</a>
+                        <a href="#" class="country-link">Poland</a>
+                        <a href="#" class="country-link">Turkey</a>
+                        <a href="#" class="country-link">Ukraine</a>
+                        <a href="#" class="country-link">Taiwan</a>
+                        <a href="#" class="country-link">Vietnam</a>
+                        <a href="#" class="country-link">Indonesia</a>
+                        <a href="#" class="country-link">Philippines</a>
+                        <a href="#" class="country-link">Russia</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row py-3 align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="social-icons d-flex gap-3">
+                        <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-end gap-3">
+                        <span class="copyright-text">© 2025 Quizlet, Inc.</span>
+                        <img src="../../../assets/website/image/coppa-seal.0efe00c1.avif"
+                            alt="COPPA Safe Harbor Certification" class="coppa-badge">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../style/script.js"></script>
+</body>
+
+</html>

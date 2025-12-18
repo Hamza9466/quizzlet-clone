@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Flashcards - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Flashcards CSS -->
+    <link rel="stylesheet" href="../../../style/flashcards.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <button class="btn-upgrade" data-i18n="upgrade">
+                Upgrade: free 7-day trial
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <!-- Profile Dropdown Menu -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-trophy"></i>
+                            <span data-i18n="achievements">Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="settings">Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span data-i18n="lightMode">Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item no-icon" data-i18n="logOut">Log out</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="privacyPolicy">Privacy policy</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="helpFeedback">Help and feedback</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="upgradeBtn">Upgrade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span data-i18n="home">Home</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span data-i18n="yourLibrary">Your library</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-bell"></i>
+                    <span data-i18n="notifications">Notifications</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-plus-circle"></i>
+                    <span data-i18n="newFolder">New folder</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="startHere">Start here</div>
+                <a href="flashcards.html" class="nav-item active">
+                    <i class="bi bi-card-text"></i>
+                    <span data-i18n="flashcards">Flashcards</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-book"></i>
+                    <span data-i18n="expertSolutions">Expert Solutions</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main p-4">
+            <div class="container-fluid px-0">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap">
+                    <div class="flex-grow-1">
+                        <h1 class="text-white fw-bold mb-3" data-i18n="createNewSet">Create a new flashcard set</h1>
+                        <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2"
+                            id="openAccessModal">
+                            <i class="bi bi-globe"></i>
+                            <span data-i18n="public">Public</span>
+                        </button>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" data-i18n="create">Create</button>
+                        <button class="btn btn-primary btn-sm" onclick="window.location.href='learn.html'"
+                            data-i18n="createAndPractice">Create and
+                            practice</button>
+                    </div>
+                </div>
+
+                <!-- Set Details -->
+                <div class="mb-4">
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-semibold" data-i18n="title">Title</label>
+                        <input type="text" class="form-control bg-dark border-secondary text-white"
+                            placeholder="Enter title" data-i18n-placeholder="enterTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-semibold"
+                            data-i18n="description">Description</label>
+                        <textarea class="form-control bg-dark border-secondary text-white" rows="3"
+                            placeholder="Add a description..." data-i18n-placeholder="addDescription"></textarea>
+                    </div>
+                </div>
+
+                <!-- Tools Section -->
+                <div
+                    class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary flex-wrap">
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2">
+                            <i class="bi bi-plus-lg"></i>
+                            <span data-i18n="import">Import</span>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2">
+                            <i class="bi bi-plus-lg"></i>
+                            <span data-i18n="addDiagram">Add diagram</span>
+                            <i class="bi bi-lock-fill text-warning"></i>
+                        </button>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="text-white small mb-0" data-i18n="suggestions">Suggestions</label>
+                            <div class="toggle-switch active">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm" style="width: 32px; height: 32px; padding: 0;">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" style="width: 32px; height: 32px; padding: 0;">
+                            <i class="bi bi-grid-3x3"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" style="width: 32px; height: 32px; padding: 0;">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Flashcards List -->
+                <div class="flashcards-list" id="flashcardsList">
+                    <!-- Flashcard items will be added here dynamically -->
+                </div>
+
+                <!-- Add Card Button -->
+                <div class="add-card-section">
+                    <button class="btn-add-card" id="addCardBtn">
+                        <i class="bi bi-plus-lg"></i>
+                        <span data-i18n="addCard">Add a card</span>
+                    </button>
+                </div>
+
+                <!-- Bottom Actions -->
+                <div class="flashcards-bottom-actions">
+                    <button class="btn-create-set" data-i18n="create">Create</button>
+                    <button class="btn-create-practice" onclick="window.location.href='learn.html'"
+                        data-i18n="createAndPractice">Create and practice</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Manage Access Modal -->
+    <div class="modal-overlay" id="manageAccessModal">
+        <div class="modal-container access-modal">
+            <h2 class="modal-title" data-i18n="manageAccess">Manage access</h2>
+            <div class="access-form">
+                <!-- Visible to Section -->
+                <div class="access-section">
+                    <label class="access-label" data-i18n="visibleTo">Visible to</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle access-dropdown-btn" type="button"
+                            id="visibleToDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span data-i18n="everyone">Everyone</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="visibleToDropdown">
+                            <li><a class="dropdown-item access-option" href="#" data-value="everyone"
+                                    data-i18n="everyone">Everyone</a></li>
+                            <li><a class="dropdown-item access-option" href="#" data-value="classes"
+                                    data-i18n="certainClasses">Certain Classes</a></li>
+                            <li><a class="dropdown-item access-option" href="#" data-value="password"
+                                    data-i18n="usersWithPassword">Users with a password</a></li>
+                            <li><a class="dropdown-item access-option" href="#" data-value="justme"
+                                    data-i18n="justMe">Just me</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Editable by Section -->
+                <div class="access-section">
+                    <label class="access-label" data-i18n="editableBy">Editable by</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle access-dropdown-btn" type="button"
+                            id="editableByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span data-i18n="justMe">Just me</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="editableByDropdown">
+                            <li><a class="dropdown-item access-option" href="#" data-value="justme"
+                                    data-i18n="justMe">Just me</a></li>
+                            <li><a class="dropdown-item access-option" href="#" data-value="everyone"
+                                    data-i18n="everyone">Everyone</a></li>
+                            <li><a class="dropdown-item access-option" href="#" data-value="classes"
+                                    data-i18n="certainClasses">Certain Classes</a></li>
+                        </ul>
+                    </div>
+                    <p class="access-help-text" data-i18n="onlyYouCanEdit">Only you can edit this set</p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-save" id="saveAccessBtn" data-i18n="save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for image upload -->
+    <input type="file" id="imageUploadInput" accept="image/*" style="display: none;">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Dashboard JS -->
+    <script src="../../../style/dashboard.js"></script>
+    <!-- Flashcards JS -->
+    <script src="../../../style/flashcards.js"></script>
+</body>
+
+</html>

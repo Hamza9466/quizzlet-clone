@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Settings CSS -->
+    <link rel="stylesheet" href="../../../style/settings.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <button class="btn-upgrade" data-i18n="upgrade">
+                Upgrade: free 7-day trial
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <!-- Profile Dropdown Menu -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-trophy"></i>
+                            <span data-i18n="achievements">Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item active">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="settings">Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span data-i18n="lightMode">Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item no-icon" data-i18n="logOut">Log out</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="privacyPolicy">Privacy policy</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="helpFeedback">Help and feedback</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="upgradeBtn">Upgrade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span data-i18n="home">Home</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span data-i18n="yourLibrary">Your library</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-bell"></i>
+                    <span data-i18n="notifications">Notifications</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-plus-circle"></i>
+                    <span data-i18n="newFolder">New folder</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="startHere">Start here</div>
+                <a href="flashcards.html" class="nav-item">
+                    <i class="bi bi-card-text"></i>
+                    <span data-i18n="flashcards">Flashcards</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="bi bi-book"></i>
+                    <span data-i18n="expertSolutions">Expert Solutions</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Settings Main Content -->
+        <main class="dashboard-main settings-main">
+            <div class="settings-container">
+                <h1 class="settings-title" data-i18n="settingsTitle">Settings</h1>
+
+                <!-- Subscription Section -->
+                <section class="settings-section">
+                    <h2 class="section-heading" data-i18n="subscription">Subscription</h2>
+                    <div class="subscription-banner">
+                        <div class="subscription-content">
+                            <h3 class="subscription-title" data-i18n="levelUp">Level up with Q+</h3>
+                        </div>
+                        <button class="btn-upgrade-now" data-i18n="upgradeNow">Upgrade now</button>
+                    </div>
+                </section>
+
+                <!-- Personal Information Section -->
+                <section class="settings-section">
+                    <h2 class="section-heading" data-i18n="personalInfo">Personal information</h2>
+                    <div class="personal-info-card">
+                        <!-- Profile Picture -->
+                        <div class="info-group profile-picture-group">
+                            <label class="info-label" data-i18n="profilePicture">Profile picture</label>
+                            <div class="profile-picture-wrapper">
+                                <div class="current-avatar">
+                                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg"
+                                        alt="Current Avatar" class="current-avatar-img">
+                                </div>
+                                <div class="avatar-grid">
+                                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/117.3cd40b021ac604f.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/108.3b3090077134db3.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/113.e4b7e1c4ed27afa.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/114.0adc064c9a6d1eb.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/116.9aaedd4f4495837.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/126.70ed6cbb19b8447.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/125.a46eeeaa1617163.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/123.e5f0bd4b49e7c12.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/117.3cd40b021ac604f.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/108.3b3090077134db3.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/113.e4b7e1c4ed27afa.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/114.0adc064c9a6d1eb.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/116.9aaedd4f4495837.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/126.70ed6cbb19b8447.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item">
+                                        <img src="../../../assets/admin/images/125.a46eeeaa1617163.jpg" alt="Avatar"
+                                            class="avatar-img">
+                                    </div>
+                                    <div class="avatar-item add-avatar" id="addAvatarBtn">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Username -->
+                        <div class="info-group">
+                            <div class="info-row">
+                                <div class="info-content">
+                                    <label class="info-label" data-i18n="username">Username</label>
+                                    <div class="info-value">M_Hamza80</div>
+                                </div>
+                                <button class="btn-edit" data-i18n="edit">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Email -->
+                        <div class="info-group">
+                            <div class="info-row">
+                                <div class="info-content">
+                                    <label class="info-label" data-i18n="email">Email</label>
+                                    <div class="info-value">hamzahafiz306@gmail.com</div>
+                                </div>
+                                <button class="btn-edit" data-i18n="edit">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Account Type -->
+                        <div class="info-group">
+                            <div class="info-row">
+                                <div class="info-content">
+                                    <label class="info-label" data-i18n="accountType">Account type</label>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle account-type-btn"
+                                        type="button" id="accountTypeDropdown" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Student
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="accountTypeDropdown">
+                                        <li><a class="dropdown-item" href="#">Student</a></li>
+                                        <li><a class="dropdown-item" href="#">Teacher</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Appearance Section -->
+                <section class="settings-section">
+                    <h2 class="section-heading" data-i18n="appearance">Appearance</h2>
+                    <div class="personal-info-card">
+                        <!-- Theme -->
+                        <div class="info-group">
+                            <div class="info-row">
+                                <div class="info-content">
+                                    <label class="info-label" data-i18n="theme">Theme</label>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle appearance-btn"
+                                        type="button" id="themeDropdown" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Dark
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="themeDropdown">
+                                        <li><a class="dropdown-item theme-option" href="#" data-theme="light">Light</a>
+                                        </li>
+                                        <li><a class="dropdown-item theme-option" href="#" data-theme="dark">Dark</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Language -->
+                        <div class="info-group">
+                            <div class="info-row">
+                                <div class="info-content">
+                                    <label class="info-label" data-i18n="language">Language</label>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle appearance-btn"
+                                        type="button" id="languageDropdown" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        English (UK)
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="de">Deutsch</a>
+                                        </li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="en-uk">English
+                                                (UK)</a></li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="en-us">English
+                                                (USA)</a></li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="es">Español</a>
+                                        </li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="fr">Français
+                                                (FR)</a></li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="fr-ca">Français
+                                                (QC/CA)</a></li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="id">Bahasa
+                                                Indonesia</a></li>
+                                        <li><a class="dropdown-item language-option" href="#"
+                                                data-lang="it">Italiano</a></li>
+                                        <li><a class="dropdown-item language-option" href="#"
+                                                data-lang="nl">Nederlands</a></li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="pl">polski</a>
+                                        </li>
+                                        <li><a class="dropdown-item language-option" href="#"
+                                                data-lang="pt-br">Português (BR)</a></li>
+                                        <li><a class="dropdown-item language-option" href="#" data-lang="ru">Русский</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notifications Section -->
+                <section class="settings-section">
+                    <h2 class="section-heading" data-i18n="notifications">Notifications</h2>
+                    <div class="personal-info-card">
+                        <!-- Personalised study updates -->
+                        <div class="notification-group">
+                            <div class="notification-group-header" data-toggle="collapse"
+                                data-target="#personalisedUpdates">
+                                <h3 class="notification-group-title" data-i18n="personalisedStudyUpdates">Personalised
+                                    study updates</h3>
+                                <i class="bi bi-chevron-up notification-chevron"></i>
+                            </div>
+                            <div class="notification-group-content collapse show" id="personalisedUpdates">
+                                <div class="notification-item">
+                                    <div class="notification-item-content">
+                                        <span class="notification-item-label" data-i18n="streaksAndBadges">Streaks and
+                                            badges</span>
+                                    </div>
+                                    <div class="notification-toggle">
+                                        <div class="notification-icon active">
+                                            <i class="bi bi-envelope-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-item-content">
+                                        <span class="notification-item-label" data-i18n="studyReminders">Study
+                                            reminders</span>
+                                    </div>
+                                    <div class="notification-toggle">
+                                        <div class="notification-icon active">
+                                            <i class="bi bi-envelope-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Quizlet updates -->
+                        <div class="notification-group">
+                            <div class="notification-group-header" data-toggle="collapse" data-target="#quizletUpdates">
+                                <h3 class="notification-group-title" data-i18n="quizletUpdates">Quizlet updates</h3>
+                                <i class="bi bi-chevron-up notification-chevron"></i>
+                            </div>
+                            <div class="notification-group-content collapse show" id="quizletUpdates">
+                                <div class="notification-item">
+                                    <div class="notification-item-content">
+                                        <span class="notification-item-label" data-i18n="newFeaturesTips">New features,
+                                            tips and study challenges</span>
+                                    </div>
+                                    <div class="notification-toggle">
+                                        <div class="notification-icon active">
+                                            <i class="bi bi-envelope-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-item-content">
+                                        <span class="notification-item-label" data-i18n="salesGiveaways">Sales,
+                                            giveaways and promotions</span>
+                                    </div>
+                                    <div class="notification-toggle">
+                                        <div class="notification-icon active">
+                                            <i class="bi bi-envelope-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Account and Privacy Section -->
+                <section class="settings-section">
+                    <h2 class="section-heading" data-i18n="accountAndPrivacy">Account and privacy</h2>
+                    <div class="personal-info-card">
+                        <!-- Create Password -->
+                        <div class="info-group">
+                            <div class="info-row">
+                                <div class="info-content">
+                                    <label class="info-label" data-i18n="createPassword">Create a Quizlet
+                                        password</label>
+                                </div>
+                                <button class="btn-create-password" id="openPasswordModal"
+                                    data-i18n="create">Create</button>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Connect Facebook -->
+                        <div class="info-group">
+                            <div class="info-row">
+                                <div class="info-content">
+                                    <label class="info-label" data-i18n="connectFacebook">Connect your Facebook
+                                        account</label>
+                                </div>
+                                <button class="btn-link-facebook">
+                                    <i class="bi bi-facebook"></i>
+                                    <span data-i18n="linkFacebook">Link Facebook</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Privacy Section -->
+                        <div class="info-group">
+                            <h3 class="privacy-heading" data-i18n="privacy">Privacy</h3>
+                            <div class="privacy-toggles">
+                                <div class="privacy-toggle-item">
+                                    <div class="privacy-toggle-content">
+                                        <label class="privacy-toggle-label" data-i18n="showActualName">Show your actual
+                                            name on Quizlet</label>
+                                    </div>
+                                    <div class="toggle-switch active">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                </div>
+                                <div class="privacy-toggle-item">
+                                    <div class="privacy-toggle-content">
+                                        <label class="privacy-toggle-label" data-i18n="showInGoogle">Show your profile
+                                            in Google search results</label>
+                                    </div>
+                                    <div class="toggle-switch">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-divider"></div>
+
+                        <!-- Delete Account Section -->
+                        <div class="info-group">
+                            <h3 class="delete-account-heading" data-i18n="deleteAccount">Delete your account</h3>
+                            <div class="delete-account-content">
+                                <p class="delete-account-description" data-i18n="deleteAccountDescription">This will
+                                    delete all your data and cannot be undone.</p>
+                                <button class="btn-delete-account" data-i18n="deleteAccountBtn">Delete account</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Password Modal -->
+    <div class="modal-overlay" id="createPasswordModal">
+        <div class="modal-container">
+            <button class="modal-close-btn" id="closePasswordModal">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <h2 class="modal-title" data-i18n="createPasswordTitle">Create a password</h2>
+            <p class="modal-subtitle" data-i18n="createPasswordSubtitle">Create a password for your Quizlet account</p>
+            <form class="modal-form">
+                <div class="modal-input-group">
+                    <input type="password" class="modal-input" placeholder="New Password"
+                        data-i18n-placeholder="newPassword" id="newPassword">
+                </div>
+                <div class="modal-input-group">
+                    <input type="password" class="modal-input" placeholder="Confirm your new password"
+                        data-i18n-placeholder="confirmPassword" id="confirmPassword">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-modal-cancel" id="cancelPasswordModal"
+                        data-i18n="cancel">Cancel</button>
+                    <button type="submit" class="btn-modal-save" data-i18n="save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Settings JS -->
+    <script src="../../../style/settings.js"></script>
+</body>
+
+</html>

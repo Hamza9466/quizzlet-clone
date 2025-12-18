@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../../style/style.css">
+</head>
+
+<body class="login-page-body">
+    <div class="login-container">
+        <!-- Left Section -->
+        <div class="login-left-section">
+            <div class="login-left-content">
+                <h2 class="login-promo-text">The best way to study.<br>Sign up for free.</h2>
+                <div class="login-logo-bottom">
+                    <span class="quizlet-logo-white">Quizlet</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="login-right-section">
+            <button class="login-close-btn" type="button" id="closeBtn">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <div class="login-form-container">
+                <div class="login-tabs mb-4">
+                    <button class="login-tab active" type="button">Sign up</button>
+                    <a href="login.html" class="login-tab">Log In</a>
+                </div>
+
+                <div class="social-login-buttons mb-4">
+                    <button class="btn social-btn w-100 mb-2">
+                        <i class="bi bi-google"></i> Continue with Google
+                    </button>
+                    <button class="btn social-btn w-100 mb-2">
+                        <i class="bi bi-facebook"></i> Continue with Facebook
+                    </button>
+                    <button class="btn social-btn w-100 mb-2">
+                        <i class="bi bi-apple"></i> Continue with Apple
+                    </button>
+                </div>
+
+                <div class="divider-with-text mb-4">
+                    <hr>
+                    <span>or email</span>
+                    <hr>
+                </div>
+
+                <form class="login-form">
+                    <div class="mb-3">
+                        <label for="birthday" class="form-label">
+                            Birthday
+                            <i class="bi bi-info-circle ms-1" style="color: #6b7280; font-size: 0.875rem;"></i>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <select class="form-select" id="month">
+                                    <option>Month</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-select" id="day">
+                                    <option>Day</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                    <option>20</option>
+                                    <option>21</option>
+                                    <option>22</option>
+                                    <option>23</option>
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>26</option>
+                                    <option>27</option>
+                                    <option>28</option>
+                                    <option>29</option>
+                                    <option>30</option>
+                                    <option>31</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-select" id="year">
+                                    <option>Year</option>
+                                    <option>2024</option>
+                                    <option>2023</option>
+                                    <option>2022</option>
+                                    <option>2021</option>
+                                    <option>2020</option>
+                                    <option>2019</option>
+                                    <option>2018</option>
+                                    <option>2017</option>
+                                    <option>2016</option>
+                                    <option>2015</option>
+                                    <option>2014</option>
+                                    <option>2013</option>
+                                    <option>2012</option>
+                                    <option>2011</option>
+                                    <option>2010</option>
+                                    <option>2009</option>
+                                    <option>2008</option>
+                                    <option>2007</option>
+                                    <option>2006</option>
+                                    <option>2005</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signup-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="signup-email" value="user@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" value="andrew123">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signup-password" class="form-label">Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" class="form-control" id="signup-password" placeholder="Enter your password">
+                            <button type="button" class="password-toggle-btn" id="toggleSignupPassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="termsCheck">
+                            <label class="form-check-label terms-checkbox-label" for="termsCheck">
+                                I accept Quizlet's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary login-submit-btn w-100 mb-3">Sign up</button>
+                    <p class="text-center create-account-text">
+                        Already have an account? <a href="login.html">Log in</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Close button functionality
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+
+        // Password toggle functionality
+        document.getElementById('toggleSignupPassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('signup-password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+    </script>
+</body>
+
+</html>
+
