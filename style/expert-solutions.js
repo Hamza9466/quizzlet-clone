@@ -50,32 +50,38 @@ document.addEventListener('DOMContentLoaded', function () {
         const textbooks = getTextbooksBySubject(subject);
         if (!textbooksGrid) return;
 
-        textbooksGrid.innerHTML = textbooks.map(book => `
-            <div class="textbook-card">
-                <div class="textbook-cover">
-                    ${book.coverImage ? 
-                        `<img src="../../../assets/admin/images/${book.coverImage}" alt="${book.title}" class="textbook-cover-img">` :
-                        `<div class="textbook-cover-placeholder" style="background: ${book.coverColor};">
-                            <div class="textbook-cover-title" style="color: ${book.coverTitleColor || '#ffffff'};">${book.coverTitle}</div>
-                        </div>`
-                    }
-                </div>
-                <div class="textbook-info">
-                    <h3 class="textbook-title">${book.title}</h3>
-                    <div class="textbook-meta">
-                        <span class="textbook-edition">${book.edition} Edition</span>
-                        <span class="textbook-separator"> • </span>
-                        <span class="textbook-isbn">ISBN: ${book.isbn}</span>
-                        ${book.moreIsbns ? `<span class="textbook-more">(${book.moreIsbns} more)</span>` : ''}
+        textbooksGrid.innerHTML = textbooks.map(book => {
+            const bookTitle = encodeURIComponent(book.title);
+            const bookIsbn = encodeURIComponent(book.isbn);
+            return `
+            <a href="textbook-view.html?title=${bookTitle}&isbn=${bookIsbn}&edition=${book.edition}&solutions=${book.solutions}" class="textbook-card-link" style="text-decoration: none; display: block;">
+                <div class="textbook-card">
+                    <div class="textbook-cover">
+                        ${book.coverImage ?
+                    `<img src="../../../assets/admin/images/${book.coverImage}" alt="${book.title}" class="textbook-cover-img">` :
+                    `<div class="textbook-cover-placeholder" style="background: ${book.coverColor};">
+                                <div class="textbook-cover-title" style="color: ${book.coverTitleColor || '#ffffff'};">${book.coverTitle}</div>
+                            </div>`
+                }
                     </div>
-                    <div class="textbook-authors">${book.authors}</div>
-                    <button class="textbook-solutions-btn">
-                        <i class="bi bi-check-circle-fill"></i>
-                        ${book.solutions} solutions
-                    </button>
+                    <div class="textbook-info">
+                        <h3 class="textbook-title">${book.title}</h3>
+                        <div class="textbook-meta">
+                            <span class="textbook-edition">${book.edition} Edition</span>
+                            <span class="textbook-separator"> • </span>
+                            <span class="textbook-isbn">ISBN: ${book.isbn}</span>
+                            ${book.moreIsbns ? `<span class="textbook-more">(${book.moreIsbns} more)</span>` : ''}
+                        </div>
+                        <div class="textbook-authors">${book.authors}</div>
+                        <button class="textbook-solutions-btn">
+                            <i class="bi bi-check-circle-fill"></i>
+                            ${book.solutions} solutions
+                        </button>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            </a>
+        `;
+        }).join('');
     }
 
     // Get textbooks by subject
@@ -175,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle subject filter clicks
     subjectButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             // Update active state
             subjectButtons.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
@@ -197,11 +203,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // FAQ Accordion Toggle
-window.toggleFaq = function(button) {
+window.toggleFaq = function (button) {
     const faqItem = button.closest('.faq-item');
     const isActive = faqItem.classList.contains('active');
     const icon = button.querySelector('i');
-    
+
     // Close all other FAQs
     document.querySelectorAll('.faq-item').forEach(item => {
         if (item !== faqItem) {
@@ -213,7 +219,7 @@ window.toggleFaq = function(button) {
             }
         }
     });
-    
+
     // Toggle current FAQ
     if (isActive) {
         faqItem.classList.remove('active');

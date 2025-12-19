@@ -77,9 +77,10 @@ function loadFoldersInSidebar() {
     }
     
     foldersList.innerHTML = pinnedFolders.map(folder => {
+        const folderName = encodeURIComponent(folder.name);
         return `
             <div class="nav-item folder-item-wrapper" data-folder-id="${folder.id}">
-                <a href="#" class="nav-item folder-item">
+                <a href="folder-view.html?id=${folder.id}&name=${folderName}" class="nav-item folder-item">
                     <i class="bi bi-folder"></i>
                     <span>${folder.name}</span>
                 </a>
@@ -98,8 +99,11 @@ function loadFoldersInSidebar() {
 }
 
 // Toggle folder context menu
-window.toggleFolderMenu = function(folderId, event) {
-    if (event) event.stopPropagation();
+window.toggleFolderMenu = function(folderId, e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     
     // Close all other menus
     document.querySelectorAll('.folder-context-menu').forEach(menu => {

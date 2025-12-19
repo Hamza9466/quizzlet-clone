@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textbook Solutions - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .textbook-view-main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .textbook-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .textbook-breadcrumb a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        .textbook-breadcrumb a:hover {
+            color: #ffffff;
+        }
+
+        .textbook-breadcrumb-separator {
+            color: #586380;
+        }
+
+        .textbook-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .textbook-cover-large {
+            width: 200px;
+            height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #2E3856;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .textbook-cover-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .textbook-details {
+            flex: 1;
+        }
+
+        .textbook-details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .textbook-details-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .textbook-details-edition {
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .textbook-details-isbn {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .textbook-details-authors {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .textbook-header-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .textbook-action-btn {
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .textbook-action-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        .textbook-solutions-section {
+            margin-top: 3rem;
+        }
+
+        .textbook-solutions-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .textbook-solutions-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .verified-badge {
+            background: #10b981;
+            color: #ffffff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .textbook-chapters {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .textbook-chapter {
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .textbook-chapter-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .textbook-chapter-header:hover {
+            background: #586380;
+        }
+
+        .textbook-chapter-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .textbook-chapter-chevron {
+            color: #9ca3af;
+            font-size: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .textbook-chapter.active .textbook-chapter-chevron {
+            transform: rotate(180deg);
+        }
+
+        .textbook-chapter-content {
+            display: none;
+            padding: 1.5rem;
+            border-top: 1px solid #586380;
+        }
+
+        .textbook-chapter.active .textbook-chapter-content {
+            display: block;
+        }
+
+        .textbook-exercises-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .textbook-exercise-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: #0A092D;
+            border: 1px solid #586380;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .textbook-exercise-item:hover {
+            background: #1a1a2e;
+            border-color: #3b82f6;
+        }
+
+        .textbook-exercise-page {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            min-width: 80px;
+        }
+
+        .textbook-exercise-name {
+            font-size: 0.875rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Custom scrollbar */
+        .textbook-exercises-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .textbook-exercises-list::-webkit-scrollbar-track {
+            background: #0A092D;
+            border-radius: 4px;
+        }
+
+        .textbook-exercises-list::-webkit-scrollbar-thumb {
+            background: #2E3856;
+            border-radius: 4px;
+            border: 1px solid #0A092D;
+        }
+
+        .textbook-exercises-list::-webkit-scrollbar-thumb:hover {
+            background: #586380;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Search for a question">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="create-dropdown-wrapper">
+                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <ul class="create-dropdown-menu dropdown-menu" aria-labelledby="createDropdownBtn">
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="flashcards.html">
+                            <i class="bi bi-card-text"></i>
+                            <span>Flashcard set</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="#"
+                            onclick="showNewFolderModal(event); return false;">
+                            <i class="bi bi-folder"></i>
+                            <span>Folder</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <!-- Profile Dropdown Menu -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="achievements.html" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span>Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span>Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item no-icon">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span>Home</span>
+                </a>
+                <a href="library.html" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span>Your library</span>
+                </a>
+                <a href="notifications.html" class="nav-item">
+                    <i class="bi bi-bell"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="dashboard.html#favorites" class="nav-item">
+                    <i class="bi bi-star"></i>
+                    <span>Favorites</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title">Your folders</div>
+                <div id="foldersList">
+                    <!-- Folders will be loaded here -->
+                </div>
+                <a href="#" class="nav-item" onclick="showNewFolderModal(event)">
+                    <i class="bi bi-plus-circle"></i>
+                    <span>New folder</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title">Start here</div>
+                <a href="flashcards.html" class="nav-item">
+                    <i class="bi bi-card-text"></i>
+                    <span>Flashcards</span>
+                </a>
+                <a href="expert-solutions.html" class="nav-item">
+                    <i class="bi bi-book"></i>
+                    <span>Expert Solutions</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="textbook-view-main">
+                <!-- Breadcrumb -->
+                <div class="textbook-breadcrumb">
+                    <a href="expert-solutions.html">Science</a>
+                    <span class="textbook-breadcrumb-separator">/</span>
+                    <span>Chemistry</span>
+                </div>
+
+                <!-- Textbook Header -->
+                <div class="textbook-header">
+                    <div class="textbook-cover-large">
+                        <img src="../../../assets/admin/images/68266c9a4540ed680807226bd916f7f0.jpg"
+                            alt="Chemistry: The Central Science" id="textbookCoverImg">
+                    </div>
+                    <div class="textbook-details">
+                        <div class="textbook-details-header">
+                            <div>
+                                <h1 class="textbook-details-title" id="textbookTitle">Chemistry: The Central Science
+                                </h1>
+                                <div class="textbook-details-edition" id="textbookEdition">14th Edition</div>
+                                <div class="textbook-details-isbn" id="textbookIsbn">ISBN: 9780134414232</div>
+                                <div class="textbook-details-authors" id="textbookAuthors">Bruce Edward Bursten,
+                                    Catherine J. Murphy, H. Eugene Lemay, Matthew E. Stoltzfus, Patrick Woodward,
+                                    Theodore E. Brown</div>
+                            </div>
+                            <div class="textbook-header-actions">
+                                <button class="textbook-action-btn">
+                                    <i class="bi bi-bookmark"></i>
+                                    Save
+                                </button>
+                                <button class="textbook-action-btn">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Textbook Solutions Section -->
+                <div class="textbook-solutions-section">
+                    <div class="textbook-solutions-header">
+                        <h2 class="textbook-solutions-title">Textbook solutions</h2>
+                        <div class="verified-badge">
+                            <i class="bi bi-check-circle-fill"></i>
+                            Verified
+                        </div>
+                    </div>
+
+                    <!-- Chapters -->
+                    <div class="textbook-chapters" id="textbookChapters">
+                        <!-- Chapters will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+        </div>
+        <div class="footer-language">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle language-btn" type="button"
+                    id="footerLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    English (USA)
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="footerLanguageDropdown">
+                    <li><a class="dropdown-item" href="#">English (UK)</a></li>
+                    <li><a class="dropdown-item" href="#">Español</a></li>
+                    <li><a class="dropdown-item" href="#">Français</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- New Folder Modal -->
+    <div class="new-folder-modal" id="newFolderModal" style="display: none;">
+        <div class="new-folder-modal-overlay" onclick="hideNewFolderModal()"></div>
+        <div class="new-folder-modal-content">
+            <div class="new-folder-icon">
+                <i class="bi bi-folder"></i>
+            </div>
+            <input type="text" class="new-folder-input" id="newFolderInput" placeholder="Name your folder"
+                autocomplete="off">
+            <div class="new-folder-buttons">
+                <button class="new-folder-btn new-folder-btn-cancel" onclick="hideNewFolderModal()">Cancel</button>
+                <button class="new-folder-btn new-folder-btn-create" id="newFolderCreateBtn" onclick="createNewFolder()"
+                    disabled>Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Theme JS -->
+    <script src="../../../style/theme.js"></script>
+    <!-- Modal JS -->
+    <script src="../../../style/modal.js"></script>
+    <script>
+        // Load textbook data from URL parameters
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('title');
+            const isbn = urlParams.get('isbn');
+            const edition = urlParams.get('edition');
+            const solutions = urlParams.get('solutions');
+
+            if (title) {
+                document.getElementById('textbookTitle').textContent = decodeURIComponent(title);
+            }
+            if (edition) {
+                document.getElementById('textbookEdition').textContent = edition + ' Edition';
+            }
+            if (isbn) {
+                document.getElementById('textbookIsbn').textContent = 'ISBN: ' + decodeURIComponent(isbn);
+            }
+
+            // Load chapters
+            loadChapters();
+        });
+
+        function loadChapters() {
+            // Dummy chapters data
+            const chapters = [
+                {
+                    title: 'Chapter 1: Introduction: Matter, Energy, and Measurement',
+                    exercises: [
+                        { page: 11, name: 'Practice Exercises 1.1' },
+                        { page: 19, name: 'Practice Exercises 1.2' },
+                        { page: 20, name: 'Practice Exercises 1.3' },
+                        { page: 22, name: 'Practice Exercises 1.4' },
+                        { page: 23, name: 'Practice Exercises 1.5' },
+                        { page: 26, name: 'Practice Exercises 1.6' },
+                        { page: 26, name: 'Practice Exercises 1.7' },
+                        { page: 27, name: 'Practice Exercises 1.8' },
+                        { page: 28, name: 'Practice Exercises 1.9' },
+                        { page: 29, name: 'Practice Exercises 1.10' },
+                        { page: 31, name: 'Practice Exercises 1.11' },
+                        { page: 32, name: 'Practice Exercises 1.12' }
+                    ],
+                    active: true
+                },
+                {
+                    title: 'Chapter 2: Atoms, Molecules, and Ions',
+                    exercises: [
+                        { page: 45, name: 'Practice Exercises 2.1' },
+                        { page: 48, name: 'Practice Exercises 2.2' },
+                        { page: 50, name: 'Practice Exercises 2.3' }
+                    ],
+                    active: false
+                },
+                {
+                    title: 'Chapter 3: Chemical Reactions and Reaction Stoichiometry',
+                    exercises: [
+                        { page: 67, name: 'Practice Exercises 3.1' },
+                        { page: 70, name: 'Practice Exercises 3.2' }
+                    ],
+                    active: false
+                }
+            ];
+
+            const chaptersContainer = document.getElementById('textbookChapters');
+            if (chaptersContainer) {
+                chaptersContainer.innerHTML = chapters.map((chapter, index) => `
+                    <div class="textbook-chapter ${chapter.active ? 'active' : ''}">
+                        <div class="textbook-chapter-header" onclick="toggleChapter(${index})">
+                            <h3 class="textbook-chapter-title">${chapter.title}</h3>
+                            <i class="bi bi-chevron-down textbook-chapter-chevron"></i>
+                        </div>
+                        <div class="textbook-chapter-content">
+                            <div class="textbook-exercises-list">
+                                ${chapter.exercises.map(ex => `
+                                    <div class="textbook-exercise-item">
+                                        <span class="textbook-exercise-page">Page ${ex.page}:</span>
+                                        <span class="textbook-exercise-name">${ex.name}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleChapter(index) {
+            const chapters = document.querySelectorAll('.textbook-chapter');
+            const chapter = chapters[index];
+
+            // Close all other chapters
+            chapters.forEach((ch, i) => {
+                if (i !== index) {
+                    ch.classList.remove('active');
+                }
+            });
+
+            // Toggle current chapter
+            chapter.classList.toggle('active');
+        }
+
+        // Load folders in sidebar
+        if (typeof loadFoldersInSidebar === 'function') {
+            loadFoldersInSidebar();
+        }
+    </script>
+</body>
+
+</html>

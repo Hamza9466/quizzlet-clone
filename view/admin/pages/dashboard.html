@@ -32,12 +32,27 @@
             </div>
         </div>
         <div class="header-right">
-            <button class="btn-create">
-                <i class="bi bi-plus-lg"></i>
-            </button>
-            <button class="btn-upgrade" data-i18n="upgrade">
-                Upgrade: free 7-day trial
-            </button>
+            <div class="create-dropdown-wrapper">
+                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <ul class="create-dropdown-menu dropdown-menu" aria-labelledby="createDropdownBtn">
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="flashcards.html">
+                            <i class="bi bi-card-text"></i>
+                            <span>Flashcard set</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="#"
+                            onclick="showNewFolderModal(event); return false;">
+                            <i class="bi bi-folder"></i>
+                            <span>Folder</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="profile-icon-wrapper">
                 <div class="profile-icon" id="profileIcon">
                     <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
@@ -215,46 +230,58 @@
                 </div>
                 <div class="staff-picks-container">
                     <div class="staff-picks-scroll">
-                        <div class="staff-pick-card">
-                            <i class="bi bi-card-text staff-pick-icon"></i>
-                            <div class="staff-pick-content">
-                                <h3 class="staff-pick-title">Quizlet basics</h3>
-                                <div class="staff-pick-meta">11 cards • by Quizlet</div>
+                        <a href="flashcard-view.html?title=Quizlet basics" class="staff-pick-card-link">
+                            <div class="staff-pick-card">
+                                <i class="bi bi-card-text staff-pick-icon"></i>
+                                <div class="staff-pick-content">
+                                    <h3 class="staff-pick-title">Quizlet basics</h3>
+                                    <div class="staff-pick-meta">11 cards • by Quizlet</div>
+                                </div>
+                                <button class="card-options-btn"
+                                    onclick="event.preventDefault(); event.stopPropagation();">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
                             </div>
-                            <button class="card-options-btn">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                        </div>
-                        <div class="staff-pick-card">
-                            <i class="bi bi-card-text staff-pick-icon"></i>
-                            <div class="staff-pick-content">
-                                <h3 class="staff-pick-title">Common Quizlet questions</h3>
-                                <div class="staff-pick-meta">15 cards • by Quizlet</div>
+                        </a>
+                        <a href="flashcard-view.html?title=Common Quizlet questions" class="staff-pick-card-link">
+                            <div class="staff-pick-card">
+                                <i class="bi bi-card-text staff-pick-icon"></i>
+                                <div class="staff-pick-content">
+                                    <h3 class="staff-pick-title">Common Quizlet questions</h3>
+                                    <div class="staff-pick-meta">15 cards • by Quizlet</div>
+                                </div>
+                                <button class="card-options-btn"
+                                    onclick="event.preventDefault(); event.stopPropagation();">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
                             </div>
-                            <button class="card-options-btn">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                        </div>
-                        <div class="staff-pick-card">
-                            <i class="bi bi-card-text staff-pick-icon"></i>
-                            <div class="staff-pick-content">
-                                <h3 class="staff-pick-title">Effective study strategies</h3>
-                                <div class="staff-pick-meta">12 cards • by Quizlet</div>
+                        </a>
+                        <a href="flashcard-view.html?title=Effective study strategies" class="staff-pick-card-link">
+                            <div class="staff-pick-card">
+                                <i class="bi bi-card-text staff-pick-icon"></i>
+                                <div class="staff-pick-content">
+                                    <h3 class="staff-pick-title">Effective study strategies</h3>
+                                    <div class="staff-pick-meta">12 cards • by Quizlet</div>
+                                </div>
+                                <button class="card-options-btn"
+                                    onclick="event.preventDefault(); event.stopPropagation();">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
                             </div>
-                            <button class="card-options-btn">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                        </div>
-                        <div class="staff-pick-card">
-                            <i class="bi bi-card-text staff-pick-icon"></i>
-                            <div class="staff-pick-content">
-                                <h3 class="staff-pick-title">Study tips and tricks</h3>
-                                <div class="staff-pick-meta">18 cards • by Quizlet</div>
+                        </a>
+                        <a href="flashcard-view.html?title=Study tips and tricks" class="staff-pick-card-link">
+                            <div class="staff-pick-card">
+                                <i class="bi bi-card-text staff-pick-icon"></i>
+                                <div class="staff-pick-content">
+                                    <h3 class="staff-pick-title">Study tips and tricks</h3>
+                                    <div class="staff-pick-meta">18 cards • by Quizlet</div>
+                                </div>
+                                <button class="card-options-btn"
+                                    onclick="event.preventDefault(); event.stopPropagation();">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
                             </div>
-                            <button class="card-options-btn">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                        </div>
+                        </a>
                     </div>
                     <button class="staff-picks-next-btn">
                         <i class="bi bi-chevron-right"></i>
@@ -296,7 +323,8 @@
                         </div>
                         <div class="personalize-text">
                             <p class="personalize-placeholder">Add your exams to get recommended content</p>
-                            <button class="btn-add-exams">Add standardized exams</button>
+                            <button class="btn-add-exams" onclick="showExamSelectionModal()">Add standardized
+                                exams</button>
                         </div>
                     </div>
                 </div>
@@ -325,6 +353,81 @@
         </div>
     </footer>
 
+    <!-- Exam Selection Modal -->
+    <div class="exam-selection-modal" id="examSelectionModal" style="display: none;">
+        <div class="exam-selection-modal-overlay" onclick="hideExamSelectionModal()"></div>
+        <div class="exam-selection-modal-content">
+            <div class="exam-selection-header">
+                <div class="exam-selection-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="6" width="32" height="40" rx="4" fill="#A855F7" />
+                        <rect x="12" y="12" width="24" height="4" rx="2" fill="white" />
+                        <rect x="12" y="20" width="20" height="4" rx="2" fill="white" />
+                        <rect x="12" y="28" width="16" height="4" rx="2" fill="white" />
+                        <circle cx="36" cy="18" r="6" fill="#FBBF24" />
+                        <path d="M33 18 L35 20 L39 16" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" fill="none" />
+                    </svg>
+                </div>
+                <h2 class="exam-selection-title">Select your exam to view flashcards</h2>
+            </div>
+            <div class="exam-selection-body">
+                <div class="exam-search-container">
+                    <i class="bi bi-search exam-search-icon"></i>
+                    <input type="text" class="exam-search-input" placeholder="Enter your exam" id="examSearchInput">
+                </div>
+                <div class="popular-exams-section">
+                    <div class="popular-exams-header">
+                        <i class="bi bi-graph-up-arrow"></i>
+                        <span class="popular-exams-title">Popular exams</span>
+                    </div>
+                    <div class="popular-exams-list">
+                        <div class="exam-item" data-exam="IELTS Academic">
+                            <div class="exam-item-info">
+                                <div class="exam-acronym">IELTS Academic</div>
+                                <div class="exam-full-name">Exam Prep for IELTS® Academic</div>
+                            </div>
+                            <button class="exam-add-btn" onclick="addExam('IELTS Academic', event);">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                        <div class="exam-item" data-exam="SAT">
+                            <div class="exam-item-info">
+                                <div class="exam-acronym">SAT</div>
+                                <div class="exam-full-name">Scholastic Assessment Test</div>
+                            </div>
+                            <button class="exam-add-btn" onclick="addExam('SAT', event);">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                        <div class="exam-item" data-exam="JEE Main">
+                            <div class="exam-item-info">
+                                <div class="exam-acronym">JEE Main</div>
+                                <div class="exam-full-name">Joint Entrance Examination - Main</div>
+                            </div>
+                            <button class="exam-add-btn" onclick="addExam('JEE Main', event);">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                        <div class="exam-item" data-exam="ENEM">
+                            <div class="exam-item-info">
+                                <div class="exam-acronym">ENEM</div>
+                                <div class="exam-full-name">Exame Nacional do Ensino Médio</div>
+                            </div>
+                            <button class="exam-add-btn" onclick="addExam('ENEM', event);">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exam-selection-footer">
+                <button class="exam-continue-btn" id="examContinueBtn" onclick="continueWithExam()"
+                    disabled>Continue</button>
+            </div>
+        </div>
+    </div>
+
     <!-- New Folder Modal -->
     <div class="new-folder-modal" id="newFolderModal" style="display: none;">
         <div class="new-folder-modal-overlay" onclick="hideNewFolderModal()"></div>
@@ -352,6 +455,178 @@
     <script src="../../../style/modal.js"></script>
     <!-- Dashboard JS -->
     <script src="../../../style/dashboard.js"></script>
+    <script>
+        // Exam Selection Modal Functions
+        let selectedExam = null;
+
+        function showExamSelectionModal() {
+            const modal = document.getElementById('examSelectionModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function hideExamSelectionModal() {
+            const modal = document.getElementById('examSelectionModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+                // Reset selection
+                selectedExam = null;
+                updateContinueButton();
+                const searchInput = document.getElementById('examSearchInput');
+                if (searchInput) {
+                    searchInput.value = '';
+                }
+                // Remove selected class from all items
+                document.querySelectorAll('.exam-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+            }
+        }
+
+        function addExam(examName, e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            // Toggle selection
+            const examItems = document.querySelectorAll('.exam-item');
+            examItems.forEach(item => {
+                if (item.dataset.exam === examName) {
+                    if (item.classList.contains('selected')) {
+                        item.classList.remove('selected');
+                        selectedExam = null;
+                    } else {
+                        // Remove selection from other items
+                        examItems.forEach(i => i.classList.remove('selected'));
+                        item.classList.add('selected');
+                        selectedExam = examName;
+                    }
+                }
+            });
+            updateContinueButton();
+        }
+
+        // Make functions globally accessible
+        window.showExamSelectionModal = showExamSelectionModal;
+        window.hideExamSelectionModal = hideExamSelectionModal;
+        window.addExam = addExam;
+        window.updateContinueButton = updateContinueButton;
+        window.continueWithExam = continueWithExam;
+
+        function updateContinueButton() {
+            const continueBtn = document.getElementById('examContinueBtn');
+            if (continueBtn) {
+                if (selectedExam) {
+                    continueBtn.disabled = false;
+                } else {
+                    continueBtn.disabled = true;
+                }
+            }
+        }
+
+        function continueWithExam() {
+            if (selectedExam) {
+                // Save the selected exam as a folder
+                saveExamAsFolder(selectedExam);
+                // Close modal
+                hideExamSelectionModal();
+                // Reload folders in sidebar
+                if (typeof loadFoldersInSidebar === 'function') {
+                    loadFoldersInSidebar();
+                }
+                // Reload library folders if on library page
+                if (typeof loadLibraryFolders === 'function') {
+                    loadLibraryFolders();
+                }
+            }
+        }
+
+        function saveExamAsFolder(examName) {
+            // Get existing folders from localStorage
+            const folders = JSON.parse(localStorage.getItem('folders') || '[]');
+
+            // Get full name for the exam
+            const fullName = getExamFullName(examName);
+
+            // Check if folder already exists
+            const folderExists = folders.some(folder => folder.name === fullName || folder.name === examName);
+
+            if (!folderExists) {
+                // Create folder object (same structure as regular folders)
+                const newFolder = {
+                    id: 'folder-' + Date.now(),
+                    name: fullName,
+                    createdAt: new Date().toISOString(),
+                    pinned: true,
+                    isExam: true,
+                    examName: examName
+                };
+
+                // Add to folders array
+                folders.push(newFolder);
+
+                // Save to localStorage
+                localStorage.setItem('folders', JSON.stringify(folders));
+            }
+        }
+
+        function getExamFullName(examName) {
+            const examNames = {
+                'IELTS Academic': 'Exam Prep for IELTS® Academic',
+                'SAT': 'Scholastic Assessment Test',
+                'JEE Main': 'Joint Entrance Examination - Main',
+                'ENEM': 'Exame Nacional do Ensino Médio'
+            };
+            return examNames[examName] || examName;
+        }
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('examSearchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', function (e) {
+                    const query = e.target.value.toLowerCase();
+                    const examItems = document.querySelectorAll('.exam-item');
+                    examItems.forEach(item => {
+                        const examName = item.dataset.exam.toLowerCase();
+                        const fullName = item.querySelector('.exam-full-name').textContent.toLowerCase();
+                        if (examName.includes(query) || fullName.includes(query)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // Close modal on Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('examSelectionModal');
+                    if (modal && modal.style.display === 'flex') {
+                        hideExamSelectionModal();
+                    }
+                }
+            });
+
+            // Add click handlers to exam items (clicking anywhere on the item)
+            setTimeout(function () {
+                document.querySelectorAll('.exam-item').forEach(item => {
+                    item.addEventListener('click', function (e) {
+                        // Don't trigger if clicking the button itself (it will handle its own click)
+                        if (!e.target.closest('.exam-add-btn')) {
+                            const examName = this.dataset.exam;
+                            addExam(examName, e);
+                        }
+                    });
+                });
+            }, 100);
+        });
+    </script>
 </body>
 
 </html>

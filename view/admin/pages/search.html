@@ -284,9 +284,25 @@
             </div>
         </div>
         <div class="header-right">
-            <button class="btn-create">
-                <i class="bi bi-plus-lg"></i>
-            </button>
+            <div class="create-dropdown-wrapper">
+                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <ul class="create-dropdown-menu dropdown-menu" aria-labelledby="createDropdownBtn">
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="flashcards.html">
+                            <i class="bi bi-card-text"></i>
+                            <span>Flashcard set</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="#" onclick="showNewFolderModal(event); return false;">
+                            <i class="bi bi-folder"></i>
+                            <span>Folder</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="profile-icon-wrapper">
                 <div class="profile-icon" id="profileIcon">
                     <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">

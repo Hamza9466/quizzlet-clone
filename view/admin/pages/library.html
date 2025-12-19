@@ -247,6 +247,93 @@
             gap: 1rem;
         }
 
+        .library-folder-card-wrapper {
+            position: relative;
+        }
+
+        .library-folder-menu-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .library-folder-menu-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        .library-folder-context-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0.75rem;
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+            padding: 0.5rem 0;
+        }
+
+        .library-folder-context-menu.show {
+            display: block;
+        }
+
+        .library-folder-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            background: none;
+            border: none;
+            color: #ffffff;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s ease;
+        }
+
+        .library-folder-menu-item:hover {
+            background: #586380;
+        }
+
+        .library-folder-menu-item i {
+            font-size: 1rem;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .library-folder-menu-item.delete {
+            color: #ef4444;
+        }
+
+        .library-folder-menu-item.delete i {
+            color: #ef4444;
+        }
+
+        .library-folder-menu-item.delete:hover {
+            background: #586380;
+        }
+
         /* Tab Content */
         .library-tab-content {
             display: none;
@@ -938,12 +1025,25 @@
             </div>
         </div>
         <div class="header-right">
-            <button class="btn-create">
-                <i class="bi bi-plus-lg"></i>
-            </button>
-            <button class="btn-upgrade" data-i18n="upgrade">
-                Upgrade: free 7-day trial
-            </button>
+            <div class="create-dropdown-wrapper">
+                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <ul class="create-dropdown-menu dropdown-menu" aria-labelledby="createDropdownBtn">
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="flashcards.html">
+                            <i class="bi bi-card-text"></i>
+                            <span>Flashcard set</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="#" onclick="showNewFolderModal(event); return false;">
+                            <i class="bi bi-folder"></i>
+                            <span>Folder</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="profile-icon-wrapper">
                 <div class="profile-icon" id="profileIcon">
                     <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">

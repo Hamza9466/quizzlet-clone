@@ -308,23 +308,93 @@ function loadLibraryFolders() {
     foldersGrid.innerHTML = folders.map(folder => {
         const createdDate = new Date(folder.createdAt);
         const formattedDate = createdDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const folderName = encodeURIComponent(folder.name);
         
         return `
-            <div class="library-set-card">
-                <div class="library-set-meta">
-                    <span>Created ${formattedDate}</span>
+            <div class="library-folder-card-wrapper" style="position: relative;">
+                <a href="folder-view.html?id=${folder.id}&name=${folderName}" class="library-set-card" style="text-decoration: none; display: block;">
+                    <div class="library-set-meta">
+                        <span>Created ${formattedDate}</span>
+                    </div>
+                    <h3 class="library-set-title">
+                        <i class="bi bi-folder" style="margin-right: 0.5rem;"></i>
+                        ${folder.name}
+                    </h3>
+                </a>
+                <button class="library-folder-menu-btn" onclick="toggleLibraryFolderMenu(event, '${folder.id}')">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <div class="library-folder-context-menu" id="folderMenu_${folder.id}">
+                    <button class="library-folder-menu-item delete" onclick="deleteLibraryFolder(event, '${folder.id}')">
+                        <i class="bi bi-trash"></i>
+                        <span>Delete</span>
+                    </button>
                 </div>
-                <h3 class="library-set-title">
-                    <i class="bi bi-folder" style="margin-right: 0.5rem;"></i>
-                    ${folder.name}
-                </h3>
             </div>
         `;
     }).join('');
 }
 
-// Make function globally available
+// Folder menu functions
+function toggleLibraryFolderMenu(event, folderId) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    // Close all other menus
+    document.querySelectorAll('.library-folder-context-menu').forEach(menu => {
+        if (menu.id !== `folderMenu_${folderId}`) {
+            menu.classList.remove('show');
+        }
+    });
+    
+    const menu = document.getElementById(`folderMenu_${folderId}`);
+    if (menu) {
+        menu.classList.toggle('show');
+    }
+}
+
+function deleteLibraryFolder(event, folderId) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    if (confirm('Are you sure you want to delete this folder? This action cannot be undone.')) {
+        const folders = JSON.parse(localStorage.getItem('folders') || '[]');
+        const updatedFolders = folders.filter(f => f.id !== folderId);
+        localStorage.setItem('folders', JSON.stringify(updatedFolders));
+        
+        // Reload folders in library
+        loadLibraryFolders();
+        
+        // Reload folders in sidebar if function exists
+        if (typeof loadFoldersInSidebar === 'function') {
+            loadFoldersInSidebar();
+        }
+    }
+    
+    // Close menu
+    const menu = document.getElementById(`folderMenu_${folderId}`);
+    if (menu) {
+        menu.classList.remove('show');
+    }
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.library-folder-menu-btn') && !e.target.closest('.library-folder-context-menu')) {
+        document.querySelectorAll('.library-folder-context-menu').forEach(menu => {
+            menu.classList.remove('show');
+        });
+    }
+});
+
+// Make functions globally available
 window.loadLibraryFolders = loadLibraryFolders;
+window.toggleLibraryFolderMenu = toggleLibraryFolderMenu;
+window.deleteLibraryFolder = deleteLibraryFolder;
 
 window.openFlashcardSet = function (setId) {
     localStorage.setItem('currentFlashcardSetId', setId);
