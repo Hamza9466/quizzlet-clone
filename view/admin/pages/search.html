@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Quizlet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .search-main {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .search-subtitle {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            margin-bottom: 3rem;
+        }
+
+        .search-bar-container {
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .search-bar::placeholder {
+            color: #6b7280;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: #333333;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1.25rem;
+        }
+
+        .browse-section {
+            text-align: left;
+            margin-top: 4rem;
+        }
+
+        .browse-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .subject-card {
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .subject-card:hover {
+            background: #586380;
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .subject-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subject-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subject-card.science .subject-icon {
+            color: #60A5FA;
+        }
+
+        .subject-card.languages .subject-icon {
+            color: #A855F7;
+        }
+
+        .subject-card.arts .subject-icon {
+            color: #EF4444;
+        }
+
+        .subject-card.maths .subject-icon {
+            color: #FBBF24;
+        }
+
+        .subject-card.social .subject-icon {
+            color: #10B981;
+        }
+
+        .subject-card.other .subject-icon {
+            color: #3B82F6;
+        }
+
+        /* Custom icons for subjects */
+        .subject-icon-science {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-icon-science::before,
+        .subject-icon-science::after {
+            content: '';
+            position: absolute;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+
+        .subject-icon-science::before {
+            width: 10px;
+            height: 28px;
+            left: 10px;
+            top: 6px;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+        }
+
+        .subject-icon-science::after {
+            width: 10px;
+            height: 24px;
+            right: 10px;
+            top: 8px;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+        }
+
+        .subject-icon-languages {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background: #A855F7;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .subject-icon-arts {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background: #EF4444;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.75rem;
+        }
+
+        .subject-icon-maths {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background: #FBBF24;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+        }
+
+        .subject-icon-social {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background: #10B981;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+        }
+
+        .subject-icon-other {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background: #3B82F6;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="achievements.html" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span>Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span>Home</span>
+                </a>
+                <a href="library.html" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span>Your library</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="search-main">
+                <h1 class="search-title">Search Quizlet</h1>
+                <p class="search-subtitle">Find flashcard sets, classes, users and more.</p>
+
+                <div class="search-bar-container">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" class="search-bar" placeholder="Search by subject or keyword" id="searchInput">
+                </div>
+
+                <div class="browse-section">
+                    <h2 class="browse-title">Browse by subject</h2>
+                    <div class="subjects-grid">
+                        <div class="subject-card science" onclick="window.location.href='subject-results.html?subject=Science'">
+                            <div class="subject-icon">
+                                <div class="subject-icon-science"></div>
+                            </div>
+                            <div class="subject-name">Science</div>
+                        </div>
+                        <div class="subject-card languages" onclick="window.location.href='subject-results.html?subject=Languages'">
+                            <div class="subject-icon">
+                                <div class="subject-icon-languages">スA</div>
+                            </div>
+                            <div class="subject-name">Languages</div>
+                        </div>
+                        <div class="subject-card arts" onclick="window.location.href='subject-results.html?subject=Arts and Humanities'">
+                            <div class="subject-icon">
+                                <div class="subject-icon-arts">
+                                    <i class="bi bi-pencil"></i>
+                                </div>
+                            </div>
+                            <div class="subject-name">Arts and Humanities</div>
+                        </div>
+                        <div class="subject-card maths" onclick="window.location.href='subject-results.html?subject=Maths'">
+                            <div class="subject-icon">
+                                <div class="subject-icon-maths">
+                                    <i class="bi bi-rulers"></i>
+                                </div>
+                            </div>
+                            <div class="subject-name">Maths</div>
+                        </div>
+                        <div class="subject-card social" onclick="window.location.href='subject-results.html?subject=Social Science'">
+                            <div class="subject-icon">
+                                <div class="subject-icon-social">
+                                    <i class="bi bi-globe"></i>
+                                </div>
+                            </div>
+                            <div class="subject-name">Social Science</div>
+                        </div>
+                        <div class="subject-card other" onclick="window.location.href='subject-results.html?subject=Other'">
+                            <div class="subject-icon">
+                                <div class="subject-icon-other">
+                                    <i class="bi bi-display"></i>
+                                </div>
+                            </div>
+                            <div class="subject-name">Other</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../style/translations.js"></script>
+    <script src="../../../style/theme.js"></script>
+    <script src="../../../style/dashboard.js"></script>
+    <script>
+        function searchBySubject(subject) {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = subject;
+            // You can add search functionality here
+            console.log('Searching for:', subject);
+        }
+
+        // Handle search input
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (query) {
+                    console.log('Searching for:', query);
+                    // Add search functionality here
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+

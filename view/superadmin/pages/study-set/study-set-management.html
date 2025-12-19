@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Set Management - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../../style/dashboard.css">
+    <link rel="stylesheet" href="../../../../style/admin-dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+                <span style="font-size: 1.25rem; font-weight: 600; color: #ffffff; margin-left: 0.5rem;">Admin</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Search admin panel...">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <i class="bi bi-person-circle" style="font-size: 2rem; color: #9ca3af;"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <div class="dropdown-avatar" style="background: #3b82f6; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 1.5rem;">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">Super Admin</div>
+                            <div class="dropdown-email">admin@quizlet.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="../../admin/pages/dashboard.html" class="dropdown-item no-icon">Exit Admin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="../admin.html" class="nav-item"><i class="bi bi-speedometer2"></i><span>Dashboard Overview</span></a>
+                <a href="../users/user-management.html" class="nav-item"><i class="bi bi-people"></i><span>User Management</span></a>
+                <a href="study-set-management.html" class="nav-item active"><i class="bi bi-journal-text"></i><span>Study Set Management</span></a>
+                <a href="../category/category-management.html" class="nav-item"><i class="bi bi-folder"></i><span>Category & Subject</span></a>
+                <a href="../content-moderation/content-moderation.html" class="nav-item"><i class="bi bi-shield-check"></i><span>Content Moderation</span></a>
+                <a href="../statistics-reports.html" class="nav-item"><i class="bi bi-bar-chart"></i><span>Statistics & Reports</span></a>
+                <a href="../notification/notification-management.html" class="nav-item"><i class="bi bi-bell"></i><span>Notification Management</span></a>
+                <a href="../security-access.html" class="nav-item"><i class="bi bi-lock"></i><span>Security & Access</span></a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-content">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">Study Set Management</h1>
+                    <div class="admin-page-actions">
+                        <input type="text" class="admin-search-input" placeholder="Search study sets...">
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="admin-filters">
+                    <button class="admin-filter-btn active">All Sets</button>
+                    <button class="admin-filter-btn">Pending Approval</button>
+                    <button class="admin-filter-btn">Approved</button>
+                    <button class="admin-filter-btn">Rejected</button>
+                </div>
+
+                <!-- Study Sets Table -->
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Study Set</th>
+                                <th>Creator</th>
+                                <th>Cards</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studySetsTableBody">
+                            <!-- Study sets will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../../style/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileIcon = document.getElementById('profileIcon');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileIcon && profileDropdown) {
+                profileIcon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('show');
+                });
+                document.addEventListener('click', function(event) {
+                    if (!profileIcon.contains(event.target) && !profileDropdown.contains(event.target)) {
+                        profileDropdown.classList.remove('show');
+                    }
+                });
+            }
+
+            setTimeout(function() {
+                const menuToggle = document.querySelector('.menu-toggle-btn');
+                const sidebar = document.querySelector('.dashboard-sidebar');
+                const mainContent = document.querySelector('.dashboard-main');
+                
+                if (menuToggle && sidebar && mainContent) {
+                    const newToggle = menuToggle.cloneNode(true);
+                    menuToggle.parentNode.replaceChild(newToggle, menuToggle);
+                    
+                    newToggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        sidebar.classList.toggle('closed');
+                        mainContent.classList.toggle('sidebar-closed');
+                    });
+                }
+            }, 100);
+        });
+    </script>
+    <script>
+        const dummyStudySets = [
+            { id: 1, title: 'Biology Chapter 5', creator: 'John Doe', cards: 45, status: 'Pending', created: '2024-03-15' },
+            { id: 2, title: 'Chemistry Basics', creator: 'Jane Smith', cards: 32, status: 'Approved', created: '2024-03-10' },
+            { id: 3, title: 'Math Formulas', creator: 'Mike Johnson', cards: 28, status: 'Pending', created: '2024-03-18' },
+            { id: 4, title: 'History Dates', creator: 'Sarah Williams', cards: 67, status: 'Approved', created: '2024-03-05' },
+            { id: 5, title: 'Spanish Vocabulary', creator: 'David Brown', cards: 120, status: 'Rejected', created: '2024-03-12' },
+            { id: 6, title: 'Physics Equations', creator: 'Emily Davis', cards: 38, status: 'Pending', created: '2024-03-20' }
+        ];
+
+        function loadStudySets() {
+            const tbody = document.getElementById('studySetsTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = dummyStudySets.map(set => `
+                <tr>
+                    <td><strong>${set.title}</strong></td>
+                    <td>${set.creator}</td>
+                    <td>${set.cards}</td>
+                    <td><span class="table-badge ${set.status === 'Approved' ? 'badge-active' : set.status === 'Pending' ? 'badge-warning' : 'badge-suspended'}">${set.status}</span></td>
+                    <td>${set.created}</td>
+                    <td>
+                        <div class="table-actions">
+                            ${set.status === 'Pending' ? `
+                                <button class="table-action-btn text-success" title="Approve"><i class="bi bi-check-circle"></i></button>
+                                <button class="table-action-btn text-danger" title="Reject"><i class="bi bi-x-circle"></i></button>
+                            ` : ''}
+                            <a href="view-study-set.html?id=${set.id}" class="table-action-btn" title="View"><i class="bi bi-eye"></i></a>
+                            <button class="table-action-btn text-danger" title="Remove"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', loadStudySets);
+    </script>
+</body>
+
+</html>
+

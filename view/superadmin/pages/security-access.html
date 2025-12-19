@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security & Access Control - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <link rel="stylesheet" href="../../../style/admin-dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+                <span style="font-size: 1.25rem; font-weight: 600; color: #ffffff; margin-left: 0.5rem;">Admin</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Search admin panel...">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <i class="bi bi-person-circle" style="font-size: 2rem; color: #9ca3af;"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <div class="dropdown-avatar" style="background: #3b82f6; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 1.5rem;">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">Super Admin</div>
+                            <div class="dropdown-email">admin@quizlet.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="../../admin/pages/dashboard.html" class="dropdown-item no-icon">Exit Admin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="admin.html" class="nav-item"><i class="bi bi-speedometer2"></i><span>Dashboard Overview</span></a>
+                <a href="users/user-management.html" class="nav-item"><i class="bi bi-people"></i><span>User Management</span></a>
+                <a href="study-set/study-set-management.html" class="nav-item"><i class="bi bi-journal-text"></i><span>Study Set Management</span></a>
+                <a href="category/category-management.html" class="nav-item"><i class="bi bi-folder"></i><span>Category & Subject</span></a>
+                <a href="content-moderation/content-moderation.html" class="nav-item"><i class="bi bi-shield-check"></i><span>Content Moderation</span></a>
+                <a href="statistics-reports.html" class="nav-item"><i class="bi bi-bar-chart"></i><span>Statistics & Reports</span></a>
+                <a href="notification/notification-management.html" class="nav-item"><i class="bi bi-bell"></i><span>Notification Management</span></a>
+                <a href="security-access.html" class="nav-item active"><i class="bi bi-lock"></i><span>Security & Access</span></a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-content">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">Security & Access Control</h1>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="admin-section">
+                    <h2 class="admin-section-title">Security Settings</h2>
+                    <div class="admin-settings-list">
+                        <div class="admin-setting-item">
+                            <div class="setting-info">
+                                <h3>Two-Factor Authentication</h3>
+                                <p>Require 2FA for admin accounts</p>
+                            </div>
+                            <label class="admin-toggle">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="admin-setting-item">
+                            <div class="setting-info">
+                                <h3>IP Whitelist</h3>
+                                <p>Restrict admin access to specific IP addresses</p>
+                            </div>
+                            <label class="admin-toggle">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="admin-setting-item">
+                            <div class="setting-info">
+                                <h3>Session Timeout</h3>
+                                <p>Auto-logout after 30 minutes of inactivity</p>
+                            </div>
+                            <label class="admin-toggle">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="admin-setting-item">
+                            <div class="setting-info">
+                                <h3>Password Policy</h3>
+                                <p>Enforce strong password requirements</p>
+                            </div>
+                            <label class="admin-toggle">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Access Logs -->
+                <div class="admin-section">
+                    <h2 class="admin-section-title">Recent Access Logs</h2>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>IP Address</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Super Admin</td>
+                                    <td>Login</td>
+                                    <td>192.168.1.100</td>
+                                    <td>2024-03-20 10:30 AM</td>
+                                    <td><span class="table-badge badge-active">Success</span></td>
+                                </tr>
+                                <tr>
+                                    <td>admin_user</td>
+                                    <td>Failed Login</td>
+                                    <td>192.168.1.105</td>
+                                    <td>2024-03-20 9:15 AM</td>
+                                    <td><span class="table-badge badge-suspended">Failed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Super Admin</td>
+                                    <td>User Management Access</td>
+                                    <td>192.168.1.100</td>
+                                    <td>2024-03-20 8:45 AM</td>
+                                    <td><span class="table-badge badge-active">Success</span></td>
+                                </tr>
+                                <tr>
+                                    <td>moderator_1</td>
+                                    <td>Content Moderation</td>
+                                    <td>192.168.1.102</td>
+                                    <td>2024-03-19 4:20 PM</td>
+                                    <td><span class="table-badge badge-active">Success</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admin Roles -->
+                <div class="admin-section">
+                    <h2 class="admin-section-title">Admin Roles & Permissions</h2>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Users</th>
+                                    <th>Permissions</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Super Admin</strong></td>
+                                    <td>2</td>
+                                    <td>Full Access</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="table-action-btn"><i class="bi bi-pencil"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Moderator</strong></td>
+                                    <td>5</td>
+                                    <td>Content Moderation, User Management</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="table-action-btn"><i class="bi bi-pencil"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Support</strong></td>
+                                    <td>8</td>
+                                    <td>User Management, Reports</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="table-action-btn"><i class="bi bi-pencil"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../style/dashboard.js"></script>
+    <script>
+        document.getElementById('profileIcon').addEventListener('click', function() {
+            document.getElementById('profileDropdown').classList.toggle('show');
+        });
+        document.addEventListener('click', function(event) {
+            const profileIcon = document.getElementById('profileIcon');
+            const dropdown = document.getElementById('profileDropdown');
+            if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+        setTimeout(function() {
+            const menuToggle = document.querySelector('.menu-toggle-btn');
+            const sidebar = document.querySelector('.dashboard-sidebar');
+            const mainContent = document.querySelector('.dashboard-main');
+            
+            if (menuToggle && sidebar && mainContent) {
+                const newToggle = menuToggle.cloneNode(true);
+                menuToggle.parentNode.replaceChild(newToggle, menuToggle);
+                
+                newToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    sidebar.classList.toggle('closed');
+                    mainContent.classList.toggle('sidebar-closed');
+                });
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>
+

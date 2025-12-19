@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class - Quizlet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .class-main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .class-banner {
+            background: #FEF3C7;
+            color: #92400E;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .class-banner-text {
+            font-weight: 600;
+        }
+
+        .class-banner-close {
+            background: none;
+            border: none;
+            color: #92400E;
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .class-header {
+            margin-bottom: 2rem;
+        }
+
+        .class-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .class-school {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .class-tabs {
+            display: flex;
+            gap: 2rem;
+            border-bottom: 2px solid #586380;
+            margin-bottom: 2rem;
+        }
+
+        .class-tab {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.75rem 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .class-tab:hover {
+            color: #ffffff;
+        }
+
+        .class-tab.active {
+            color: #ffffff;
+        }
+
+        .class-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ffffff;
+        }
+
+        .class-actions {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .class-action-btn {
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.25rem;
+        }
+
+        .class-action-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        .class-context-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 8px;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .class-context-menu.show {
+            display: block;
+        }
+
+        .class-context-item {
+            padding: 0.75rem 1rem;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .class-context-item:hover {
+            background: #586380;
+        }
+
+        .class-context-item.danger {
+            color: #ef4444;
+        }
+
+        .invite-section {
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .invite-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .invite-method {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .invite-method-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .invite-google-btn {
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .invite-google-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        .google-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: #10b981;
+            border: 2px solid #fbbf24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .copy-link-btn {
+            background: #3b82f6;
+            border: none;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .copy-link-btn:hover {
+            background: #2563eb;
+        }
+
+        .invite-email-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .invite-email-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #0A092D;
+            border: 1px solid #586380;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.875rem;
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .invite-email-input::placeholder {
+            color: #6b7280;
+        }
+
+        .invite-email-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: #1a1a2e;
+        }
+
+        .invite-email-limit {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-align: right;
+        }
+
+        .send-invitations-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #9ca3af;
+            border: none;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: not-allowed;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .send-invitations-btn.active {
+            background: #3b82f6;
+            cursor: pointer;
+        }
+
+        .send-invitations-btn.active:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="achievements.html" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span>Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span>Home</span>
+                </a>
+                <a href="library.html" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span>Your library</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="class-main">
+                <!-- Banner -->
+                <div class="class-banner" id="classBanner">
+                    <div class="class-banner-text">
+                        <strong>Invite students to join this class</strong> Students get free access to activities and materials you add to your class.
+                    </div>
+                    <button class="class-banner-close" onclick="hideBanner()">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+
+                <!-- Class Header -->
+                <div class="class-header">
+                    <h1 class="class-name" id="className">helo</h1>
+                    <div class="class-school">
+                        <i class="bi bi-building"></i>
+                        <span id="classSchool">Cathedral High Scool • Lahore</span>
+                    </div>
+                </div>
+
+                <!-- Class Actions -->
+                <div class="class-actions">
+                    <button class="class-action-btn">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <div style="position: relative;">
+                        <button class="class-action-btn" onclick="toggleContextMenu()">
+                            <i class="bi bi-three-dots"></i>
+                        </button>
+                        <div class="class-context-menu" id="contextMenu">
+                            <button class="class-context-item">
+                                <i class="bi bi-pencil"></i>
+                                <span>Edit</span>
+                            </button>
+                            <button class="class-context-item">
+                                <i class="bi bi-person-plus"></i>
+                                <span>Invite</span>
+                            </button>
+                            <button class="class-context-item">
+                                <i class="bi bi-bell"></i>
+                                <span>Notifications</span>
+                            </button>
+                            <button class="class-context-item">
+                                <i class="bi bi-pin-angle"></i>
+                                <span>Unpin from sidebar</span>
+                            </button>
+                            <button class="class-context-item">
+                                <i class="bi bi-exclamation-triangle"></i>
+                                <span>Report</span>
+                            </button>
+                            <button class="class-context-item danger">
+                                <i class="bi bi-trash"></i>
+                                <span>Delete</span>
+                            </button>
+                            <button class="class-context-item danger">
+                                <i class="bi bi-x-circle"></i>
+                                <span>Remove all members</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="class-tabs">
+                    <button class="class-tab">Material</button>
+                    <button class="class-tab active">Members</button>
+                </div>
+
+                <!-- Invite Section -->
+                <div class="invite-section">
+                    <div class="invite-methods">
+                        <div class="invite-method">
+                            <div class="invite-method-title">Invite using your LMS</div>
+                            <button class="invite-google-btn">
+                                <div class="google-icon">G</div>
+                                <span>Invite using Google</span>
+                            </button>
+                        </div>
+                        <div class="invite-method">
+                            <div class="invite-method-title">Invite using a link</div>
+                            <button class="copy-link-btn" onclick="copyLink()">
+                                <i class="bi bi-link-45deg"></i>
+                                <span>Copy link</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="invite-method">
+                        <div class="invite-method-title">Invite using email</div>
+                        <div class="invite-email-group">
+                            <textarea class="invite-email-input" id="emailInput" placeholder="Enter usernames or email addresses, separated by commas or line breaks."></textarea>
+                            <div class="invite-email-limit">200 email limit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Send Invitations Button -->
+    <button class="send-invitations-btn" id="sendInvitationsBtn" onclick="sendInvitations()">
+        <i class="bi bi-send"></i>
+        <span>Send Invitations</span>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../style/translations.js"></script>
+    <script src="../../../style/theme.js"></script>
+    <script src="../../../style/dashboard.js"></script>
+    <script>
+        // Load class data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const className = urlParams.get('name') || 'helo';
+        const classSchool = urlParams.get('school') || 'Cathedral High Scool • Lahore';
+
+        document.getElementById('className').textContent = className;
+        document.getElementById('classSchool').textContent = classSchool;
+
+        // Hide banner
+        function hideBanner() {
+            document.getElementById('classBanner').style.display = 'none';
+        }
+
+        // Toggle context menu
+        function toggleContextMenu() {
+            const menu = document.getElementById('contextMenu');
+            menu.classList.toggle('show');
+        }
+
+        // Close context menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('contextMenu');
+            const btn = event.target.closest('.class-action-btn');
+            if (!btn && !menu.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Copy link
+        function copyLink() {
+            const link = window.location.href;
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+
+        // Update send button state
+        document.getElementById('emailInput').addEventListener('input', function() {
+            const emailInput = this.value.trim();
+            const sendBtn = document.getElementById('sendInvitationsBtn');
+            if (emailInput) {
+                sendBtn.classList.add('active');
+            } else {
+                sendBtn.classList.remove('active');
+            }
+        });
+
+        // Send invitations
+        function sendInvitations() {
+            const emailInput = document.getElementById('emailInput').value.trim();
+            if (emailInput) {
+                alert('Invitations sent successfully!');
+                document.getElementById('emailInput').value = '';
+                document.getElementById('sendInvitationsBtn').classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - Quizlet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .achievements-main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .achievements-header {
+            margin-bottom: 2rem;
+        }
+
+        .achievements-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievements-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .achievements-content {
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 16px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .achievements-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .recently-earned-item {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+        }
+
+        .achievement-badge {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border: 3px solid #1e40af;
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .achievement-badge::before {
+            content: '⭐';
+            font-size: 2rem;
+            position: absolute;
+            top: 15px;
+        }
+
+        .achievement-badge::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            width: 40px;
+            height: 30px;
+            background: #ffffff;
+            border-radius: 4px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .calendar-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-month {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar-nav-btn {
+            background: #0A092D;
+            border: 1px solid #586380;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-nav-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #9ca3af;
+            font-weight: 600;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #9ca3af;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-day.other-month {
+            color: #586380;
+        }
+
+        .calendar-day.current-month {
+            color: #ffffff;
+        }
+
+        .calendar-day.active {
+            background: #10b981;
+            color: #ffffff;
+        }
+
+        .calendar-day.streak {
+            background: #f59e0b;
+            color: #ffffff;
+        }
+
+        .calendar-day.streak::before {
+            content: '🔥';
+            position: absolute;
+            top: -8px;
+            font-size: 0.75rem;
+        }
+
+        .calendar-day.streak.current-day::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            width: 4px;
+            height: 4px;
+            background: #f59e0b;
+            border-radius: 50%;
+        }
+
+        .streak-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .streak-days {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+        }
+
+        .streak-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .streak-flame {
+            width: 32px;
+            height: 32px;
+            background: #f59e0b;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.25rem;
+        }
+
+        .streak-flame::before {
+            content: '🔥';
+            font-size: 1.5rem;
+        }
+
+        .streak-flame.partial {
+            opacity: 0.5;
+            transform: scale(0.7);
+        }
+
+        .achievements-category {
+            margin-top: 3rem;
+        }
+
+        .achievements-category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        .achievements-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+        }
+
+        .achievement-badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .achievement-badge-hex {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .achievement-badge-hex img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .achievement-badge-item.locked .achievement-badge-hex {
+            opacity: 0.4;
+            filter: grayscale(100%) brightness(0.5);
+        }
+
+        .achievement-badge-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .achievement-badge-item.locked .achievement-badge-name {
+            color: #9ca3af;
+        }
+
+        .achievement-badge-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .achievements-subsection {
+            margin-bottom: 3rem;
+        }
+
+        .subsection-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+
+        .streaks-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .streak-badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .streak-badge-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .streak-badge-item.earned .streak-badge-circle {
+            background: #FBBF24;
+            border: 4px solid #10B981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .streak-badge-item.locked .streak-badge-circle {
+            background: #586380;
+            border: 4px solid #9ca3af;
+            opacity: 0.6;
+        }
+
+        .streak-badge-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .streak-badge-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .streak-badge-item.locked .streak-badge-name {
+            color: #9ca3af;
+        }
+
+        .streak-badge-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .lifetime-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .lifetime-badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .lifetime-badge-shield {
+            width: 100px;
+            height: 120px;
+            background: #A855F7;
+            border: 3px solid #7c3aed;
+            border-radius: 12px 12px 8px 8px;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+
+        .lifetime-badge-item.locked .lifetime-badge-shield {
+            background: #586380;
+            border-color: #9ca3af;
+            opacity: 0.6;
+            box-shadow: none;
+        }
+
+        .lifetime-badge-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .lifetime-badge-plus {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .lifetime-badge-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .lifetime-badge-item.locked .lifetime-badge-name {
+            color: #9ca3af;
+        }
+
+        .lifetime-badge-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .view-all-btn {
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .view-all-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        @media (max-width: 968px) {
+            .achievements-content {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-badges-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .streaks-badges-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 1rem;
+            }
+
+            .lifetime-badges-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="achievements.html" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span data-i18n="achievements">Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="settings">Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span data-i18n="lightMode">Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item no-icon" data-i18n="logOut">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span>Home</span>
+                </a>
+                <a href="library.html" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span>Your library</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="achievements-main">
+                <div class="achievements-header">
+                    <h1 class="achievements-title">Achievements</h1>
+                    <p class="achievements-subtitle">Recent activity</p>
+                </div>
+
+                <div class="achievements-content">
+                    <!-- Recently Earned Section -->
+                    <div class="achievements-section">
+                        <h2 class="section-title">Recently earned</h2>
+                        <div class="recently-earned-item">Match maker</div>
+                        <div class="achievement-badge"></div>
+                    </div>
+
+                    <!-- Calendar Section -->
+                    <div class="achievements-section calendar-section">
+                        <div class="calendar-header">
+                            <div class="calendar-month" id="calendarMonth">December 2025</div>
+                            <div class="calendar-nav">
+                                <button class="calendar-nav-btn" onclick="changeMonth(-1)">
+                                    <i class="bi bi-chevron-left"></i>
+                                </button>
+                                <button class="calendar-nav-btn" onclick="changeMonth(1)">
+                                    <i class="bi bi-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <div class="calendar-weekday">S</div>
+                            <div class="calendar-weekday">M</div>
+                            <div class="calendar-weekday">T</div>
+                            <div class="calendar-weekday">W</div>
+                            <div class="calendar-weekday">T</div>
+                            <div class="calendar-weekday">F</div>
+                            <div class="calendar-weekday">S</div>
+                        </div>
+                        <div class="calendar-days" id="calendarDays">
+                            <!-- Calendar days will be generated here -->
+                        </div>
+                    </div>
+
+                    <!-- Current Streak Section -->
+                    <div class="achievements-section streak-section">
+                        <h2 class="section-title">Current streak</h2>
+                        <div class="streak-days">3-day</div>
+                        <div class="streak-visual">
+                            <div class="streak-flame partial"></div>
+                            <div class="streak-flame"></div>
+                            <div class="streak-flame"></div>
+                            <div class="streak-flame"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Studying Achievements Section -->
+                <div class="achievements-category">
+                    <h2 class="achievements-category-title">Studying</h2>
+                    <div class="achievements-badges-grid">
+                        <div class="achievement-badge-item earned">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/badge-StudiedWithLearn.svg" alt="Flashcard whiz"
+                                    class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Flashcard whiz</div>
+                            <div class="achievement-badge-date">Earned 17/12/25</div>
+                        </div>
+                        <div class="achievement-badge-item earned">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/badge-StudiedWithLearn.svg" alt="Active learner"
+                                    class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Active learner</div>
+                            <div class="achievement-badge-date">Earned 17/12/25</div>
+                        </div>
+                        <div class="achievement-badge-item locked">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/locked-badge-ReachedEndOfLearn.svg"
+                                    alt="Committed learner" class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Committed learner</div>
+                        </div>
+                        <div class="achievement-badge-item earned">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/badge-StudiedWithTest.svg" alt="Match whiz"
+                                    class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Match whiz</div>
+                            <div class="achievement-badge-date">Earned 18/12/25</div>
+                        </div>
+                        <div class="achievement-badge-item earned">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/badge-StudiedWithLearn.svg" alt="Night owl"
+                                    class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Night owl</div>
+                            <div class="achievement-badge-date">Earned 17/12/25</div>
+                        </div>
+                        <div class="achievement-badge-item locked">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/locked-badge-ReachedEndOfLearn.svg"
+                                    alt="Early bird" class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Early bird</div>
+                        </div>
+                        <div class="achievement-badge-item earned">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/badge-StudiedWithTest.svg" alt="Test acer"
+                                    class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Test acer</div>
+                            <div class="achievement-badge-date">Earned 17/12/25</div>
+                        </div>
+                        <div class="achievement-badge-item earned">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/badge-StudiedWithLearn.svg" alt="Set builder"
+                                    class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Set builder</div>
+                            <div class="achievement-badge-date">Earned 17/12/25</div>
+                        </div>
+                        <div class="achievement-badge-item earned">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/badge-StudiedWithTest.svg" alt="Match maker"
+                                    class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Match maker</div>
+                            <div class="achievement-badge-date">Earned 18/12/25</div>
+                        </div>
+                        <div class="achievement-badge-item locked">
+                            <div class="achievement-badge-hex">
+                                <img src="../../../assets/admin/images/locked-badge-ReachedEndOfLearn.svg"
+                                    alt="Exam ready" class="badge-icon">
+                            </div>
+                            <div class="achievement-badge-name">Exam ready</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Streaks Section -->
+                <div class="achievements-category">
+                    <h2 class="achievements-category-title">Streaks</h2>
+
+                    <!-- Daily Streaks -->
+                    <div class="achievements-subsection">
+                        <h3 class="subsection-title">Daily streaks</h3>
+                        <div class="streaks-badges-grid">
+                            <div class="streak-badge-item earned">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">3</div>
+                                </div>
+                                <div class="streak-badge-name">3-day streak</div>
+                                <div class="streak-badge-date">Earned 19/12/25</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">5</div>
+                                </div>
+                                <div class="streak-badge-name">5-day streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">7</div>
+                                </div>
+                                <div class="streak-badge-name">7-day streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">10</div>
+                                </div>
+                                <div class="streak-badge-name">10-day streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">20</div>
+                                </div>
+                                <div class="streak-badge-name">20-day streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">30</div>
+                                </div>
+                                <div class="streak-badge-name">30-day streak</div>
+                            </div>
+                        </div>
+                        <button class="view-all-btn">View all</button>
+                    </div>
+
+                    <!-- Weekly Streaks -->
+                    <div class="achievements-subsection">
+                        <h3 class="subsection-title">Weekly streaks</h3>
+                        <div class="streaks-badges-grid">
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">3</div>
+                                </div>
+                                <div class="streak-badge-name">3-week streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">5</div>
+                                </div>
+                                <div class="streak-badge-name">5-week streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">10</div>
+                                </div>
+                                <div class="streak-badge-name">10-week streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">20</div>
+                                </div>
+                                <div class="streak-badge-name">20-week streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">30</div>
+                                </div>
+                                <div class="streak-badge-name">30-week streak</div>
+                            </div>
+                            <div class="streak-badge-item locked">
+                                <div class="streak-badge-circle">
+                                    <div class="streak-badge-number">40</div>
+                                </div>
+                                <div class="streak-badge-name">40-week streak</div>
+                            </div>
+                        </div>
+                        <button class="view-all-btn">View all</button>
+                    </div>
+                </div>
+
+                <!-- Lifetime Section -->
+                <div class="achievements-category">
+                    <h2 class="achievements-category-title">Lifetime</h2>
+
+                    <!-- Sets Studied -->
+                    <div class="achievements-subsection">
+                        <h3 class="subsection-title">Sets studied</h3>
+                        <div class="lifetime-badges-grid">
+                            <div class="lifetime-badge-item earned">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">1</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">Studied first set</div>
+                                <div class="lifetime-badge-date">Earned 17/12/25</div>
+                            </div>
+                            <div class="lifetime-badge-item earned">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">3</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">3 sets studied</div>
+                                <div class="lifetime-badge-date">Earned 17/12/25</div>
+                            </div>
+                            <div class="lifetime-badge-item earned">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">5</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">5 sets studied</div>
+                                <div class="lifetime-badge-date">Earned 18/12/25</div>
+                            </div>
+                            <div class="lifetime-badge-item earned">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">10</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">10 sets studied</div>
+                                <div class="lifetime-badge-date">Earned 18/12/25</div>
+                            </div>
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">25</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">25 sets studied</div>
+                            </div>
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">50</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">50 sets studied</div>
+                            </div>
+                        </div>
+                        <button class="view-all-btn">View all</button>
+                    </div>
+
+                    <!-- Rounds Studied -->
+                    <div class="achievements-subsection">
+                        <h3 class="subsection-title">Rounds studied</h3>
+                        <div class="lifetime-badges-grid">
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">1</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">Studied first round</div>
+                            </div>
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">3</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">3 rounds studied</div>
+                            </div>
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">5</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">5 rounds studied</div>
+                            </div>
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">10</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">10 rounds studied</div>
+                            </div>
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">25</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">25 rounds studied</div>
+                            </div>
+                            <div class="lifetime-badge-item locked">
+                                <div class="lifetime-badge-shield">
+                                    <div class="lifetime-badge-number">50</div>
+                                    <div class="lifetime-badge-plus">+</div>
+                                </div>
+                                <div class="lifetime-badge-name">50 rounds studied</div>
+                            </div>
+                        </div>
+                        <button class="view-all-btn">View all</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../style/translations.js"></script>
+    <script src="../../../style/theme.js"></script>
+    <script src="../../../style/dashboard.js"></script>
+    <script>
+        // Calendar functionality
+        let currentDate = new Date(2025, 11, 19); // December 2025, day 19
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            document.getElementById('calendarMonth').textContent = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            const calendarDays = document.getElementById('calendarDays');
+            calendarDays.innerHTML = '';
+
+            // Previous month days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = daysInPrevMonth - i;
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = day;
+                calendarDays.appendChild(dayElement);
+            }
+
+            // Current month days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day current-month';
+                dayElement.textContent = day;
+
+                // Highlight specific dates
+                if (day === 17 || day === 18 || day === 19) {
+                    dayElement.classList.add('streak');
+                    if (day === 19) {
+                        dayElement.classList.add('current-day');
+                    }
+                } else if (day === 14 || day === 15 || day === 16 || day === 20) {
+                    dayElement.classList.add('active');
+                }
+
+                calendarDays.appendChild(dayElement);
+            }
+
+            // Next month days
+            const totalCells = calendarDays.children.length;
+            const remainingCells = 42 - totalCells; // 6 rows * 7 days
+            for (let day = 1; day <= remainingCells && day <= 7; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = day;
+                calendarDays.appendChild(dayElement);
+            }
+        }
+
+        function changeMonth(direction) {
+            currentDate.setMonth(currentDate.getMonth() + direction);
+            renderCalendar();
+        }
+
+        // Initialize calendar
+        renderCalendar();
+    </script>
+</body>
+
+</html>

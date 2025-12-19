@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics & Reports - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <link rel="stylesheet" href="../../../style/admin-dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+                <span style="font-size: 1.25rem; font-weight: 600; color: #ffffff; margin-left: 0.5rem;">Admin</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Search admin panel...">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <i class="bi bi-person-circle" style="font-size: 2rem; color: #9ca3af;"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <div class="dropdown-avatar" style="background: #3b82f6; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 1.5rem;">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">Super Admin</div>
+                            <div class="dropdown-email">admin@quizlet.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="../../admin/pages/dashboard.html" class="dropdown-item no-icon">Exit Admin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="admin.html" class="nav-item"><i class="bi bi-speedometer2"></i><span>Dashboard Overview</span></a>
+                <a href="users/user-management.html" class="nav-item"><i class="bi bi-people"></i><span>User Management</span></a>
+                <a href="study-set/study-set-management.html" class="nav-item"><i class="bi bi-journal-text"></i><span>Study Set Management</span></a>
+                <a href="category/category-management.html" class="nav-item"><i class="bi bi-folder"></i><span>Category & Subject</span></a>
+                <a href="content-moderation/content-moderation.html" class="nav-item"><i class="bi bi-shield-check"></i><span>Content Moderation</span></a>
+                <a href="statistics-reports.html" class="nav-item active"><i class="bi bi-bar-chart"></i><span>Statistics & Reports</span></a>
+                <a href="notification/notification-management.html" class="nav-item"><i class="bi bi-bell"></i><span>Notification Management</span></a>
+                <a href="security-access.html" class="nav-item"><i class="bi bi-lock"></i><span>Security & Access</span></a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-content">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">Statistics & Reports</h1>
+                    <div class="admin-page-actions">
+                        <select class="admin-select">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 90 days</option>
+                            <option>Last year</option>
+                        </select>
+                        <button class="admin-btn-secondary">
+                            <i class="bi bi-download"></i>
+                            Export Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card">
+                        <div class="stat-icon" style="background: #3b82f6;">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">12,458</div>
+                            <div class="stat-label">Total Users</div>
+                            <div class="stat-change positive">+12% from last month</div>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="stat-icon" style="background: #10b981;">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">8,234</div>
+                            <div class="stat-label">Study Sets</div>
+                            <div class="stat-change positive">+8% from last month</div>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="stat-icon" style="background: #f59e0b;">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">45,678</div>
+                            <div class="stat-label">Active Sessions</div>
+                            <div class="stat-change positive">+15% from last month</div>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="stat-icon" style="background: #8b5cf6;">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">89.2%</div>
+                            <div class="stat-label">User Retention</div>
+                            <div class="stat-change positive">+2.3% from last month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="admin-section">
+                    <h2 class="admin-section-title">User Growth</h2>
+                    <div class="admin-chart-container">
+                        <div class="fake-line-chart">
+                            <svg viewBox="0 0 800 300" style="width: 100%; height: 300px;">
+                                <!-- Grid lines -->
+                                <line x1="50" y1="50" x2="50" y2="250" stroke="#586380" stroke-width="2"/>
+                                <line x1="50" y1="250" x2="750" y2="250" stroke="#586380" stroke-width="2"/>
+                                <line x1="50" y1="200" x2="750" y2="200" stroke="#586380" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+                                <line x1="50" y1="150" x2="750" y2="150" stroke="#586380" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+                                <line x1="50" y1="100" x2="750" y2="100" stroke="#586380" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+                                <!-- Data line -->
+                                <polyline points="50,220 150,200 250,180 350,160 450,140 550,130 650,120 750,110" 
+                                    fill="none" stroke="#3b82f6" stroke-width="3"/>
+                                <!-- Data points -->
+                                <circle cx="50" cy="220" r="5" fill="#3b82f6"/>
+                                <circle cx="150" cy="200" r="5" fill="#3b82f6"/>
+                                <circle cx="250" cy="180" r="5" fill="#3b82f6"/>
+                                <circle cx="350" cy="160" r="5" fill="#3b82f6"/>
+                                <circle cx="450" cy="140" r="5" fill="#3b82f6"/>
+                                <circle cx="550" cy="130" r="5" fill="#3b82f6"/>
+                                <circle cx="650" cy="120" r="5" fill="#3b82f6"/>
+                                <circle cx="750" cy="110" r="5" fill="#3b82f6"/>
+                                <!-- Labels -->
+                                <text x="50" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Jan</text>
+                                <text x="150" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Feb</text>
+                                <text x="250" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Mar</text>
+                                <text x="350" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Apr</text>
+                                <text x="450" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">May</text>
+                                <text x="550" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Jun</text>
+                                <text x="650" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Jul</text>
+                                <text x="750" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Aug</text>
+                                <!-- Y-axis labels -->
+                                <text x="40" y="255" fill="#9ca3af" font-size="11" text-anchor="end">0</text>
+                                <text x="40" y="205" fill="#9ca3af" font-size="11" text-anchor="end">5K</text>
+                                <text x="40" y="155" fill="#9ca3af" font-size="11" text-anchor="end">10K</text>
+                                <text x="40" y="105" fill="#9ca3af" font-size="11" text-anchor="end">15K</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <h2 class="admin-section-title">Study Set Activity</h2>
+                    <div class="admin-chart-container">
+                        <div class="fake-bar-chart">
+                            <svg viewBox="0 0 800 300" style="width: 100%; height: 300px;">
+                                <!-- Grid lines -->
+                                <line x1="50" y1="50" x2="50" y2="250" stroke="#586380" stroke-width="2"/>
+                                <line x1="50" y1="250" x2="750" y2="250" stroke="#586380" stroke-width="2"/>
+                                <line x1="50" y1="200" x2="750" y2="200" stroke="#586380" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+                                <line x1="50" y1="150" x2="750" y2="150" stroke="#586380" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+                                <line x1="50" y1="100" x2="750" y2="100" stroke="#586380" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+                                <!-- Bars -->
+                                <rect x="80" y="180" width="60" height="70" fill="#10b981" rx="4"/>
+                                <rect x="160" y="160" width="60" height="90" fill="#10b981" rx="4"/>
+                                <rect x="240" y="140" width="60" height="110" fill="#10b981" rx="4"/>
+                                <rect x="320" y="120" width="60" height="130" fill="#10b981" rx="4"/>
+                                <rect x="400" y="100" width="60" height="150" fill="#10b981" rx="4"/>
+                                <rect x="480" y="90" width="60" height="160" fill="#10b981" rx="4"/>
+                                <rect x="560" y="110" width="60" height="140" fill="#10b981" rx="4"/>
+                                <rect x="640" y="130" width="60" height="120" fill="#10b981" rx="4"/>
+                                <!-- Labels -->
+                                <text x="110" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Jan</text>
+                                <text x="190" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Feb</text>
+                                <text x="270" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Mar</text>
+                                <text x="350" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Apr</text>
+                                <text x="430" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">May</text>
+                                <text x="510" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Jun</text>
+                                <text x="590" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Jul</text>
+                                <text x="670" y="270" fill="#9ca3af" font-size="12" text-anchor="middle">Aug</text>
+                                <!-- Y-axis labels -->
+                                <text x="40" y="255" fill="#9ca3af" font-size="11" text-anchor="end">0</text>
+                                <text x="40" y="205" fill="#9ca3af" font-size="11" text-anchor="end">500</text>
+                                <text x="40" y="155" fill="#9ca3af" font-size="11" text-anchor="end">1000</text>
+                                <text x="40" y="105" fill="#9ca3af" font-size="11" text-anchor="end">1500</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <h2 class="admin-section-title">Revenue Overview</h2>
+                    <div class="admin-chart-container">
+                        <div class="fake-pie-chart">
+                            <svg viewBox="0 0 400 300" style="width: 100%; height: 300px;">
+                                <!-- Pie slices -->
+                                <path d="M 200,150 L 200,50 A 100,100 0 0,1 280,80 Z" fill="#3b82f6"/>
+                                <path d="M 280,80 A 100,100 0 0,1 350,150 Z" fill="#10b981"/>
+                                <path d="M 350,150 A 100,100 0 0,1 280,220 Z" fill="#f59e0b"/>
+                                <path d="M 280,220 A 100,100 0 0,1 200,250 Z" fill="#8b5cf6"/>
+                                <path d="M 200,250 A 100,100 0 0,1 200,150 Z" fill="#ec4899"/>
+                                <!-- Labels -->
+                                <text x="200" y="30" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="600">35%</text>
+                                <text x="320" y="100" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="600">25%</text>
+                                <text x="320" y="200" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="600">20%</text>
+                                <text x="200" y="280" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="600">12%</text>
+                                <text x="80" y="200" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="600">8%</text>
+                                <!-- Legend -->
+                                <circle cx="50" cy="50" r="8" fill="#3b82f6"/>
+                                <text x="65" y="55" fill="#ffffff" font-size="12">Premium Subscriptions</text>
+                                <circle cx="50" cy="75" r="8" fill="#10b981"/>
+                                <text x="65" y="80" fill="#ffffff" font-size="12">Study Set Purchases</text>
+                                <circle cx="200" cy="50" r="8" fill="#f59e0b"/>
+                                <text x="215" y="55" fill="#ffffff" font-size="12">Ad Revenue</text>
+                                <circle cx="200" cy="75" r="8" fill="#8b5cf6"/>
+                                <text x="215" y="80" fill="#ffffff" font-size="12">Enterprise Plans</text>
+                                <circle cx="200" cy="100" r="8" fill="#ec4899"/>
+                                <text x="215" y="105" fill="#ffffff" font-size="12">Other</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../style/dashboard.js"></script>
+    <script>
+        document.getElementById('profileIcon').addEventListener('click', function() {
+            document.getElementById('profileDropdown').classList.toggle('show');
+        });
+        document.addEventListener('click', function(event) {
+            const profileIcon = document.getElementById('profileIcon');
+            const dropdown = document.getElementById('profileDropdown');
+            if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+        setTimeout(function() {
+            const menuToggle = document.querySelector('.menu-toggle-btn');
+            const sidebar = document.querySelector('.dashboard-sidebar');
+            const mainContent = document.querySelector('.dashboard-main');
+            
+            if (menuToggle && sidebar && mainContent) {
+                const newToggle = menuToggle.cloneNode(true);
+                menuToggle.parentNode.replaceChild(newToggle, menuToggle);
+                
+                newToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    sidebar.classList.toggle('closed');
+                    mainContent.classList.toggle('sidebar-closed');
+                });
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>
+

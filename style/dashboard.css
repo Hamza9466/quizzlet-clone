@@ -284,6 +284,8 @@
     top: 73px;
     height: calc(100vh - 73px);
     z-index: 10;
+    border-left: 2px solid #ef4444;
+    border-bottom: 2px solid #ef4444;
     /* Firefox scrollbar */
     scrollbar-width: thin;
     scrollbar-color: #2E3856 #0A092D;
@@ -314,6 +316,8 @@
     width: 0;
     padding: 0;
     overflow: hidden;
+    border-left: none;
+    border-bottom: none;
 }
 
 .dashboard-main.sidebar-closed {

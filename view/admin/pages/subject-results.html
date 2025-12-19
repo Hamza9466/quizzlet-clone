@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Flashcards - Quizlet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .subject-results-main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .subject-header {
+            margin-bottom: 2rem;
+        }
+
+        .subject-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+
+        .subject-title-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .subject-categories {
+            display: flex;
+            gap: 2rem;
+            border-bottom: 1px solid #586380;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .subject-category {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            white-space: nowrap;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .subject-category:hover {
+            color: #ffffff;
+        }
+
+        .subject-category.active {
+            color: #60A5FA;
+        }
+
+        .subject-category.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #60A5FA;
+        }
+
+        .results-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-tabs {
+            display: flex;
+            gap: 2rem;
+            border-bottom: 1px solid #586380;
+        }
+
+        .results-tab {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.75rem 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .results-tab:hover {
+            color: #ffffff;
+        }
+
+        .results-tab.active {
+            color: #60A5FA;
+        }
+
+        .results-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #60A5FA;
+        }
+
+        .results-count {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .results-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .filter-btn {
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        .flashcards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .flashcard-card {
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .flashcard-card:hover {
+            background: #586380;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .flashcard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .flashcard-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .flashcard-badge {
+            background: #0A092D;
+            border: 1px solid #586380;
+            color: #9ca3af;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 0.5rem;
+        }
+
+        .flashcard-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .flashcard-terms {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .flashcard-creator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .flashcard-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .flashcard-username {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .flashcard-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .preview-btn {
+            background: #3b82f6;
+            border: none;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .preview-btn:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="achievements.html" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span>Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span>Home</span>
+                </a>
+                <a href="library.html" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span>Your library</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="subject-results-main">
+                <div class="subject-header">
+                    <h1 class="subject-title" id="subjectTitle">
+                        <span class="subject-title-icon" id="subjectIcon"></span>
+                        <span id="subjectName">Science Flashcards</span>
+                    </h1>
+                    <div class="subject-categories" id="subjectCategories">
+                        <!-- Categories will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="results-nav">
+                    <div class="results-tabs">
+                        <button class="results-tab">All results</button>
+                        <button class="results-tab active">Flashcard sets</button>
+                        <button class="results-tab">Textbook solutions</button>
+                        <button class="results-tab">Expert Q&A</button>
+                    </div>
+                    <div class="results-count" id="resultsCount">1-44 of 10K+ results</div>
+                </div>
+
+                <div class="results-filters">
+                    <div class="filter-dropdown">
+                        <button class="filter-btn">
+                            <span>School: All</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="filter-dropdown">
+                        <button class="filter-btn">
+                            <span>Level: All</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flashcards-grid" id="flashcardsGrid">
+                    <!-- Flashcard sets will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../style/translations.js"></script>
+    <script src="../../../style/theme.js"></script>
+    <script src="../../../style/dashboard.js"></script>
+    <script>
+        // Subject data
+        const subjects = {
+            'Science': {
+                name: 'Science Flashcards',
+                icon: '<i class="bi bi-lightning-charge" style="color: #60A5FA;"></i>',
+                iconBg: '#60A5FA',
+                categories: ['Biology', 'Chemistry', 'Computer Science', 'Earth Science', 'Engineering', 'Medicine', 'Physics'],
+                flashcards: [
+                    { title: 'INTEGUMENTARY ASSESSMENT Exam 5', terms: 42, creator: 'nlyatb12', avatar: 'N' },
+                    { title: 'AECL 300 Exam 3', terms: 32, creator: 'jairoReMu', avatar: 'J' },
+                    { title: 'Science Keystone', terms: 19, creator: 'BenHarhaj', avatar: 'B' },
+                    { title: 'Fundamentals of Nursing', terms: 34, creator: 'taylorjwright2003', avatar: 'T' },
+                    { title: 'Driving Permit', terms: 18, creator: 'K857577', avatar: 'K' },
+                    { title: 'anp 10 and 14', terms: 34, creator: 'Isalahavan94', avatar: 'I' },
+                    { title: 'Botany Exam 1', terms: 134, creator: 'mkeller25', avatar: 'M' },
+                    { title: 'EES Refelction 3 and 4', terms: 16, creator: 'abbywelthoffer', avatar: 'A' },
+                    { title: 'Microbiology Lab Midterm 1', terms: 52, creator: 'Brady_Matthews37', avatar: 'B' },
+                    { title: 'BIO1331- Exam 2 STUDY', terms: 38, creator: 'Gracegves4956', avatar: 'G' },
+                    { title: 'Advanced Prosth Exam 2', terms: 427, creator: 'kcc0114', avatar: 'K' },
+                    { title: 'SSTI LEC', terms: 48, creator: 'samantha_saldo', avatar: 'S' },
+                    { title: 'Immunology 10/07', terms: 28, creator: 'morganbiomer', avatar: 'M' },
+                    { title: 'Immunesystem Part 1 Exam 2 Micro', terms: 107, creator: 'LisaDees', avatar: 'L' },
+                    { title: 'Intugementry Test', terms: 47, creator: 'gabbyosorioll', avatar: 'G' },
+                    { title: 'cirrhosis', terms: 75, creator: 'marneb3', avatar: 'M' },
+                    { title: 'Sedimentary Rock Classification', terms: 15, creator: 'weatherzannall', avatar: 'W' },
+                    { title: 'Thermochem', terms: 37, creator: 'glannapres', avatar: 'G' }
+                ]
+            },
+            'Languages': {
+                name: 'Languages Flashcards',
+                icon: '<span style="color: #A855F7; font-size: 1.5rem; font-weight: 700;">スA</span>',
+                iconBg: '#A855F7',
+                categories: ['Spanish', 'French', 'German', 'Italian', 'Japanese', 'Chinese', 'Korean'],
+                flashcards: [
+                    { title: 'Spanish Vocabulary Chapter 1', terms: 45, creator: 'spanish_learner', avatar: 'S' },
+                    { title: 'French Verbs', terms: 28, creator: 'french_tutor', avatar: 'F' },
+                    { title: 'German Basics', terms: 32, creator: 'german_student', avatar: 'G' }
+                ]
+            },
+            'Arts and Humanities': {
+                name: 'Arts and Humanities Flashcards',
+                icon: '<i class="bi bi-pencil" style="color: #EF4444;"></i>',
+                iconBg: '#EF4444',
+                categories: ['Art History', 'Literature', 'Music', 'Philosophy', 'Religion', 'Theater'],
+                flashcards: [
+                    { title: 'Art History Renaissance', terms: 56, creator: 'art_lover', avatar: 'A' },
+                    { title: 'Shakespeare Plays', terms: 38, creator: 'lit_student', avatar: 'L' }
+                ]
+            },
+            'Maths': {
+                name: 'Maths Flashcards',
+                icon: '<i class="bi bi-rulers" style="color: #FBBF24;"></i>',
+                iconBg: '#FBBF24',
+                categories: ['Algebra', 'Calculus', 'Geometry', 'Statistics', 'Trigonometry'],
+                flashcards: [
+                    { title: 'Algebra Basics', terms: 42, creator: 'math_teacher', avatar: 'M' },
+                    { title: 'Calculus Formulas', terms: 35, creator: 'calc_student', avatar: 'C' }
+                ]
+            },
+            'Social Science': {
+                name: 'Social Science Flashcards',
+                icon: '<i class="bi bi-globe" style="color: #10B981;"></i>',
+                iconBg: '#10B981',
+                categories: ['History', 'Geography', 'Economics', 'Psychology', 'Sociology'],
+                flashcards: [
+                    { title: 'World History Chapter 5', terms: 48, creator: 'history_buff', avatar: 'H' },
+                    { title: 'US Geography', terms: 52, creator: 'geo_student', avatar: 'G' }
+                ]
+            },
+            'Other': {
+                name: 'Other Flashcards',
+                icon: '<i class="bi bi-display" style="color: #3B82F6;"></i>',
+                iconBg: '#3B82F6',
+                categories: ['Business', 'Technology', 'Health', 'Sports'],
+                flashcards: [
+                    { title: 'Business Terms', terms: 38, creator: 'biz_student', avatar: 'B' },
+                    { title: 'Computer Science Basics', terms: 45, creator: 'tech_learner', avatar: 'T' }
+                ]
+            }
+        };
+
+        // Load subject data from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let subjectName = urlParams.get('subject') || 'Science';
+
+        // Handle URL encoding for "Arts and Humanities"
+        if (subjectName === 'Arts%20and%20Humanities' || subjectName.includes('Arts')) {
+            subjectName = 'Arts and Humanities';
+        }
+
+        const subject = subjects[subjectName] || subjects['Science'];
+
+        // Update page title and header
+        document.getElementById('subjectName').textContent = subject.name;
+        const subjectIcon = document.getElementById('subjectIcon');
+        subjectIcon.innerHTML = subject.icon;
+        subjectIcon.style.background = subject.iconBg + '20';
+        subjectIcon.style.color = subject.iconBg;
+
+        // Load categories
+        const categoriesContainer = document.getElementById('subjectCategories');
+        categoriesContainer.innerHTML = subject.categories.map((cat, index) => `
+            <button class="subject-category ${index === 0 ? 'active' : ''}" onclick="filterByCategory('${cat}')">
+                ${cat}
+            </button>
+        `).join('');
+
+        // Load flashcards
+        function loadFlashcards() {
+            const grid = document.getElementById('flashcardsGrid');
+            grid.innerHTML = subject.flashcards.map(card => `
+                <div class="flashcard-card" onclick="previewFlashcard('${card.title}')">
+                    <div class="flashcard-header">
+                        <h3 class="flashcard-title">${card.title}</h3>
+                    </div>
+                    <div class="flashcard-meta">
+                        <span class="flashcard-terms">${card.terms} terms</span>
+                        <div class="flashcard-creator">
+                            <div class="flashcard-avatar">${card.avatar}</div>
+                            <span class="flashcard-username">${card.creator}</span>
+                        </div>
+                    </div>
+                    <div class="flashcard-actions">
+                        <button class="preview-btn" onclick="event.stopPropagation(); previewFlashcard('${card.title}')">Preview</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterByCategory(category) {
+            // Update active category
+            document.querySelectorAll('.subject-category').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim() === category) {
+                    btn.classList.add('active');
+                }
+            });
+            // Filter flashcards (in a real app, this would filter the data)
+            console.log('Filtering by:', category);
+        }
+
+        function previewFlashcard(title) {
+            // Navigate to flashcard preview page
+            window.location.href = `flashcard-view.html?title=${encodeURIComponent(title)}`;
+        }
+
+        // Initialize
+        loadFlashcards();
+    </script>
+</body>
+
+</html>
