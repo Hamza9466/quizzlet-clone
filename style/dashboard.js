@@ -1,6 +1,86 @@
 // Dashboard Page JavaScript
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Check account type and show/hide teacher buttons
+    const accountType = localStorage.getItem('accountType') || 'Student';
+    const teacherActionsSection = document.getElementById('teacherActionsSection');
+    const teacherToolsDivider = document.getElementById('teacherToolsDivider');
+    const teacherToolsTitle = document.getElementById('teacherToolsTitle');
+    const assignActivityNavItem = document.getElementById('assignActivityNavItem');
+
+    if (teacherActionsSection) {
+        if (accountType === 'Teacher') {
+            teacherActionsSection.style.display = 'block';
+        } else {
+            teacherActionsSection.style.display = 'none';
+        }
+    }
+
+    // Show/hide Teacher tools in sidebar
+    const startHereDivider = document.getElementById('startHereDivider');
+    const startHereTitle = document.getElementById('startHereTitle');
+    const flashcardsNavItem = document.getElementById('flashcardsNavItem');
+    const expertSolutionsNavItem = document.getElementById('expertSolutionsNavItem');
+
+    if (accountType === 'Teacher') {
+        if (teacherToolsDivider) teacherToolsDivider.style.display = 'block';
+        if (teacherToolsTitle) teacherToolsTitle.style.display = 'block';
+        if (assignActivityNavItem) assignActivityNavItem.style.display = 'flex';
+        // Hide "Start here" section for teachers
+        if (startHereDivider) startHereDivider.style.display = 'none';
+        if (startHereTitle) startHereTitle.style.display = 'none';
+        if (flashcardsNavItem) flashcardsNavItem.style.display = 'none';
+        if (expertSolutionsNavItem) expertSolutionsNavItem.style.display = 'none';
+    } else {
+        if (teacherToolsDivider) teacherToolsDivider.style.display = 'none';
+        if (teacherToolsTitle) teacherToolsTitle.style.display = 'none';
+        if (assignActivityNavItem) assignActivityNavItem.style.display = 'none';
+        // Show "Start here" section for students
+        if (startHereDivider) startHereDivider.style.display = 'block';
+        if (startHereTitle) startHereTitle.style.display = 'block';
+        if (flashcardsNavItem) flashcardsNavItem.style.display = 'flex';
+        if (expertSolutionsNavItem) expertSolutionsNavItem.style.display = 'flex';
+    }
+
+    // Teacher action buttons dropdowns
+    const createContentBtn = document.getElementById('createContentBtn');
+    const teacherDropdownWrapper = document.querySelector('.teacher-dropdown-wrapper');
+    const playClassGamesBtn = document.getElementById('playClassGamesBtn');
+
+    if (createContentBtn && teacherDropdownWrapper) {
+        createContentBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            teacherDropdownWrapper.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!teacherDropdownWrapper.contains(e.target)) {
+                teacherDropdownWrapper.classList.remove('active');
+            }
+        });
+    }
+
+    if (playClassGamesBtn) {
+        const playClassGamesDropdown = document.getElementById('playClassGamesDropdown');
+        const playClassGamesWrapper = playClassGamesBtn.closest('.teacher-dropdown-wrapper');
+
+        if (playClassGamesBtn && playClassGamesDropdown && playClassGamesWrapper) {
+            playClassGamesBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                playClassGamesWrapper.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!playClassGamesWrapper.contains(e.target)) {
+                    playClassGamesWrapper.classList.remove('active');
+                }
+            });
+        }
+    }
     // Sidebar Toggle
     const menuToggleBtn = document.querySelector('.menu-toggle-btn');
     const sidebar = document.querySelector('.dashboard-sidebar');

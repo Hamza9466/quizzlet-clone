@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literature Guides - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../../style/style.css">
+    <style>
+        .literature-page {
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .literature-breadcrumb {
+            padding: 1rem 0;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .literature-breadcrumb-text {
+            color: #4b5563;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .literature-hero-wrapper {
+            width: 100%;
+            display: flex;
+            min-height: 500px;
+        }
+
+        .literature-hero {
+            width: 100%;
+            display: flex;
+            min-height: 500px;
+        }
+
+        .literature-hero-left {
+            flex: 2;
+            background: #a7f3d0;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .literature-hero-right {
+            flex: 1;
+            background: #fce7f3;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .literature-verified-badge {
+            color: #3b82f6;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .literature-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .literature-subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        .literature-description {
+            font-size: 1rem;
+            color: #1f2937;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .literature-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .literature-image {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            z-index: 2;
+        }
+
+        .literature-shape {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .literature-shape-1 {
+            width: 200px;
+            height: 200px;
+            background: #fbcfe8;
+            top: 10%;
+            right: 10%;
+            z-index: 1;
+        }
+
+        .literature-shape-2 {
+            width: 150px;
+            height: 150px;
+            background: #f9a8d4;
+            bottom: 15%;
+            right: 5%;
+            z-index: 1;
+        }
+
+        .literature-shape-3 {
+            width: 100px;
+            height: 100px;
+            background: #a7f3d0;
+            top: 5%;
+            left: 5%;
+            z-index: 1;
+        }
+
+        .literature-sparkle {
+            position: absolute;
+            top: 20%;
+            right: 15%;
+            width: 40px;
+            height: 40px;
+            z-index: 3;
+        }
+
+        .literature-sparkle svg {
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .literature-hero {
+                flex-direction: column;
+            }
+
+            .literature-hero-left {
+                padding: 2rem 1.5rem;
+            }
+
+            .literature-title {
+                font-size: 2rem;
+            }
+
+            .literature-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Books Section */
+        .literature-books-section {
+            padding: 4rem 0;
+            background: #ffffff;
+        }
+
+        .literature-books-content {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .literature-books-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .literature-books-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+
+        .literature-books-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .literature-books-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .literature-book-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .literature-book-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .literature-book-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .literature-book-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            padding: 2rem 1.5rem 1.5rem;
+        }
+
+        .literature-book-title {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .literature-book-author {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 992px) {
+            .literature-books-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .literature-books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .literature-books-title {
+                font-size: 1.5rem;
+            }
+
+            .literature-books-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* 19th Century Section */
+        .literature-19th-section {
+            padding: 4rem 0;
+            background: #ffffff;
+        }
+
+        .literature-19th-content {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .literature-19th-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .literature-19th-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .literature-19th-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .literature-19th-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .literature-19th-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .literature-19th-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-4 shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="home.html" style="color: #1a56db; font-size: 1.5rem;">
+                Quizlet
+            </a>
+
+            <!-- Navbar Toggler for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto align-items-center">
+                    <!-- Subjects Dropdown -->
+                    <li class="nav-item dropdown subjects-dropdown-wrapper">
+                        <a class="nav-link dropdown-toggle text-dark fw-normal" href="#" id="subjectsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Subjects
+                        </a>
+                        <div class="dropdown-menu subjects-mega-menu" aria-labelledby="subjectsDropdown">
+                            <!-- Two Column Layout -->
+                            <div class="subjects-menu-content">
+                                <!-- Left Column - Categories -->
+                                <div class="subjects-categories-column">
+                                    <div class="subject-category-item active" data-category="exams">
+                                        <div class="subject-category-icon exams-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor"
+                                                    stroke-width="2" fill="none" />
+                                                <text x="12" y="16" text-anchor="middle" font-size="10"
+                                                    font-weight="bold" fill="currentColor">EN</text>
+                                                <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Exams</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="literature">
+                                        <div class="subject-category-icon literature-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" />
+                                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                                                    stroke="currentColor" stroke-width="2" />
+                                                <path d="M8 7h8M8 11h8" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Literature</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="arts">
+                                        <div class="subject-category-icon arts-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Arts and Humanities</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="languages">
+                                        <div class="subject-category-icon languages-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                                <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Languages</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="math">
+                                        <div class="subject-category-icon math-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12 2L2 12l10 10 10-10L12 2z" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8 8h8M8 12h8M8 16h8" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Math</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="science">
+                                        <div class="subject-category-icon science-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M9 2v6M15 2v6M5 10h14M4 10h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Science</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="social">
+                                        <div class="subject-category-icon social-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor"
+                                                    stroke-width="2" />
+                                                <path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Social Science</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="other">
+                                        <div class="subject-category-icon other-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"
+                                                    stroke-width="2" />
+                                                <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Other</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <!-- Right Column - Sub-items -->
+                                <div class="subjects-items-column">
+                                    <div class="subject-items-list" id="examsItems">
+                                        <a href="exam-prep.html?exam=IELTS" class="subject-item-link">IELTS®</a>
+                                        <a href="exam-prep.html?exam=TOEFL" class="subject-item-link">TOEFL®</a>
+                                        <a href="exam-prep.html?exam=TOEIC" class="subject-item-link">TOEIC®</a>
+                                    </div>
+                                    <div class="subject-items-list" id="literatureItems" style="display: none;">
+                                        <a href="literature.html?type=novels" class="subject-item-link">Novels</a>
+                                        <a href="literature.html?type=poems" class="subject-item-link">Poems</a>
+                                        <a href="literature.html?type=plays" class="subject-item-link">Plays</a>
+                                    </div>
+                                    <div class="subject-items-list" id="artsItems" style="display: none;">
+                                        <a href="#" class="subject-item-link">Philosophy</a>
+                                        <a href="#" class="subject-item-link">History</a>
+                                        <a href="#" class="subject-item-link">English</a>
+                                        <a href="#" class="subject-item-link">Film and TV</a>
+                                        <a href="#" class="subject-item-link">Music</a>
+                                        <a href="#" class="subject-item-link">Dance</a>
+                                        <a href="#" class="subject-item-link">Theater</a>
+                                        <a href="#" class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="languagesItems" style="display: none;">
+                                        <a href="#" class="subject-item-link">French</a>
+                                        <a href="#" class="subject-item-link">Spanish</a>
+                                        <a href="#" class="subject-item-link">German</a>
+                                        <a href="#" class="subject-item-link">Latin</a>
+                                        <a href="#" class="subject-item-link">English</a>
+                                        <a href="#" class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="mathItems" style="display: none;">
+                                        <a href="#" class="subject-item-link">Arithmetic</a>
+                                        <a href="#" class="subject-item-link">Geometry</a>
+                                        <a href="#" class="subject-item-link">Algebra</a>
+                                        <a href="#" class="subject-item-link">Statistics</a>
+                                        <a href="#" class="subject-item-link">Calculus</a>
+                                        <a href="#" class="subject-item-link">Math Foundations</a>
+                                        <a href="#" class="subject-item-link">Probability</a>
+                                        <a href="#" class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="scienceItems" style="display: none;">
+                                        <a href="#" class="subject-item-link">Biology</a>
+                                        <a href="#" class="subject-item-link">Chemistry</a>
+                                        <a href="#" class="subject-item-link">Physics</a>
+                                        <a href="#" class="subject-item-link">Medicine</a>
+                                        <a href="#" class="subject-item-link">Computer Science</a>
+                                        <a href="#" class="subject-item-link">Engineering</a>
+                                        <a href="#" class="subject-item-link">Earth Science</a>
+                                        <a href="#" class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="socialItems" style="display: none;">
+                                        <a href="#" class="subject-item-link">Psychology</a>
+                                        <a href="#" class="subject-item-link">Business</a>
+                                        <a href="#" class="subject-item-link">Sociology</a>
+                                        <a href="#" class="subject-item-link">Economics</a>
+                                        <a href="#" class="subject-item-link">Law</a>
+                                        <a href="#" class="subject-item-link">Human Geography</a>
+                                        <a href="#" class="subject-item-link">Political Science</a>
+                                        <a href="#" class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="otherItems" style="display: none;">
+                                        <a href="#" class="subject-item-link">Hobbies</a>
+                                        <a href="#" class="subject-item-link">Sports</a>
+                                        <a href="#" class="subject-item-link">Computer Skills</a>
+                                        <a href="#" class="subject-item-link">View all</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Search Bar -->
+                <div class="search-container mx-auto">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-secondary"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0"
+                            placeholder="Flashcard sets, textbooks, questions" aria-label="Search">
+                    </div>
+                </div>
+
+                <!-- Right Side Actions -->
+                <div class="d-flex align-items-center ms-auto">
+                    <a href="signup.html" class="btn rounded-pill px-4 text-decoration-none me-3"
+                        style="background: #dbeafe; color: #1e40af; border: none;">
+                        <i class="bi bi-plus-circle me-1"></i>Create
+                    </a>
+                    <a href="login.html" class="btn btn-primary rounded-pill px-4 text-decoration-none">
+                        Log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="literature-page">
+        <!-- Breadcrumb -->
+        <div class="literature-breadcrumb">
+            <div class="container" style="max-width: 80%; margin: 0 auto;">
+                <p class="literature-breadcrumb-text" id="literatureBreadcrumb">Literature / Novels and Short Stories
+                </p>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="literature-hero">
+            <!-- Left Panel -->
+            <div class="literature-hero-left">
+                <div class="literature-hero-left-content">
+                    <div class="literature-verified-badge">VERIFIED CONTENT</div>
+                    <h1 class="literature-title" id="literatureTitle">Novels and Short Stories</h1>
+                    <h2 class="literature-subtitle">Literature Guides</h2>
+                    <p class="literature-description" id="literatureDescription">
+                        Explore your favorite novels and short stories on Quizlet! Access comprehensive summaries and
+                        analyses, curated flashcards, discussion questions, and AI quizzes for enhanced understanding
+                        and
+                        exam prep.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="literature-hero-right">
+                <div class="literature-shape literature-shape-1"></div>
+                <div class="literature-shape literature-shape-2"></div>
+                <div class="literature-shape literature-shape-3"></div>
+                <div class="literature-sparkle">
+                    <svg viewBox="0 0 40 40" fill="none">
+                        <path d="M20 5L22 15L30 18L22 21L20 31L18 21L10 18L18 15Z" fill="currentColor" />
+                        <circle cx="20" cy="18" r="2" fill="currentColor" />
+                    </svg>
+                </div>
+                <div class="literature-image-wrapper">
+                    <img src="../../../assets/website/image/Zs6RM0aF0TcGJcpR_Photo.svg" alt="Student studying"
+                        class="literature-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section class="literature-books-section">
+            <div class="literature-books-content">
+                <div class="literature-books-header">
+                    <h2 class="literature-books-title">Explore your Favorite Novels and Short Stories</h2>
+                    <h3 class="literature-books-subtitle">14 - 17th Century Fiction</h3>
+                </div>
+                <div class="literature-books-grid">
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/ZtWtnEaF0TcGJq6r_Group11095-1-.avif" alt="Don Quixote"
+                            class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">Don Quixote</div>
+                            <div class="literature-book-author">Miguel de Cervantes</div>
+                        </div>
+                    </div>
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/ZziyC68jQArT08Fn_AnimalFarm-Cover-3-.avif"
+                            alt="The Canterbury Tales" class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">The Canterbury Tales</div>
+                            <div class="literature-book-author">Chaucer</div>
+                        </div>
+                    </div>
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/ZtW6i0aF0TcGJrDI_81ONqQ0HpcL._SL1444_.avif"
+                            alt="The Decameron" class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">The Decameron</div>
+                            <div class="literature-book-author">Giovanni Boccaccio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 19th Century Fiction Section -->
+        <section class="literature-19th-section">
+            <div class="literature-19th-content">
+                <div class="literature-19th-header">
+                    <h2 class="literature-19th-title">19th Century Fiction</h2>
+                </div>
+                <div class="literature-19th-grid">
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="The Yellow Wallpaper"
+                            class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">The Yellow Wallpaper</div>
+                            <div class="literature-book-author">Charlotte Perkins Gilman</div>
+                        </div>
+                    </div>
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/CaDQQYj73AfhEpicYmiwVg_m.jpg" alt="Frankenstein"
+                            class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">Frankenstein</div>
+                            <div class="literature-book-author">Mary Shelley</div>
+                        </div>
+                    </div>
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/OWqN-Xv7cO2ykHp1HcG-Ww_m.jpg"
+                            alt="The Fall of the House of Usher" class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">The Fall of the House of Usher</div>
+                            <div class="literature-book-author">Edgar Allan Poe</div>
+                        </div>
+                    </div>
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/jYw9jNGtBOLpHRBHkSK-rw_m.jpg" alt="Pride and Prejudice"
+                            class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">Pride and Prejudice</div>
+                            <div class="literature-book-author">Jane Austen</div>
+                        </div>
+                    </div>
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/ZpWfEx5LeNNTxK_U_learn-image.avif"
+                            alt="Adventures of Huckleberry Finn" class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">Adventures of Huckleberry Finn</div>
+                            <div class="literature-book-author">Mark Twain</div>
+                        </div>
+                    </div>
+                    <div class="literature-book-card">
+                        <img src="../../../assets/website/image/ZpWfEh5LeNNTxK_T_study-guides-image.avif"
+                            alt="Wuthering Heights" class="literature-book-image">
+                        <div class="literature-book-overlay">
+                            <div class="literature-book-title">Wuthering Heights</div>
+                            <div class="literature-book-author">Emily Brontë</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Subjects dropdown functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryItems = document.querySelectorAll('.subject-category-item');
+            const itemLists = document.querySelectorAll('.subject-items-list');
+
+            categoryItems.forEach(item => {
+                item.addEventListener('mouseenter', function () {
+                    const category = this.getAttribute('data-category');
+
+                    // Remove active class from all items
+                    categoryItems.forEach(cat => cat.classList.remove('active'));
+
+                    // Add active class to hovered item
+                    this.classList.add('active');
+
+                    // Hide all item lists
+                    itemLists.forEach(list => {
+                        list.style.display = 'none';
+                    });
+
+                    // Show the corresponding item list
+                    const targetList = document.getElementById(category + 'Items');
+                    if (targetList) {
+                        targetList.style.display = 'flex';
+                    }
+                });
+            });
+
+            // Initialize with exams selected
+            const examsCategory = document.querySelector('[data-category="exams"]');
+            if (examsCategory) {
+                examsCategory.classList.add('active');
+            }
+
+            // Update page content based on type from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type');
+
+            const literatureData = {
+                'novels': {
+                    breadcrumb: 'Literature / Novels and Short Stories',
+                    title: 'Novels and Short Stories',
+                    description: 'Explore your favorite novels and short stories on Quizlet! Access comprehensive summaries and analyses, curated flashcards, discussion questions, and AI quizzes for enhanced understanding and exam prep.'
+                },
+                'poems': {
+                    breadcrumb: 'Literature / Poems',
+                    title: 'Poems',
+                    description: 'Explore your favorite poems on Quizlet! Access comprehensive summaries and analyses, curated flashcards, discussion questions, and AI quizzes for enhanced understanding and exam prep.'
+                },
+                'plays': {
+                    breadcrumb: 'Literature / Plays',
+                    title: 'Plays',
+                    description: 'Explore your favorite plays on Quizlet! Access comprehensive summaries and analyses, curated flashcards, discussion questions, and AI quizzes for enhanced understanding and exam prep.'
+                }
+            };
+
+            if (type && literatureData[type]) {
+                document.getElementById('literatureBreadcrumb').textContent = literatureData[type].breadcrumb;
+                document.getElementById('literatureTitle').textContent = literatureData[type].title;
+                document.getElementById('literatureDescription').textContent = literatureData[type].description;
+            }
+        });
+    </script>
+</body>
+
+</html>

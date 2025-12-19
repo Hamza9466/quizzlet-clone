@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign an activity - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Theme JS -->
+    <script src="../../../style/theme.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn" onclick="window.location.href='flashcard-view.html'">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="create-dropdown-wrapper">
+                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <ul class="create-dropdown-menu dropdown-menu" aria-labelledby="createDropdownBtn">
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="flashcards.html">
+                            <i class="bi bi-card-text"></i>
+                            <span>Flashcard set</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="#"
+                            onclick="showNewFolderModal(event); return false;">
+                            <i class="bi bi-folder"></i>
+                            <span>Folder</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="assign-activity-main">
+        <div class="container-fluid" style="max-width: 900px; margin: 0 auto; padding: 2rem;">
+            <!-- Header Section -->
+            <div class="assign-activity-header mb-5">
+                <h1 class="assign-activity-title mb-3">Assign an activity</h1>
+                <p class="assign-activity-description">
+                    Choose an activity for your students to complete and get reporting on their progress. You'll get a
+                    link to share and will be able to view their progress as they complete the assignment.
+                </p>
+            </div>
+
+            <!-- Choose your content Section -->
+            <div class="assign-activity-section mb-4">
+                <h2 class="assign-activity-section-title mb-3">Choose your content</h2>
+                <div class="assign-content-box">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="assign-content-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="4" y="4" width="16" height="20" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" fill="none" />
+                                    <rect x="6" y="8" width="12" height="2" rx="1" fill="currentColor" />
+                                    <rect x="6" y="12" width="8" height="2" rx="1" fill="currentColor" />
+                                    <rect x="6" y="16" width="10" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </div>
+                            <span class="assign-content-name" id="assignContentName">biology chapter 2</span>
+                        </div>
+                        <button class="assign-content-edit-btn">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="assign-activity-divider">
+
+            <!-- Choose an activity Section -->
+            <div class="assign-activity-section mb-4">
+                <h2 class="assign-activity-section-title mb-3">Choose an activity to assign</h2>
+                <div class="assign-activity-options">
+                    <label class="assign-activity-option">
+                        <input type="radio" name="activityType" value="learn" checked>
+                        <div class="assign-activity-option-content">
+                            <div class="assign-activity-icon assign-activity-icon-learn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"
+                                        fill="none" />
+                                    <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="assign-activity-option-text">
+                                <div class="assign-activity-option-title">Learn</div>
+                                <div class="assign-activity-option-desc">Study with multiple-choice and written
+                                    questions</div>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="assign-activity-option">
+                        <input type="radio" name="activityType" value="flashcards">
+                        <div class="assign-activity-option-content">
+                            <div class="assign-activity-icon assign-activity-icon-flashcards">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="4" y="6" width="12" height="16" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" fill="none" />
+                                    <rect x="8" y="2" width="12" height="16" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" fill="none" />
+                                </svg>
+                            </div>
+                            <div class="assign-activity-option-text">
+                                <div class="assign-activity-option-title">Flashcards</div>
+                                <div class="assign-activity-option-desc">Review and memorise terms and definitions</div>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="assign-activity-option">
+                        <input type="radio" name="activityType" value="test">
+                        <div class="assign-activity-option-content">
+                            <div class="assign-activity-icon assign-activity-icon-test">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="4" y="4" width="16" height="20" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" fill="none" />
+                                    <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="assign-activity-option-text">
+                                <div class="assign-activity-option-title">Test</div>
+                                <div class="assign-activity-option-desc">Check your understanding with a quick test
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="assign-activity-option">
+                        <input type="radio" name="activityType" value="match">
+                        <div class="assign-activity-option-content">
+                            <div class="assign-activity-icon assign-activity-icon-match">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 12L12 8L16 12" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M8 12L12 16L16 12" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="assign-activity-option-text">
+                                <div class="assign-activity-option-title">Match</div>
+                                <div class="assign-activity-option-desc">Play a matching game with terms and definitions
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <hr class="assign-activity-divider">
+
+            <!-- Activity details Section -->
+            <div class="assign-activity-section mb-4">
+                <h2 class="assign-activity-section-title mb-4">Activity details</h2>
+                <div class="assign-activity-form">
+                    <div class="assign-form-group mb-4">
+                        <label class="assign-form-label">Title</label>
+                        <input type="text" class="assign-form-input" id="activityTitle"
+                            placeholder="biology chapter 2 activity" value="biology chapter 2 activity">
+                    </div>
+                    <div class="assign-form-group mb-4">
+                        <label class="assign-form-label">Note</label>
+                        <textarea class="assign-form-input assign-form-textarea" id="activityNote"
+                            placeholder="Enter a brief note to your students (optional)" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="assign-form-label">Activity starts</label>
+                            <div class="assign-date-input-wrapper">
+                                <input type="text" class="assign-form-input assign-date-input" id="activityStarts"
+                                    value="12/20/2025 02:03 AM" readonly>
+                                <i class="bi bi-calendar assign-date-icon"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="assign-form-label">Activity due</label>
+                            <div class="assign-date-input-wrapper">
+                                <input type="text" class="assign-form-input assign-date-input" id="activityDue"
+                                    value="12/21/2025 11:59 PM" readonly>
+                                <i class="bi bi-calendar assign-date-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="assign-activity-hint">Students can access the activity until it's due.</p>
+                </div>
+            </div>
+
+            <!-- Assign Button -->
+            <div class="assign-activity-footer">
+                <button class="assign-activity-btn" onclick="assignActivity()">Assign</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Get content name from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const contentName = urlParams.get('content');
+        if (contentName) {
+            document.getElementById('assignContentName').textContent = decodeURIComponent(contentName);
+        }
+
+        // Initialize date pickers (using flatpickr or similar would be better, but for now using basic input)
+        function initializeDatePickers() {
+            // Set default dates
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(23, 59, 0, 0);
+
+            // Format dates
+            const formatDate = (date) => {
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = date.getHours() % 12 || 12;
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
+                return `${month}/${day}/${year} ${hours}:${minutes} ${ampm}`;
+            };
+
+            document.getElementById('activityStarts').value = formatDate(now);
+            document.getElementById('activityDue').value = formatDate(tomorrow);
+        }
+
+        function assignActivity() {
+            const activityType = document.querySelector('input[name="activityType"]:checked').value;
+            const title = document.getElementById('activityTitle').value;
+            const note = document.getElementById('activityNote').value;
+            const starts = document.getElementById('activityStarts').value;
+            const due = document.getElementById('activityDue').value;
+            const contentName = document.getElementById('assignContentName').textContent;
+
+            // Navigate to activity results page with parameters
+            const params = new URLSearchParams({
+                title: title,
+                content: contentName,
+                type: activityType,
+                starts: starts,
+                due: due,
+                note: note
+            });
+            window.location.href = `activity-results.html?${params.toString()}`;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeDatePickers();
+        });
+    </script>
+</body>
+
+</html>

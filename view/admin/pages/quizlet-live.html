@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizlet Live - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Theme JS -->
+    <script src="../../../style/theme.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="blast-live-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="blast-live-logo">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 10h16M4 14h16M4 18h16" stroke="#ffffff" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="blast-live-logo-text">Live</span>
+                    </div>
+                </div>
+                <div class="col-4 text-center">
+                    <p class="blast-live-set-name mb-0" id="liveSetName">AECL 366 Exam 3</p>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex justify-content-end align-items-center gap-3">
+                        <button class="blast-live-icon-btn" id="liveMuteBtn">
+                            <i class="bi bi-volume-up"></i>
+                        </button>
+                        <button class="blast-live-icon-btn" id="liveGearBtn">
+                            <i class="bi bi-gear"></i>
+                        </button>
+                        <button class="blast-live-icon-btn" onclick="window.location.href='dashboard.html'">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="blast-live-main">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <!-- Left Sidebar -->
+                <div class="col-md-4 blast-live-sidebar">
+                    <div class="blast-live-join-section">
+                        <div class="blast-live-join-item mb-4">
+                            <div class="d-flex align-items-center gap-2 mb-3">
+                                <span class="blast-live-join-title">On a computer?</span>
+                                <i class="bi bi-eye"></i>
+                            </div>
+                            <div class="blast-live-website">www.quizlet.live</div>
+                            <div class="blast-live-code-box">
+                                <span class="blast-live-code" id="liveCode">R81-E9X</span>
+                            </div>
+                        </div>
+
+                        <div class="blast-live-join-item mb-4">
+                            <div class="blast-live-join-title mb-3">On a mobile device?</div>
+                            <div class="blast-live-mobile-text mb-3">Open the Quizlet app</div>
+                            <div class="blast-live-qr-code">
+                                <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+                                    <rect width="200" height="200" fill="#ffffff" />
+                                    <rect x="10" y="10" width="180" height="180" fill="#000000" />
+                                    <rect x="20" y="20" width="40" height="40" fill="#ffffff" />
+                                    <rect x="70" y="20" width="40" height="40" fill="#ffffff" />
+                                    <rect x="140" y="20" width="40" height="40" fill="#ffffff" />
+                                    <rect x="20" y="70" width="40" height="40" fill="#ffffff" />
+                                    <rect x="140" y="70" width="40" height="40" fill="#ffffff" />
+                                    <rect x="20" y="140" width="40" height="40" fill="#ffffff" />
+                                    <rect x="70" y="140" width="40" height="40" fill="#ffffff" />
+                                    <rect x="140" y="140" width="40" height="40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="blast-live-share-section">
+                            <div class="blast-live-share-title mb-3">Share with students</div>
+                            <button class="blast-live-copy-link-btn" id="liveCopyLinkBtn">
+                                <i class="bi bi-link-45deg"></i>
+                                <span>Copy link</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Main Section -->
+                <div class="col-md-8 blast-live-main-section">
+                    <div class="blast-live-content">
+                        <div class="blast-live-status mb-4">
+                            <span class="blast-live-status-text">Waiting for students</span>
+                        </div>
+
+                        <div class="blast-live-actions">
+                            <button class="blast-live-action-btn" id="liveSwitchGameBtn">
+                                <i class="bi bi-arrow-left-right"></i>
+                                <span>Switch game</span>
+                            </button>
+                            <button class="blast-live-action-btn" id="liveChooseSetBtn">
+                                <i class="bi bi-plus-lg"></i>
+                                <span>Choose a set</span>
+                            </button>
+                            <button class="blast-live-action-btn blast-live-action-btn-disabled" id="liveCreateGameBtn" disabled>
+                                <span>Create game</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Get set name from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const setName = urlParams.get('set');
+        if (setName) {
+            document.getElementById('liveSetName').textContent = decodeURIComponent(setName);
+        }
+
+        // Generate random game code
+        function generateGameCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 7; i++) {
+                if (i === 3) {
+                    code += '-';
+                } else {
+                    code += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+            }
+            return code;
+        }
+
+        // Set game code on load
+        document.getElementById('liveCode').textContent = generateGameCode();
+
+        // Copy link functionality
+        document.getElementById('liveCopyLinkBtn').addEventListener('click', function() {
+            const gameCode = document.getElementById('liveCode').textContent;
+            const link = `https://quizlet.live/${gameCode}`;
+            navigator.clipboard.writeText(link).then(function() {
+                const btn = document.getElementById('liveCopyLinkBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-check"></i> <span>Copied!</span>';
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+
+        // Mute button toggle
+        document.getElementById('liveMuteBtn').addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('bi-volume-up')) {
+                icon.classList.remove('bi-volume-up');
+                icon.classList.add('bi-volume-mute');
+            } else {
+                icon.classList.remove('bi-volume-mute');
+                icon.classList.add('bi-volume-up');
+            }
+        });
+    </script>
+</body>
+
+</html>
+

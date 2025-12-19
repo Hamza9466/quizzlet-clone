@@ -88,7 +88,8 @@
         </div>
         <div class="header-right">
             <div class="create-dropdown-wrapper">
-                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     <i class="bi bi-plus-lg"></i>
                 </button>
                 <ul class="create-dropdown-menu dropdown-menu" aria-labelledby="createDropdownBtn">
@@ -99,7 +100,8 @@
                         </a>
                     </li>
                     <li>
-                        <a class="create-dropdown-item dropdown-item" href="#" onclick="showNewFolderModal(event); return false;">
+                        <a class="create-dropdown-item dropdown-item" href="#"
+                            onclick="showNewFolderModal(event); return false;">
                             <i class="bi bi-folder"></i>
                             <span>Folder</span>
                         </a>
@@ -171,11 +173,17 @@
                     <i class="bi bi-plus-circle"></i>
                     <span data-i18n="newFolder">New folder</span>
                 </a>
-                <hr class="sidebar-divider">
-                <div class="nav-section-title" data-i18n="startHere">Start here</div>
-                <a href="flashcards.html" class="nav-item">
+                <hr class="sidebar-divider" id="startHereDivider">
+                <div class="nav-section-title" data-i18n="startHere" id="startHereTitle">Start here</div>
+                <a href="flashcards.html" class="nav-item" id="flashcardsNavItem">
                     <i class="bi bi-card-text"></i>
                     <span data-i18n="flashcards">Flashcards</span>
+                </a>
+                <hr class="sidebar-divider" id="teacherToolsDivider" style="display: none;">
+                <div class="nav-section-title" id="teacherToolsTitle" style="display: none;">Teacher tools</div>
+                <a href="assign-activity.html" class="nav-item" id="assignActivityNavItem" style="display: none;">
+                    <i class="bi bi-clock"></i>
+                    <span>Assign activity</span>
                 </a>
             </nav>
         </aside>
@@ -192,10 +200,6 @@
                             <i class="bi bi-bookmark"></i>
                             <span>Save</span>
                         </button>
-                        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2">
-                            <i class="bi bi-people"></i>
-                            <span>Groups</span>
-                        </button>
                         <button class="btn btn-outline-secondary btn-sm">
                             <i class="bi bi-upload"></i>
                         </button>
@@ -204,6 +208,23 @@
                         </button>
                     </div>
                 </header>
+
+                <!-- Teacher Action Buttons -->
+                <div class="teacher-flashcard-actions mb-4" id="teacherFlashcardActions" style="display: none;">
+                    <div class="d-flex gap-3">
+                        <button class="btn teacher-action-primary-btn" onclick="showStudentPassModal()">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="margin-right: 0.5rem;">
+                                <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5" fill="none" />
+                                <circle cx="10" cy="10" r="3" fill="currentColor" />
+                            </svg>
+                            <span>Start a student pass</span>
+                        </button>
+                        <button class="btn teacher-action-primary-btn" onclick="goToAssignActivity()">
+                            <i class="bi bi-clock" style="margin-right: 0.5rem;"></i>
+                            <span>Assign an activity</span>
+                        </button>
+                    </div>
+                </div>
 
                 <!-- Study Mode Buttons -->
                 <div class="row g-3 mb-4">
@@ -526,6 +547,163 @@
     <script src="../../../style/dashboard.js"></script>
     <!-- Flashcard View JS -->
     <script src="../../../style/flashcard-view.js"></script>
+    <script>
+        // Check if account type is Teacher and show teacher buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            const accountType = localStorage.getItem('accountType');
+            const teacherActions = document.getElementById('teacherFlashcardActions');
+
+            if (accountType === 'Teacher' && teacherActions) {
+                teacherActions.style.display = 'block';
+            }
+
+            // Show/hide Teacher tools in sidebar
+            const teacherToolsDivider = document.getElementById('teacherToolsDivider');
+            const teacherToolsTitle = document.getElementById('teacherToolsTitle');
+            const assignActivityNavItem = document.getElementById('assignActivityNavItem');
+            const startHereDivider = document.getElementById('startHereDivider');
+            const startHereTitle = document.getElementById('startHereTitle');
+            const flashcardsNavItem = document.getElementById('flashcardsNavItem');
+
+            if (accountType === 'Teacher') {
+                if (teacherToolsDivider) teacherToolsDivider.style.display = 'block';
+                if (teacherToolsTitle) teacherToolsTitle.style.display = 'block';
+                if (assignActivityNavItem) assignActivityNavItem.style.display = 'flex';
+                // Hide "Start here" section for teachers
+                if (startHereDivider) startHereDivider.style.display = 'none';
+                if (startHereTitle) startHereTitle.style.display = 'none';
+                if (flashcardsNavItem) flashcardsNavItem.style.display = 'none';
+            } else {
+                if (teacherToolsDivider) teacherToolsDivider.style.display = 'none';
+                if (teacherToolsTitle) teacherToolsTitle.style.display = 'none';
+                if (assignActivityNavItem) assignActivityNavItem.style.display = 'none';
+                // Show "Start here" section for students
+                if (startHereDivider) startHereDivider.style.display = 'block';
+                if (startHereTitle) startHereTitle.style.display = 'block';
+                if (flashcardsNavItem) flashcardsNavItem.style.display = 'flex';
+            }
+        });
+
+        // Student Pass Modal Functions
+        function showStudentPassModal() {
+            const modal = document.getElementById('studentPassModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                // Generate random code
+                generateStudentPassCode();
+            }
+        }
+
+        function closeStudentPassModal() {
+            const modal = document.getElementById('studentPassModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function generateStudentPassCode() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const code = letters.charAt(Math.floor(Math.random() * letters.length)) +
+                letters.charAt(Math.floor(Math.random() * letters.length)) +
+                ' - ' +
+                Math.floor(Math.random() * 10) +
+                letters.charAt(Math.floor(Math.random() * letters.length)).toLowerCase() +
+                letters.charAt(Math.floor(Math.random() * letters.length)).toLowerCase();
+            document.getElementById('studentPassCode').querySelector('span').textContent = code;
+        }
+
+        function activateStudentPass() {
+            // Add activation logic here
+            alert('Student pass activated! Share the code with your students.');
+            closeStudentPassModal();
+        }
+
+        function goToAssignActivity() {
+            const contentName = document.getElementById('flashcardSetTitle').textContent;
+            window.location.href = `assign-activity.html?content=${encodeURIComponent(contentName)}`;
+        }
+    </script>
+
+    <!-- Student Pass Modal -->
+    <div class="student-pass-modal" id="studentPassModal" style="display: none;">
+        <div class="student-pass-modal-overlay" onclick="closeStudentPassModal()"></div>
+        <div class="student-pass-modal-content">
+            <button class="student-pass-modal-close" onclick="closeStudentPassModal()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <div class="student-pass-header">
+                <div class="d-flex align-items-center gap-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none" />
+                        <circle cx="12" cy="12" r="4" fill="currentColor" />
+                    </svg>
+                    <h2 class="student-pass-title mb-0">Start a student pass</h2>
+                    <span class="student-pass-timer">90:00</span>
+                </div>
+            </div>
+            <div class="student-pass-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="student-pass-features mb-4">
+                            <div class="student-pass-feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>No account required</span>
+                            </div>
+                            <div class="student-pass-feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>No ads</span>
+                            </div>
+                            <div class="student-pass-feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>Uninterrupted use of Learn and Test modes</span>
+                            </div>
+                        </div>
+                        <div class="student-pass-instructions">
+                            <div class="student-pass-instruction-item">
+                                <span class="student-pass-instruction-number">1.</span>
+                                <span>Click Activate and share your code with students</span>
+                            </div>
+                            <div class="student-pass-instruction-item">
+                                <span class="student-pass-instruction-number">2.</span>
+                                <span>Students go to quizlet.com/join and enter your code</span>
+                            </div>
+                            <div class="student-pass-instruction-item">
+                                <span class="student-pass-instruction-number">3.</span>
+                                <span>Students get pass access for 90 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="student-pass-join-info">
+                            <div class="student-pass-join-section mb-4">
+                                <div class="student-pass-join-label">Students go to</div>
+                                <div class="student-pass-code-box student-pass-url-box">
+                                    <span>quizlet.com/join</span>
+                                </div>
+                            </div>
+                            <div class="student-pass-join-section">
+                                <div class="student-pass-join-label">Students, enter the following code to join</div>
+                                <div class="student-pass-code-box" id="studentPassCode">
+                                    <span>AM - 1ab</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="student-pass-footer">
+                <div class="student-pass-beta">
+                    <span class="student-pass-beta-tag">Beta</span>
+                    <span class="student-pass-beta-text">The student pass is in the early development stage and is
+                        subject to change.</span>
+                </div>
+                <div class="student-pass-actions">
+                    <button class="student-pass-btn-cancel" onclick="closeStudentPassModal()">Cancel</button>
+                    <button class="student-pass-btn-activate" onclick="activateStudentPass()">Activate</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

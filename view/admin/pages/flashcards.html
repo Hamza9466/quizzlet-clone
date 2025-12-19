@@ -120,15 +120,27 @@
                     <i class="bi bi-plus-circle"></i>
                     <span data-i18n="newFolder">New folder</span>
                 </a>
-                <hr class="sidebar-divider">
-                <div class="nav-section-title" data-i18n="startHere">Start here</div>
-                <a href="flashcards.html" class="nav-item active">
+                <hr class="sidebar-divider" id="startHereDivider">
+                <div class="nav-section-title" data-i18n="startHere" id="startHereTitle">Start here</div>
+                <a href="flashcards.html" class="nav-item active" id="flashcardsNavItem">
                     <i class="bi bi-card-text"></i>
                     <span data-i18n="flashcards">Flashcards</span>
                 </a>
-                <a href="expert-solutions.html" class="nav-item">
+                <a href="expert-solutions.html" class="nav-item" id="expertSolutionsNavItem">
                     <i class="bi bi-book"></i>
                     <span data-i18n="expertSolutions">Expert Solutions</span>
+                </a>
+                <hr class="sidebar-divider" id="teacherToolsDivider" style="display: none;">
+                <div class="nav-section-title" id="teacherToolsTitle" style="display: none;">Teacher tools</div>
+                <a href="assign-activity.html" class="nav-item" id="assignActivityNavItem" style="display: none;">
+                    <i class="bi bi-clock"></i>
+                    <span>Assign activity</span>
+                </a>
+                <hr class="sidebar-divider" id="teacherToolsDivider" style="display: none;">
+                <div class="nav-section-title" id="teacherToolsTitle" style="display: none;">Teacher tools</div>
+                <a href="assign-activity.html" class="nav-item" id="assignActivityNavItem" style="display: none;">
+                    <i class="bi bi-clock"></i>
+                    <span>Assign activity</span>
                 </a>
             </nav>
         </aside>
@@ -218,7 +230,7 @@
                 <!-- Bottom Actions -->
                 <div class="flashcards-bottom-actions">
                     <button class="btn-create-set" data-i18n="create">Create</button>
-                    <button class="btn-create-practice" onclick="window.location.href='learn.html'"
+                    <button class="btn-create-practice" id="createAndPracticeBtn" onclick="window.location.href='learn.html'"
                         data-i18n="createAndPractice">Create and practice</button>
                 </div>
             </div>
@@ -307,6 +319,8 @@
     <script src="../../../style/dashboard.js"></script>
     <!-- Flashcards JS -->
     <script src="../../../style/flashcards.js"></script>
+    <!-- Teacher Tools JS -->
+    <script src="../../../style/teacher-tools.js"></script>
 </body>
 
 </html>

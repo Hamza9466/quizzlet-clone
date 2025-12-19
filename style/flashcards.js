@@ -353,5 +353,13 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }, 100);
+
+    // Hide "Create and practice" button if account type is Teacher
+    const accountType = localStorage.getItem('accountType') || 'Student';
+    const createAndPracticeBtn = document.getElementById('createAndPracticeBtn');
+    
+    if (createAndPracticeBtn && accountType === 'Teacher') {
+        createAndPracticeBtn.style.display = 'none';
+    }
 });
 

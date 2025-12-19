@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../../style/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-4 shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="home.html">
+                Quizlet
+            </a>
+
+            <!-- Navbar Toggler for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto align-items-center">
+                    <!-- Subjects Dropdown -->
+                    <li class="nav-item dropdown subjects-dropdown-wrapper">
+                        <a class="nav-link dropdown-toggle text-dark fw-normal" href="#" id="subjectsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Subjects
+                        </a>
+                        <div class="dropdown-menu subjects-mega-menu" aria-labelledby="subjectsDropdown">
+                            <!-- Two Column Layout -->
+                            <div class="subjects-menu-content">
+                                <!-- Left Column - Categories -->
+                                <div class="subjects-categories-column">
+                                    <div class="subject-category-item active" data-category="exams">
+                                        <div class="subject-category-icon exams-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor"
+                                                    stroke-width="2" fill="none" />
+                                                <text x="12" y="16" text-anchor="middle" font-size="10"
+                                                    font-weight="bold" fill="currentColor">EN</text>
+                                                <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Exams</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="literature">
+                                        <div class="subject-category-icon literature-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" />
+                                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                                                    stroke="currentColor" stroke-width="2" />
+                                                <path d="M8 7h8M8 11h8" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Literature</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <!-- Right Column - Sub-items -->
+                                <div class="subjects-items-column">
+                                    <div class="subject-items-list" id="examsItems">
+                                        <a href="#" class="subject-item-link">IELTS®</a>
+                                        <a href="#" class="subject-item-link">TOEFL®</a>
+                                        <a href="#" class="subject-item-link">TOEIC®</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Right Side Actions -->
+                <div class="d-flex align-items-center ms-auto">
+                    <a href="signup.html" class="text-decoration-none me-4 fw-normal text-primary">
+                        <i class="bi bi-plus-circle me-1"></i>Create
+                    </a>
+                    <a href="login.html" class="btn btn-primary rounded-pill px-4 text-decoration-none">
+                        Log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Teachers Page Content -->
+    <div class="teachers-page">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="teachers-hero text-center mb-5">
+                <h1 class="mb-3">Instantly create learning activities</h1>
+                <p class="mb-4 mx-auto">Teachers can generate in-class games, practice modes, and activities in seconds.
+                </p>
+                <a href="signup.html"
+                    class="btn btn-primary rounded-pill px-5 py-3 fs-5 fw-semibold text-decoration-none">Sign up for
+                    free</a>
+            </div>
+
+            <!-- Activity Cards -->
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="#" class="text-decoration-none">
+                        <div class="study-card" style="background: #423ED8;">
+                            <p class="card-title text-white">study Guides</p>
+                            <img src="../../../assets/website/image/ZpFuUR5LeNNTxHxc_2Flashcards@2x.avif"
+                                alt="Flashcards" class="img-fluid">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="#" class="text-decoration-none">
+                        <div class="study-card" style="background: #FFC38C;">
+                            <p class="card-title text-dark">Flashcards</p>
+                            <img src="../../../assets/website/image/ZpFuYB5LeNNTxHxd_3PracticeTests@2x.avif"
+                                alt="Practice Tests" class="img-fluid">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="#" class="text-decoration-none">
+                        <div class="study-card" style="background: #98F1D1;">
+                            <p class="card-title text-dark">Practice Tests</p>
+                            <img src="../../../assets/website/image/ZpWg2x5LeNNTxK_n_5Expertsolutions@2x.avif"
+                                alt="Expert Solutions" class="img-fluid">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="#" class="text-decoration-none">
+                        <div class="study-card" style="background: #98E3FF;">
+                            <p class="card-title text-dark">Games</p>
+                            <img src="../../../assets/website/image/ZpFubx5LeNNTxHxg_4Learn@2x.avif" alt="Learn"
+                                class="img-fluid">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Turn Lesson Materials Section -->
+        <section class="lesson-materials-section py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Left Side - Interface Mockup -->
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="interface-mockup">
+                            <div class="mockup-card">
+                                <!-- Progress Bar -->
+                                <div class="progress-bar-container">
+                                    <div class="progress-segment"></div>
+                                    <div class="progress-segment progress-segment-active"></div>
+                                </div>
+
+                                <!-- Document Icon -->
+                                <div class="document-icon-wrapper">
+                                    <div class="document-icon">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                                            <rect x="4" y="4" width="16" height="16" rx="2" fill="#a855f7" />
+                                            <path d="M8 8h8M8 12h8M8 16h4" stroke="white" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                        <div class="document-star">
+                                            <i class="bi bi-star-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Vertical Toolbar -->
+                                <div class="toolbar">
+                                    <div class="toolbar-icon"><i class="bi bi-pencil"></i></div>
+                                    <div class="toolbar-icon"><i class="bi bi-question-circle"></i></div>
+                                    <div class="toolbar-icon"><i class="bi bi-star"></i></div>
+                                    <div class="toolbar-icon"><i class="bi bi-square"></i></div>
+                                    <div class="toolbar-icon"><i class="bi bi-list-ul"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side - Features -->
+                    <div class="col-lg-6">
+                        <h2 class="lesson-materials-heading mb-5">Turn lesson materials into everything you need</h2>
+
+                        <!-- Feature 1 -->
+                        <div class="feature-item mb-4">
+                            <div class="feature-icon feature-icon-1">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" fill="#a855f7" />
+                                    <path d="M8 8h8M8 12h8M8 16h4" stroke="white" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                    <path d="M18 6l2 2-2 2" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none" />
+                                    <path d="M18 8l1-1" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">Study resources</h3>
+                                <p class="feature-description">Turn your existing documents into flashcards, study
+                                    guides, and practice tests.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="feature-item mb-4">
+                            <div class="feature-icon feature-icon-2">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
+                                        fill="#a855f7" />
+                                    <path d="M7 8h10" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                    <circle cx="10" cy="12" r="2" fill="#10b981" />
+                                    <circle cx="14" cy="16" r="2" fill="#ec4899" />
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">In-class or at-home activities</h3>
+                                <p class="feature-description">Assign activities in a snap. Students can review material
+                                    and complete personalized practice exercises.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="feature-item">
+                            <div class="feature-icon feature-icon-3">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3b82f6" />
+                                    <path d="M4 8h8M4 12h8M4 16h4" stroke="white" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                    <path d="M16 8h4M16 12h4M16 16h4" stroke="white" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                    <line x1="12" y1="4" x2="12" y2="20" stroke="white" stroke-width="2" />
+                                    <line x1="16" y1="8" x2="20" y2="8" stroke="white" stroke-width="2" />
+                                    <line x1="16" y1="12" x2="20" y2="12" stroke="white" stroke-width="2" />
+                                    <line x1="16" y1="16" x2="20" y2="16" stroke="white" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">Bite-size classroom games</h3>
+                                <p class="feature-description">Matching games, quiz shows, and more. Use your teaching
+                                    material to power games.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Play Bite-size Classroom Games Section -->
+        <section class="classroom-games-section py-5">
+            <div class="container">
+                <h2 class="games-section-heading text-center mb-5">Play bite-size classroom games</h2>
+                <div class="row g-4">
+                    <!-- Categories Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="game-card game-card-categories">
+                            <div class="game-icon">
+                                <i class="bi bi-question-circle-fill"></i>
+                            </div>
+                            <div class="game-preview">
+                                <div class="game-board">
+                                    <div class="board-header">
+                                        <div class="board-question-mark">?</div>
+                                    </div>
+                                    <div class="board-grid">
+                                        <div class="board-cell cell-blue">—</div>
+                                        <div class="board-cell cell-purple">—</div>
+                                        <div class="board-cell cell-grey">—</div>
+                                        <div class="board-cell cell-score">200</div>
+                                        <div class="board-cell cell-score">200</div>
+                                        <div class="board-cell cell-score">200</div>
+                                        <div class="board-cell cell-score">400</div>
+                                        <div class="board-cell cell-score">400</div>
+                                        <div class="board-cell cell-score">400</div>
+                                    </div>
+                                    <div class="board-character">
+                                        <div class="character-ring"></div>
+                                        <div class="character-face">🦊</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="game-title">Categories</h3>
+                            <p class="game-description">Launch a quiz show in the classroom</p>
+                        </div>
+                    </div>
+
+                    <!-- Quizlet Live Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="game-card game-card-live">
+                            <div class="game-icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div class="game-preview">
+                                <div class="game-board">
+                                    <div class="board-header">
+                                        <div class="board-icon-live">E</div>
+                                    </div>
+                                    <div class="live-progress-bars">
+                                        <div class="progress-bar-item">
+                                            <div class="progress-bar-fill progress-green" style="width: 60%;">
+                                                <div class="progress-handle">1</div>
+                                            </div>
+                                        </div>
+                                        <div class="progress-bar-item">
+                                            <div class="progress-bar-fill progress-red" style="width: 80%;">
+                                                <div class="progress-handle">3</div>
+                                            </div>
+                                        </div>
+                                        <div class="progress-bar-item">
+                                            <div class="progress-bar-fill progress-yellow" style="width: 40%;">
+                                                <div class="progress-handle">4</div>
+                                            </div>
+                                        </div>
+                                        <div class="progress-bar-item">
+                                            <div class="progress-bar-fill progress-blue" style="width: 100%;">
+                                                <div class="progress-handle">2</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="game-title">Quizlet Live</h3>
+                            <p class="game-description">It takes teamwork to find the right answer</p>
+                        </div>
+                    </div>
+
+                    <!-- Blast Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="game-card game-card-blast">
+                            <div class="game-icon">
+                                <i class="bi bi-rocket-fill"></i>
+                            </div>
+                            <div class="game-preview">
+                                <div class="game-board blast-board">
+                                    <div class="board-header">
+                                        <div class="board-icon-blast">🚀</div>
+                                    </div>
+                                    <div class="blast-game-scene">
+                                        <div class="blast-stars">
+                                            <div class="blast-star"></div>
+                                            <div class="blast-star"></div>
+                                            <div class="blast-star"></div>
+                                        </div>
+                                        <div class="blast-spaceship">
+                                            <span class="blast-number">99</span>
+                                        </div>
+                                        <div class="blast-beam"></div>
+                                        <div class="blast-asteroid">
+                                            <div class="asteroid-minus">−</div>
+                                        </div>
+                                        <div class="blast-small-asteroids">
+                                            <div class="small-asteroid"></div>
+                                            <div class="small-asteroid"></div>
+                                            <div class="small-asteroid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="game-title">Blast</h3>
+                            <p class="game-description">Vocab practice meets asteroid-blasting</p>
+                        </div>
+                    </div>
+
+                    <!-- Match Card -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="game-card game-card-match">
+                            <div class="game-icon">
+                                <i class="bi bi-grid-3x3-gap-fill"></i>
+                            </div>
+                            <div class="game-preview">
+                                <div class="game-board">
+                                    <div class="board-header">
+                                        <div class="board-icon-match">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                                <rect x="4" y="4" width="6" height="6" stroke="white" stroke-width="2"
+                                                    fill="none" />
+                                                <rect x="14" y="4" width="6" height="6" stroke="white" stroke-width="2"
+                                                    fill="none" />
+                                                <rect x="4" y="14" width="6" height="6" stroke="white" stroke-width="2"
+                                                    fill="none" />
+                                                <rect x="14" y="14" width="6" height="6" stroke="white" stroke-width="2"
+                                                    fill="none" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="match-grid">
+                                        <div class="match-cell match-empty">
+                                            <div class="match-line"></div>
+                                        </div>
+                                        <div class="match-cell match-image match-correct">
+                                            <div class="match-checkmark">✓</div>
+                                            <div class="match-lungs">🫁</div>
+                                        </div>
+                                        <div class="match-cell match-green match-correct">
+                                            <div class="match-checkmark">✓</div>
+                                            <div class="match-line-green"></div>
+                                        </div>
+                                        <div class="match-cell match-image">
+                                            <div class="match-digestive">🫀</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="game-title">Match</h3>
+                            <p class="game-description">Students race to match terms & definitions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assign Activities Section -->
+        <section class="assign-activities-section py-5">
+            <div class="container">
+                <h2 class="assign-activities-heading text-center mb-5">Easily assign activities to your class. No
+                    student accounts required.</h2>
+                <div class="row g-4">
+                    <!-- Flashcards Feature -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="activity-feature-card text-center">
+                            <div class="activity-icon-wrapper mb-4">
+                                <div class="activity-icon activity-icon-flashcards">
+                                    <div class="flashcard-icon-card card-back"></div>
+                                    <div class="flashcard-icon-card card-front"></div>
+                                </div>
+                            </div>
+                            <h3 class="activity-feature-title mb-3">Flashcards</h3>
+                            <p class="activity-feature-description">The quickest and simplest way to learn, sort, and
+                                review vocabulary and facts.</p>
+                        </div>
+                    </div>
+
+                    <!-- Learn Feature -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="activity-feature-card text-center">
+                            <div class="activity-icon-wrapper mb-4">
+                                <div class="activity-icon activity-icon-learn">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                        <circle cx="32" cy="32" r="28" stroke="#3b82f6" stroke-width="3" fill="none"
+                                            stroke-dasharray="2 4" />
+                                        <circle cx="32" cy="32" r="28" stroke="#3b82f6" stroke-width="3" fill="none"
+                                            stroke-dashoffset="44" />
+                                        <circle cx="32" cy="4" r="3" fill="#3b82f6" />
+                                        <circle cx="32" cy="60" r="3" fill="#3b82f6" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="activity-feature-title mb-3">Learn</h3>
+                            <p class="activity-feature-description">Personalized practice sessions that cover writing,
+                                spelling, flashcard review, and more.</p>
+                        </div>
+                    </div>
+
+                    <!-- Test Feature -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="activity-feature-card text-center">
+                            <div class="activity-icon-wrapper mb-4">
+                                <div class="activity-icon activity-icon-test">
+                                    <div class="test-icon-doc doc-back"></div>
+                                    <div class="test-icon-doc doc-front">
+                                        <div class="doc-lines">
+                                            <div class="doc-line"></div>
+                                            <div class="doc-line"></div>
+                                            <div class="doc-line"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="activity-feature-title mb-3">Test</h3>
+                            <p class="activity-feature-description">Students can quiz themselves using true or false,
+                                multiple choice, matching, or written response formats.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quizlet Plus for Teachers Section -->
+        <section class="quizlet-plus-section py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Left Side - Text Content -->
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <h2 class="quizlet-plus-heading text-white mb-4">Add teacher super<br>powers to your<br>account
+                        </h2>
+                        <p class="quizlet-plus-description text-white mb-4">
+                            Upgrade to Quizlet Plus for teachers to use features like Class Progress. You'll get a
+                            detailed view of which students have started or completed their study session and those who
+                            might need some more encouragement.
+                        </p>
+                    </div>
+
+                    <!-- Right Side - Class Progress Card -->
+                    <div class="col-lg-6">
+                        <div class="class-progress-card">
+                            <!-- Card Header -->
+                            <div class="progress-card-header">
+                                <div class="progress-card-icon">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                                <div class="progress-card-divider"></div>
+                            </div>
+
+                            <!-- Student Rows -->
+                            <div class="student-rows">
+                                <!-- Student 1 -->
+                                <div class="student-row">
+                                    <div class="student-avatar">
+                                        <div class="avatar-owl">🦉</div>
+                                    </div>
+                                    <div class="activity-icons">
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-square"></i>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-volume-up"></i>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-file-text"></i>
+                                        </div>
+                                        <div class="activity-icon-item completed">
+                                            <i class="bi bi-stack"></i>
+                                            <span class="checkmark">✓</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Student 2 -->
+                                <div class="student-row">
+                                    <div class="student-avatar">
+                                        <div class="avatar-rabbit">🐰</div>
+                                    </div>
+                                    <div class="activity-icons">
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </div>
+                                        <div class="activity-icon-item completed">
+                                            <i class="bi bi-square"></i>
+                                            <span class="checkmark">✓</span>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-volume-up"></i>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-file-text"></i>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-stack"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Student 3 -->
+                                <div class="student-row">
+                                    <div class="student-avatar">
+                                        <div class="avatar-cat">🐱</div>
+                                    </div>
+                                    <div class="activity-icons">
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-square"></i>
+                                        </div>
+                                        <div class="activity-icon-item completed">
+                                            <i class="bi bi-volume-up"></i>
+                                            <span class="checkmark">✓</span>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-file-text"></i>
+                                        </div>
+                                        <div class="activity-icon-item">
+                                            <i class="bi bi-stack"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quizlet Plus Logo -->
+                <div class="quizlet-plus-logo text-white text-end mt-4">
+                    <span class="quizlet-plus-text">Quizlet Plus</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Watch How Teachers Use Quizlet Section -->
+        <section class="teachers-usage-section py-5">
+            <div class="container">
+                <h2 class="teachers-usage-heading text-center mb-3">Watch how teachers are using Quizlet in their
+                    classroom</h2>
+                <p class="teachers-usage-subtitle text-center mb-5">Checkout our past Quizlet Unconference recordings.
+                </p>
+
+                <div class="row g-3 justify-content-center">
+                    <!-- Row 1 -->
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <button class="subject-card subject-card-active">
+                            Foreign language
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <button class="subject-card">
+                            Social studies
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <button class="subject-card">
+                            Science
+                        </button>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <button class="subject-card">
+                            Math
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <button class="subject-card">
+                            Language arts
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <button class="subject-card">
+                            Quizlet 101
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">About us</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">About Quizlet</a></li>
+                        <li><a href="#">How Quizlet works</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Advertise with us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">For students</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Flashcards</a></li>
+                        <li><a href="#">Test</a></li>
+                        <li><a href="#">Learn</a></li>
+                        <li><a href="#">Study groups</a></li>
+                        <li><a href="#">Solutions</a></li>
+                        <li><a href="#">Modern Learning Lab</a></li>
+                        <li><a href="#">Quizlet Plus</a></li>
+                        <li><a href="#">Study Guides</a></li>
+                        <li><a href="#">Pomodoro timer</a></li>
+                        <li><a href="#">Learning games</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">For teachers</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Live</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Be the Change</a></li>
+                        <li><a href="#">Quizlet Plus for teachers</a></li>
+                        <li><a href="#">Teachers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">Resources</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Help center</a></li>
+                        <li><a href="#">Sign up</a></li>
+                        <li><a href="#">Honor code</a></li>
+                        <li><a href="#">Community guidelines</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">California Privacy</a></li>
+                        <li><a href="#">Your Privacy/Cookie Choices <i
+                                    class="bi bi-check-circle-fill text-primary"></i></a></li>
+                        <li><a href="#">Ads and Cookie Settings</a></li>
+                        <li><a href="#">Interest-Based Advertising</a></li>
+                        <li><a href="#">Quizlet for Schools</a></li>
+                        <li><a href="#">Parents</a></li>
+                        <li><a href="#">Content hub</a></li>
+                        <li><a href="#">AI tools</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <h5 class="footer-heading mb-3">Language</h5>
+                    <select class="form-select mb-3" style="max-width: 200px;">
+                        <option>English (USA)</option>
+                        <option>English (UK)</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                        <option>Deutsch</option>
+                    </select>
+                    <div class="qr-code-section">
+                        <div class="qr-code-placeholder bg-light d-inline-block p-2 rounded mb-2"
+                            style="width: 80px; height: 80px;">
+                            <div class="d-flex align-items-center justify-content-center h-100 text-muted small">QR Code
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0">Get the app</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row py-3">
+                <div class="col-12 mb-3">
+                    <h5 class="footer-heading mb-3">Country</h5>
+                    <div class="country-list">
+                        <a href="#" class="country-link">United States</a>
+                        <a href="#" class="country-link">Canada</a>
+                        <a href="#" class="country-link">United Kingdom</a>
+                        <a href="#" class="country-link">Australia</a>
+                        <a href="#" class="country-link">New Zealand</a>
+                        <a href="#" class="country-link">Germany</a>
+                        <a href="#" class="country-link">France</a>
+                        <a href="#" class="country-link">Spain</a>
+                        <a href="#" class="country-link">Italy</a>
+                        <a href="#" class="country-link">Japan</a>
+                        <a href="#" class="country-link">South Korea</a>
+                        <a href="#" class="country-link">India</a>
+                        <a href="#" class="country-link">China</a>
+                        <a href="#" class="country-link">Mexico</a>
+                        <a href="#" class="country-link">Sweden</a>
+                        <a href="#" class="country-link">Netherlands</a>
+                        <a href="#" class="country-link">Switzerland</a>
+                        <a href="#" class="country-link">Brazil</a>
+                        <a href="#" class="country-link">Poland</a>
+                        <a href="#" class="country-link">Turkey</a>
+                        <a href="#" class="country-link">Ukraine</a>
+                        <a href="#" class="country-link">Taiwan</a>
+                        <a href="#" class="country-link">Vietnam</a>
+                        <a href="#" class="country-link">Indonesia</a>
+                        <a href="#" class="country-link">Philippines</a>
+                        <a href="#" class="country-link">Russia</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row py-3 align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="social-icons d-flex gap-3">
+                        <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-end gap-3">
+                        <span class="copyright-text">© 2025 Quizlet, Inc.</span>
+                        <img src="../../../assets/website/image/coppa-seal.0efe00c1.avif"
+                            alt="COPPA Safe Harbor Certification" class="coppa-badge">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

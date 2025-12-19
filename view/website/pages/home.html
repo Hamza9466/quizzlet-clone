@@ -29,32 +29,219 @@
             <!-- Navbar Items -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto align-items-center">
-                    <!-- Study Tools Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-dark fw-normal" href="#" id="studyToolsDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Study tools
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="studyToolsDropdown">
-                            <li><a class="dropdown-item" href="#">Flashcards</a></li>
-                            <li><a class="dropdown-item" href="#">Learn</a></li>
-                            <li><a class="dropdown-item" href="#">Test</a></li>
-                            <li><a class="dropdown-item" href="#">Match</a></li>
-                        </ul>
-                    </li>
-
                     <!-- Subjects Dropdown -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown subjects-dropdown-wrapper">
                         <a class="nav-link dropdown-toggle text-dark fw-normal" href="#" id="subjectsDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Subjects
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="subjectsDropdown">
-                            <li><a class="dropdown-item" href="#">Math</a></li>
-                            <li><a class="dropdown-item" href="#">Science</a></li>
-                            <li><a class="dropdown-item" href="#">English</a></li>
-                            <li><a class="dropdown-item" href="#">History</a></li>
-                        </ul>
+                        <div class="dropdown-menu subjects-mega-menu" aria-labelledby="subjectsDropdown">
+                            <!-- Two Column Layout -->
+                            <div class="subjects-menu-content">
+                                <!-- Left Column - Categories -->
+                                <div class="subjects-categories-column">
+                                    <div class="subject-category-item active" data-category="exams">
+                                        <div class="subject-category-icon exams-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor"
+                                                    stroke-width="2" fill="none" />
+                                                <text x="12" y="16" text-anchor="middle" font-size="10"
+                                                    font-weight="bold" fill="currentColor">EN</text>
+                                                <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Exams</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="literature">
+                                        <div class="subject-category-icon literature-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" />
+                                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                                                    stroke="currentColor" stroke-width="2" />
+                                                <path d="M8 7h8M8 11h8" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Literature</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="arts">
+                                        <div class="subject-category-icon arts-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Arts and Humanities</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="languages">
+                                        <div class="subject-category-icon languages-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                                <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Languages</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="math">
+                                        <div class="subject-category-icon math-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12 2L2 12l10 10 10-10L12 2z" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8 8h8M8 12h8M8 16h8" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Math</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="science">
+                                        <div class="subject-category-icon science-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M9 2v6M15 2v6M5 10h14M4 10h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Science</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="social">
+                                        <div class="subject-category-icon social-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor"
+                                                    stroke-width="2" />
+                                                <path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Social Science</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="other">
+                                        <div class="subject-category-icon other-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"
+                                                    stroke-width="2" />
+                                                <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Other</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <!-- Right Column - Sub-items -->
+                                <div class="subjects-items-column">
+                                    <div class="subject-items-list" id="examsItems">
+                                        <a href="exam-prep.html?exam=IELTS" class="subject-item-link">IELTS®</a>
+                                        <a href="exam-prep.html?exam=TOEFL" class="subject-item-link">TOEFL®</a>
+                                        <a href="exam-prep.html?exam=TOEIC" class="subject-item-link">TOEIC®</a>
+                                    </div>
+                                    <div class="subject-items-list" id="literatureItems" style="display: none;">
+                                        <a href="literature.html?type=novels" class="subject-item-link">Novels</a>
+                                        <a href="literature.html?type=poems" class="subject-item-link">Poems</a>
+                                        <a href="literature.html?type=plays" class="subject-item-link">Plays</a>
+                                    </div>
+                                    <div class="subject-items-list" id="artsItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Philosophy"
+                                            class="subject-item-link">Philosophy</a>
+                                        <a href="book-flashcards.html?book=History"
+                                            class="subject-item-link">History</a>
+                                        <a href="book-flashcards.html?book=English"
+                                            class="subject-item-link">English</a>
+                                        <a href="book-flashcards.html?book=Film and TV" class="subject-item-link">Film
+                                            and TV</a>
+                                        <a href="book-flashcards.html?book=Music" class="subject-item-link">Music</a>
+                                        <a href="book-flashcards.html?book=Dance" class="subject-item-link">Dance</a>
+                                        <a href="book-flashcards.html?book=Theater"
+                                            class="subject-item-link">Theater</a>
+                                        <a href="book-flashcards.html?book=Arts and Humanities"
+                                            class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="languagesItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=French" class="subject-item-link">French</a>
+                                        <a href="book-flashcards.html?book=Spanish"
+                                            class="subject-item-link">Spanish</a>
+                                        <a href="book-flashcards.html?book=German" class="subject-item-link">German</a>
+                                        <a href="book-flashcards.html?book=Latin" class="subject-item-link">Latin</a>
+                                        <a href="book-flashcards.html?book=English Language"
+                                            class="subject-item-link">English</a>
+                                        <a href="book-flashcards.html?book=Languages" class="subject-item-link">View
+                                            all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="mathItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Arithmetic"
+                                            class="subject-item-link">Arithmetic</a>
+                                        <a href="book-flashcards.html?book=Geometry"
+                                            class="subject-item-link">Geometry</a>
+                                        <a href="book-flashcards.html?book=Algebra"
+                                            class="subject-item-link">Algebra</a>
+                                        <a href="book-flashcards.html?book=Statistics"
+                                            class="subject-item-link">Statistics</a>
+                                        <a href="book-flashcards.html?book=Calculus"
+                                            class="subject-item-link">Calculus</a>
+                                        <a href="book-flashcards.html?book=Math Foundations"
+                                            class="subject-item-link">Math Foundations</a>
+                                        <a href="book-flashcards.html?book=Probability"
+                                            class="subject-item-link">Probability</a>
+                                        <a href="book-flashcards.html?book=Math" class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="scienceItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Biology"
+                                            class="subject-item-link">Biology</a>
+                                        <a href="book-flashcards.html?book=Chemistry"
+                                            class="subject-item-link">Chemistry</a>
+                                        <a href="book-flashcards.html?book=Physics"
+                                            class="subject-item-link">Physics</a>
+                                        <a href="book-flashcards.html?book=Medicine"
+                                            class="subject-item-link">Medicine</a>
+                                        <a href="book-flashcards.html?book=Computer Science"
+                                            class="subject-item-link">Computer Science</a>
+                                        <a href="book-flashcards.html?book=Engineering"
+                                            class="subject-item-link">Engineering</a>
+                                        <a href="book-flashcards.html?book=Earth Science"
+                                            class="subject-item-link">Earth Science</a>
+                                        <a href="book-flashcards.html?book=Science" class="subject-item-link">View
+                                            all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="socialItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Psychology"
+                                            class="subject-item-link">Psychology</a>
+                                        <a href="book-flashcards.html?book=Business"
+                                            class="subject-item-link">Business</a>
+                                        <a href="book-flashcards.html?book=Sociology"
+                                            class="subject-item-link">Sociology</a>
+                                        <a href="book-flashcards.html?book=Economics"
+                                            class="subject-item-link">Economics</a>
+                                        <a href="book-flashcards.html?book=Law" class="subject-item-link">Law</a>
+                                        <a href="book-flashcards.html?book=Human Geography"
+                                            class="subject-item-link">Human Geography</a>
+                                        <a href="book-flashcards.html?book=Political Science"
+                                            class="subject-item-link">Political Science</a>
+                                        <a href="book-flashcards.html?book=Social Science"
+                                            class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="otherItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Hobbies"
+                                            class="subject-item-link">Hobbies</a>
+                                        <a href="book-flashcards.html?book=Sports" class="subject-item-link">Sports</a>
+                                        <a href="book-flashcards.html?book=Computer Skills"
+                                            class="subject-item-link">Computer Skills</a>
+                                        <a href="book-flashcards.html?book=Other" class="subject-item-link">View all</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
 
@@ -91,7 +278,7 @@
                     practice tests, and study activities.</p>
                 <button class="btn btn-primary btn-signup rounded-pill">Sign up for free</button>
                 <div class="mt-3">
-                    <a href="#" class="teacher-link">I'm a teacher</a>
+                    <a href="teachers.html" class="teacher-link">I'm a teacher</a>
                 </div>
             </div>
         </div>
@@ -643,6 +830,42 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../../style/script.js"></script>
+    <script>
+        // Subjects dropdown functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryItems = document.querySelectorAll('.subject-category-item');
+            const itemLists = document.querySelectorAll('.subject-items-list');
+
+            categoryItems.forEach(item => {
+                item.addEventListener('mouseenter', function () {
+                    const category = this.getAttribute('data-category');
+
+                    // Remove active class from all items
+                    categoryItems.forEach(cat => cat.classList.remove('active'));
+
+                    // Add active class to hovered item
+                    this.classList.add('active');
+
+                    // Hide all item lists
+                    itemLists.forEach(list => {
+                        list.style.display = 'none';
+                    });
+
+                    // Show the corresponding item list
+                    const targetList = document.getElementById(category + 'Items');
+                    if (targetList) {
+                        targetList.style.display = 'flex';
+                    }
+                });
+            });
+
+            // Initialize with exams selected
+            const examsCategory = document.querySelector('[data-category="exams"]');
+            if (examsCategory) {
+                examsCategory.classList.add('active');
+            }
+        });
+    </script>
 </body>
 
 </html>

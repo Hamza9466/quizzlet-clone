@@ -81,11 +81,15 @@
                             <i class="bi bi-sun"></i>
                             <span data-i18n="lightMode">Light mode</span>
                         </a>
+
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-menu-items">
                         <a href="#" class="dropdown-item no-icon" data-i18n="logOut">Log out</a>
+
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -120,15 +124,21 @@
                     <i class="bi bi-plus-circle"></i>
                     <span data-i18n="newFolder">New folder</span>
                 </a>
-                <hr class="sidebar-divider">
-                <div class="nav-section-title" data-i18n="startHere">Start here</div>
-                <a href="flashcards.html" class="nav-item">
+                <hr class="sidebar-divider" id="startHereDivider">
+                <div class="nav-section-title" data-i18n="startHere" id="startHereTitle">Start here</div>
+                <a href="flashcards.html" class="nav-item" id="flashcardsNavItem">
                     <i class="bi bi-card-text"></i>
                     <span data-i18n="flashcards">Flashcards</span>
                 </a>
-                <a href="expert-solutions.html" class="nav-item">
+                <a href="expert-solutions.html" class="nav-item" id="expertSolutionsNavItem">
                     <i class="bi bi-book"></i>
                     <span data-i18n="expertSolutions">Expert Solutions</span>
+                </a>
+                <hr class="sidebar-divider" id="teacherToolsDivider" style="display: none;">
+                <div class="nav-section-title" id="teacherToolsTitle" style="display: none;">Teacher tools</div>
+                <a href="assign-activity.html" class="nav-item" id="assignActivityNavItem" style="display: none;">
+                    <i class="bi bi-clock"></i>
+                    <span>Assign activity</span>
                 </a>
             </nav>
         </aside>
@@ -140,6 +150,78 @@
                 <h2 class="section-title">Your Favorites</h2>
                 <div class="favorites-list" id="favoritesList">
                     <!-- Favorites will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Teacher Action Buttons Section -->
+            <section class="teacher-actions-section" id="teacherActionsSection" style="display: none;">
+                <div class="teacher-action-buttons">
+                    <div class="teacher-dropdown-wrapper">
+                        <button class="teacher-action-btn" id="createContentBtn">
+                            <i class="bi bi-file-earmark-plus"></i>
+                            <span>Create content</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="teacher-dropdown-menu">
+                            <a href="flashcards.html" class="teacher-dropdown-item">
+                                <div class="dropdown-icon dropdown-icon-blue">
+                                    <i class="bi bi-card-text"></i>
+                                </div>
+                                <span>Flashcard set</span>
+                            </a>
+                            <a href="#" class="teacher-dropdown-item" id="studyGuideLink"
+                                onclick="event.preventDefault(); showStudyGuideModal();">
+                                <div class="dropdown-icon dropdown-icon-purple">
+                                    <i class="bi bi-file-text"></i>
+                                </div>
+                                <span>Study guide</span>
+                            </a>
+                            <a href="#" class="teacher-dropdown-item" id="practiceTestLink"
+                                onclick="event.preventDefault(); showPracticeTestModal();">
+                                <div class="dropdown-icon dropdown-icon-orange">
+                                    <i class="bi bi-clipboard-check"></i>
+                                </div>
+                                <span>Practice test</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="teacher-dropdown-wrapper">
+                        <button class="teacher-action-btn">
+                            <i class="bi bi-clock"></i>
+                            <span>Assign an activity</span>
+                        </button>
+                    </div>
+                    <div class="teacher-dropdown-wrapper">
+                        <button class="teacher-action-btn" id="playClassGamesBtn">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                            <span>Play class games</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="teacher-dropdown-menu" id="playClassGamesDropdown">
+                            <a href="#" class="teacher-dropdown-item" id="liveLink"
+                                onclick="event.preventDefault(); showLiveModal();">
+                                <div class="dropdown-icon dropdown-icon-live">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M4 10h16M4 14h16M4 18h16" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span>Live</span>
+                            </a>
+                            <a href="#" class="teacher-dropdown-item" id="blastLink"
+                                onclick="event.preventDefault(); showBlastModal();">
+                                <div class="dropdown-icon dropdown-icon-blast">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2L10 6h4L12 2z" fill="currentColor" />
+                                        <path d="M10 6L8 18h8L14 6H10z" fill="currentColor" />
+                                        <path d="M9 18L12 22L15 18" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" fill="none" />
+                                    </svg>
+                                </div>
+                                <span>Blast</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -627,6 +709,255 @@
             }, 100);
         });
     </script>
+
+    <!-- Study Guide Modal -->
+    <div class="study-guide-modal" id="studyGuideModal">
+        <div class="study-guide-modal-content">
+            <div class="study-guide-icon">
+                <div class="study-guide-document">
+                    <div class="document-lines">
+                        <div class="document-line"></div>
+                        <div class="document-line"></div>
+                        <div class="document-line"></div>
+                    </div>
+                </div>
+                <div class="study-guide-star">
+                    <i class="bi bi-star-fill"></i>
+                </div>
+            </div>
+            <h2 class="study-guide-title">Thanks for your interest in Study Guides!</h2>
+            <p class="study-guide-message">We are working to expand access and hope to get you in soon.</p>
+            <button class="study-guide-close-btn" onclick="closeStudyGuideModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showStudyGuideModal() {
+            const modal = document.getElementById('studyGuideModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeStudyGuideModal() {
+            const modal = document.getElementById('studyGuideModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function (e) {
+            const modal = document.getElementById('studyGuideModal');
+            if (modal && e.target === modal) {
+                closeStudyGuideModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('studyGuideModal');
+                if (modal && modal.style.display === 'flex') {
+                    closeStudyGuideModal();
+                }
+                const practiceModal = document.getElementById('practiceTestModal');
+                if (practiceModal && practiceModal.style.display === 'flex') {
+                    closePracticeTestModal();
+                }
+            }
+        });
+
+        function showPracticeTestModal() {
+            const modal = document.getElementById('practiceTestModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closePracticeTestModal() {
+            const modal = document.getElementById('practiceTestModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close practice test modal when clicking outside
+        document.addEventListener('click', function (e) {
+            const modal = document.getElementById('practiceTestModal');
+            if (modal && e.target === modal) {
+                closePracticeTestModal();
+            }
+            const blastModal = document.getElementById('blastModal');
+            if (blastModal && e.target === blastModal) {
+                closeBlastModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                const blastModal = document.getElementById('blastModal');
+                if (blastModal && blastModal.style.display === 'flex') {
+                    closeBlastModal();
+                }
+            }
+        });
+
+        function showBlastModal() {
+            const modal = document.getElementById('blastModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeBlastModal() {
+            const modal = document.getElementById('blastModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function startBlastGame() {
+            const selectedSet = document.querySelector('input[name="flashcardSet"]:checked');
+            if (selectedSet) {
+                const setName = selectedSet.closest('label').querySelector('.blast-set-name').textContent;
+                window.location.href = `blast-live.html?set=${encodeURIComponent(setName)}`;
+            } else {
+                alert('Please select a flashcard set');
+            }
+        }
+
+        function showLiveModal() {
+            const modal = document.getElementById('liveModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeLiveModal() {
+            const modal = document.getElementById('liveModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function startLiveGame() {
+            const selectedSet = document.querySelector('input[name="liveFlashcardSet"]:checked');
+            if (selectedSet) {
+                const setName = selectedSet.closest('label').querySelector('.blast-set-name').textContent;
+                window.location.href = `quizlet-live.html?set=${encodeURIComponent(setName)}`;
+            } else {
+                alert('Please select a flashcard set');
+            }
+        }
+    </script>
+
+    <!-- Practice Test Modal -->
+    <div class="practice-test-modal" id="practiceTestModal">
+        <div class="practice-test-modal-content">
+            <div class="practice-test-icon">
+                <div class="practice-test-error-box">
+                    <i class="bi bi-x-lg"></i>
+                </div>
+            </div>
+            <h2 class="practice-test-title">Sorry. Practice tests are not available<br>at this time.</h2>
+            <button class="practice-test-home-btn" onclick="window.location.href='dashboard.html'">Back to Quizlet
+                home</button>
+        </div>
+    </div>
+
+    <!-- Blast Modal -->
+    <div class="blast-modal" id="blastModal">
+        <div class="blast-modal-content">
+            <button class="blast-modal-close" onclick="closeBlastModal()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <h2 class="blast-modal-title">Choose a flashcard set for your activity</h2>
+            <div class="blast-modal-body">
+                <div class="blast-sets-dropdown-wrapper">
+                    <button class="blast-sets-dropdown-btn" id="blastSetsDropdownBtn">
+                        Recent sets
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="blast-sets-list">
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">AECL 366 Exam 3</span>
+                        <input type="radio" name="flashcardSet" value="aecl-366-exam-3">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">biology chapter 2</span>
+                        <input type="radio" name="flashcardSet" value="biology-chapter-2">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">biology chapter 1</span>
+                        <input type="radio" name="flashcardSet" value="biology-chapter-1">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">Et quia perferendis doloremque dolores</span>
+                        <input type="radio" name="flashcardSet" value="et-quia">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">biology</span>
+                        <input type="radio" name="flashcardSet" value="biology">
+                    </label>
+                </div>
+            </div>
+            <div class="blast-modal-footer">
+                <button class="blast-btn-cancel" onclick="closeBlastModal()">Cancel</button>
+                <button class="blast-btn-start" onclick="startBlastGame()">
+                    <i class="bi bi-play-fill"></i> Start
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Modal -->
+    <div class="blast-modal" id="liveModal">
+        <div class="blast-modal-content">
+            <button class="blast-modal-close" onclick="closeLiveModal()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <h2 class="blast-modal-title">Choose a flashcard set for your activity</h2>
+            <div class="blast-modal-body">
+                <div class="blast-sets-dropdown-wrapper">
+                    <button class="blast-sets-dropdown-btn" id="liveSetsDropdownBtn">
+                        Recent sets
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="blast-sets-list">
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">AECL 366 Exam 3</span>
+                        <input type="radio" name="liveFlashcardSet" value="aecl-366-exam-3">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">biology chapter 2</span>
+                        <input type="radio" name="liveFlashcardSet" value="biology-chapter-2">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">biology chapter 1</span>
+                        <input type="radio" name="liveFlashcardSet" value="biology-chapter-1">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">Et quia perferendis doloremque dolores</span>
+                        <input type="radio" name="liveFlashcardSet" value="et-quia">
+                    </label>
+                    <label class="blast-set-item">
+                        <span class="blast-set-name">biology</span>
+                        <input type="radio" name="liveFlashcardSet" value="biology">
+                    </label>
+                </div>
+            </div>
+            <div class="blast-modal-footer">
+                <button class="blast-btn-cancel" onclick="closeLiveModal()">Cancel</button>
+                <button class="blast-btn-start" onclick="startLiveGame()">
+                    <i class="bi bi-play-fill"></i> Start
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

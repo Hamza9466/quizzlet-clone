@@ -66,19 +66,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Avatar upload functionality
     if (addAvatarBtn && avatarUpload) {
-        addAvatarBtn.addEventListener('click', function(e) {
+        addAvatarBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             avatarUpload.click();
         });
 
-        avatarUpload.addEventListener('change', function(e) {
+        avatarUpload.addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
-                
-                reader.onload = function(event) {
+
+                reader.onload = function (event) {
                     const imageUrl = event.target.result;
-                    
+
                     // Create new avatar item
                     const newAvatarItem = document.createElement('div');
                     newAvatarItem.className = 'avatar-item uploaded';
@@ -88,37 +88,37 @@ document.addEventListener('DOMContentLoaded', function () {
                             <i class="bi bi-x"></i>
                         </button>
                     `;
-                    
+
                     // Insert before the add-avatar button
                     if (addAvatarBtn && addAvatarBtn.parentNode) {
                         addAvatarBtn.parentNode.insertBefore(newAvatarItem, addAvatarBtn);
                     }
-                    
+
                     // Add click handler to new avatar (for selection)
-                    newAvatarItem.addEventListener('click', function(e) {
+                    newAvatarItem.addEventListener('click', function (e) {
                         // Don't trigger selection if clicking delete button
                         if (e.target.closest('.avatar-delete-btn')) {
                             return;
                         }
                         updateAvatarSelection(this);
-                        
+
                         // Update current avatar
                         const clickedImg = this.querySelector('.avatar-img');
                         if (clickedImg && currentAvatarImg) {
                             currentAvatarImg.src = clickedImg.src;
                         }
                     });
-                    
+
                     // Add delete handler
                     const deleteBtn = newAvatarItem.querySelector('.avatar-delete-btn');
                     if (deleteBtn) {
-                        deleteBtn.addEventListener('click', function(e) {
+                        deleteBtn.addEventListener('click', function (e) {
                             e.stopPropagation();
-                            
+
                             // Check if this avatar is currently selected
                             const isSelected = newAvatarItem.classList.contains('selected');
                             const avatarImg = newAvatarItem.querySelector('.avatar-img');
-                            
+
                             // If this avatar is selected, reset to first default avatar
                             if (isSelected && currentAvatarImg) {
                                 const firstDefaultAvatar = document.querySelector('.avatar-item:not(.uploaded):not(.add-avatar) .avatar-img');
@@ -127,22 +127,22 @@ document.addEventListener('DOMContentLoaded', function () {
                                     updateAvatarSelection(firstDefaultAvatar.closest('.avatar-item'));
                                 }
                             }
-                            
+
                             // Remove the avatar item
                             newAvatarItem.remove();
                         });
                     }
-                    
+
                     // Select and update current avatar to the new one
                     updateAvatarSelection(newAvatarItem);
                     if (currentAvatarImg) {
                         currentAvatarImg.src = imageUrl;
                     }
-                    
+
                     // Reset file input
                     avatarUpload.value = '';
                 };
-                
+
                 reader.readAsDataURL(file);
             } else {
                 alert('Please select a valid image file.');
@@ -215,8 +215,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateLanguageButton(lang) {
         if (languageButton) {
             // Use languageNames from translations.js if available
-            const langName = (typeof languageNames !== 'undefined' && languageNames[lang]) 
-                ? languageNames[lang] 
+            const langName = (typeof languageNames !== 'undefined' && languageNames[lang])
+                ? languageNames[lang]
                 : (lang === 'en-uk' ? 'English (UK)' : lang);
             languageButton.innerHTML = langName + ' <i class="bi bi-chevron-down"></i>';
         }
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Notification toggle functionality
     const notificationIcons = document.querySelectorAll('.notification-icon');
     notificationIcons.forEach(icon => {
-        icon.addEventListener('click', function(e) {
+        icon.addEventListener('click', function (e) {
             e.stopPropagation();
             this.classList.toggle('active');
             this.classList.toggle('inactive');
@@ -235,11 +235,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Notification group collapse functionality
     const notificationGroupHeaders = document.querySelectorAll('.notification-group-header');
     notificationGroupHeaders.forEach(header => {
-        header.addEventListener('click', function() {
+        header.addEventListener('click', function () {
             const targetId = this.getAttribute('data-target');
             const target = document.querySelector(targetId);
             const chevron = this.querySelector('.notification-chevron');
-            
+
             if (target) {
                 const isExpanded = !target.classList.contains('show');
                 if (isExpanded) {
@@ -253,10 +253,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Account Type Selection
+    const accountTypeDropdown = document.getElementById('accountTypeDropdown');
+    const accountTypeItems = document.querySelectorAll('#accountTypeDropdown + .dropdown-menu .dropdown-item');
+
+    // Load saved account type
+    const savedAccountType = localStorage.getItem('accountType') || 'Student';
+    if (accountTypeDropdown) {
+        accountTypeDropdown.innerHTML = savedAccountType + ' <i class="bi bi-chevron-down"></i>';
+    }
+
+    // Handle account type selection
+    accountTypeItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            const accountType = this.textContent.trim();
+            localStorage.setItem('accountType', accountType);
+            if (accountTypeDropdown) {
+                accountTypeDropdown.innerHTML = accountType + ' <i class="bi bi-chevron-down"></i>';
+            }
+            // Reload page to update dashboard
+            window.location.reload();
+        });
+    });
+
     // Privacy toggle switches
     const toggleSwitches = document.querySelectorAll('.toggle-switch');
     toggleSwitches.forEach(toggle => {
-        toggle.addEventListener('click', function() {
+        toggle.addEventListener('click', function () {
             this.classList.toggle('active');
         });
     });
@@ -269,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalForm = document.querySelector('.modal-form');
 
     if (openPasswordModal && createPasswordModal) {
-        openPasswordModal.addEventListener('click', function(e) {
+        openPasswordModal.addEventListener('click', function (e) {
             e.preventDefault();
             createPasswordModal.classList.add('show');
         });
@@ -295,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close modal when clicking outside
     if (createPasswordModal) {
-        createPasswordModal.addEventListener('click', function(e) {
+        createPasswordModal.addEventListener('click', function (e) {
             if (e.target === createPasswordModal) {
                 closeModal();
             }
@@ -304,11 +328,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle form submission
     if (modalForm) {
-        modalForm.addEventListener('submit', function(e) {
+        modalForm.addEventListener('submit', function (e) {
             e.preventDefault();
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            
+
             // Basic validation
             if (newPassword && confirmPassword && newPassword === confirmPassword) {
                 // Here you would typically send the password to your backend

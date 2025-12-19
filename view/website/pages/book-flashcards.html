@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flashcards - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../../style/style.css">
+    <style>
+        .book-flashcards-page {
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .book-flashcards-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .book-flashcards-breadcrumb {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-flashcards-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .book-flashcards-header-top-left {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .book-flashcards-header-top-right {
+            background: #2563eb;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .book-flashcards-title-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-flashcards-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .book-flashcards-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .book-flashcards-nav-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .book-flashcards-nav-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+            display: inline-block;
+        }
+
+        .book-flashcards-nav-link:hover {
+            background: #f3f4f6;
+        }
+
+        .book-flashcards-nav-link.active {
+            background: #f3f4f6;
+        }
+
+        .book-flashcards-tabs {
+            display: flex;
+            gap: 2rem;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .book-flashcards-tab {
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .book-flashcards-tab:hover {
+            color: #1f2937;
+        }
+
+        .book-flashcards-tab.active {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .book-flashcards-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #2563eb;
+        }
+
+        .book-flashcards-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .book-flashcards-filter-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .book-flashcards-filter-dropdown {
+            position: relative;
+        }
+
+        .book-flashcards-filter-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            color: #1f2937;
+            font-size: 0.875rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .book-flashcards-filter-btn:hover {
+            background: #f9fafb;
+        }
+
+        .book-flashcards-results-count {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .book-flashcards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .book-flashcard-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .book-flashcard-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-flashcard-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .book-flashcard-badge {
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+
+        .book-flashcard-badge.terms {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .book-flashcard-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .book-flashcard-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .book-flashcard-user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .book-flashcard-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .book-flashcard-username {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .book-flashcard-preview-btn {
+            background: #f3f4f6;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            color: #1f2937;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .book-flashcard-preview-btn:hover {
+            background: #e5e7eb;
+        }
+
+        @media (max-width: 992px) {
+            .book-flashcards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .book-flashcards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .book-flashcards-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .book-flashcards-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-4 shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="home.html" style="color: #1a56db; font-size: 1.5rem;">
+                Quizlet
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto align-items-center">
+                    <li class="nav-item dropdown subjects-dropdown-wrapper">
+                        <a class="nav-link dropdown-toggle fw-normal" href="#" id="subjectsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            style="background: #dbeafe; color: #2563eb; border-radius: 6px; padding: 0.5rem 1rem; border: 1px solid #93c5fd;">
+                            Subjects
+                        </a>
+                        <div class="dropdown-menu subjects-mega-menu" aria-labelledby="subjectsDropdown">
+                            <!-- Two Column Layout -->
+                            <div class="subjects-menu-content">
+                                <!-- Left Column - Categories -->
+                                <div class="subjects-categories-column">
+                                    <div class="subject-category-item active" data-category="exams">
+                                        <div class="subject-category-icon exams-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor"
+                                                    stroke-width="2" fill="none" />
+                                                <text x="12" y="16" text-anchor="middle" font-size="10"
+                                                    font-weight="bold" fill="currentColor">EN</text>
+                                                <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Exams</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="literature">
+                                        <div class="subject-category-icon literature-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" />
+                                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                                                    stroke="currentColor" stroke-width="2" />
+                                                <path d="M8 7h8M8 11h8" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Literature</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="arts">
+                                        <div class="subject-category-icon arts-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Arts and Humanities</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="languages">
+                                        <div class="subject-category-icon languages-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                                <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Languages</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="math">
+                                        <div class="subject-category-icon math-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12 2L2 12l10 10 10-10L12 2z" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8 8h8M8 12h8M8 16h8" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Math</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="science">
+                                        <div class="subject-category-icon science-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M9 2v6M15 2v6M5 10h14M4 10h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Science</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="social">
+                                        <div class="subject-category-icon social-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor"
+                                                    stroke-width="2" />
+                                                <path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Social Science</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="subject-category-item" data-category="other">
+                                        <div class="subject-category-icon other-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"
+                                                    stroke-width="2" />
+                                                <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                        <span class="subject-category-name">Other</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <!-- Right Column - Sub-items -->
+                                <div class="subjects-items-column">
+                                    <div class="subject-items-list" id="examsItems">
+                                        <a href="exam-prep.html?exam=IELTS" class="subject-item-link">IELTS®</a>
+                                        <a href="exam-prep.html?exam=TOEFL" class="subject-item-link">TOEFL®</a>
+                                        <a href="exam-prep.html?exam=TOEIC" class="subject-item-link">TOEIC®</a>
+                                    </div>
+                                    <div class="subject-items-list" id="literatureItems" style="display: none;">
+                                        <a href="literature.html?type=novels" class="subject-item-link">Novels</a>
+                                        <a href="literature.html?type=poems" class="subject-item-link">Poems</a>
+                                        <a href="literature.html?type=plays" class="subject-item-link">Plays</a>
+                                    </div>
+                                    <div class="subject-items-list" id="artsItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Philosophy"
+                                            class="subject-item-link">Philosophy</a>
+                                        <a href="book-flashcards.html?book=History"
+                                            class="subject-item-link">History</a>
+                                        <a href="book-flashcards.html?book=English"
+                                            class="subject-item-link">English</a>
+                                        <a href="book-flashcards.html?book=Film and TV" class="subject-item-link">Film
+                                            and TV</a>
+                                        <a href="book-flashcards.html?book=Music" class="subject-item-link">Music</a>
+                                        <a href="book-flashcards.html?book=Dance" class="subject-item-link">Dance</a>
+                                        <a href="book-flashcards.html?book=Theater"
+                                            class="subject-item-link">Theater</a>
+                                        <a href="book-flashcards.html?book=Arts and Humanities"
+                                            class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="languagesItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=French" class="subject-item-link">French</a>
+                                        <a href="book-flashcards.html?book=Spanish"
+                                            class="subject-item-link">Spanish</a>
+                                        <a href="book-flashcards.html?book=German" class="subject-item-link">German</a>
+                                        <a href="book-flashcards.html?book=Latin" class="subject-item-link">Latin</a>
+                                        <a href="book-flashcards.html?book=English Language"
+                                            class="subject-item-link">English</a>
+                                        <a href="book-flashcards.html?book=Languages" class="subject-item-link">View
+                                            all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="mathItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Arithmetic"
+                                            class="subject-item-link">Arithmetic</a>
+                                        <a href="book-flashcards.html?book=Geometry"
+                                            class="subject-item-link">Geometry</a>
+                                        <a href="book-flashcards.html?book=Algebra"
+                                            class="subject-item-link">Algebra</a>
+                                        <a href="book-flashcards.html?book=Statistics"
+                                            class="subject-item-link">Statistics</a>
+                                        <a href="book-flashcards.html?book=Probability"
+                                            class="subject-item-link">Probability</a>
+                                        <a href="book-flashcards.html?book=Math" class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="scienceItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Biology"
+                                            class="subject-item-link">Biology</a>
+                                        <a href="book-flashcards.html?book=Chemistry"
+                                            class="subject-item-link">Chemistry</a>
+                                        <a href="book-flashcards.html?book=Physics"
+                                            class="subject-item-link">Physics</a>
+                                        <a href="book-flashcards.html?book=Medicine"
+                                            class="subject-item-link">Medicine</a>
+                                        <a href="book-flashcards.html?book=Engineering"
+                                            class="subject-item-link">Engineering</a>
+                                        <a href="book-flashcards.html?book=Computer Science"
+                                            class="subject-item-link">Computer Science</a>
+                                        <a href="book-flashcards.html?book=Science" class="subject-item-link">View
+                                            all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="socialItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=History"
+                                            class="subject-item-link">History</a>
+                                        <a href="book-flashcards.html?book=Political Science"
+                                            class="subject-item-link">Political Science</a>
+                                        <a href="book-flashcards.html?book=Geography"
+                                            class="subject-item-link">Geography</a>
+                                        <a href="book-flashcards.html?book=Economics"
+                                            class="subject-item-link">Economics</a>
+                                        <a href="book-flashcards.html?book=Psychology"
+                                            class="subject-item-link">Psychology</a>
+                                        <a href="book-flashcards.html?book=Sociology"
+                                            class="subject-item-link">Sociology</a>
+                                        <a href="book-flashcards.html?book=Social Science"
+                                            class="subject-item-link">View all</a>
+                                    </div>
+                                    <div class="subject-items-list" id="otherItems" style="display: none;">
+                                        <a href="book-flashcards.html?book=Hobbies"
+                                            class="subject-item-link">Hobbies</a>
+                                        <a href="book-flashcards.html?book=Sports" class="subject-item-link">Sports</a>
+                                        <a href="book-flashcards.html?book=Computer Skills"
+                                            class="subject-item-link">Computer Skills</a>
+                                        <a href="book-flashcards.html?book=Other" class="subject-item-link">View all</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="search-container mx-auto">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-secondary"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0" placeholder="Search for flashcards"
+                            aria-label="Search for flashcards">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center ms-auto">
+                    <a href="signup.html" class="text-decoration-none me-4 fw-normal" style="color: #1a56db;">
+                        <i class="bi bi-plus-circle me-1"></i>Create
+                    </a>
+                    <a href="login.html" class="btn btn-primary rounded-pill px-4 text-decoration-none">
+                        Log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="book-flashcards-page">
+        <div class="book-flashcards-content">
+            <!-- Breadcrumb -->
+            <div class="book-flashcards-breadcrumb">Arts and Humanities</div>
+
+            <!-- Header Top -->
+            <div class="book-flashcards-header-top">
+                <div class="book-flashcards-header-top-left">Arts and Humanities</div>
+                <button class="book-flashcards-header-top-right">Flashcard sets</button>
+            </div>
+
+            <!-- Title Section -->
+            <div class="book-flashcards-title-section">
+                <svg class="book-flashcards-icon" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 4L20 12L28 14L20 16L16 24L12 16L4 14L12 12L16 4Z" fill="#ec4899" />
+                    <path d="M16 14L18 18L22 19L18 20L16 24L14 20L10 19L14 18L16 14Z" fill="#ef4444" />
+                </svg>
+                <h1 class="book-flashcards-title" id="bookTitle">Philosophy Flashcards</h1>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="book-flashcards-nav-links" id="bookNavLinks">
+                <a href="book-flashcards.html?book=Philosophy&category=Ethics" class="book-flashcards-nav-link"
+                    id="navEthics">Ethics</a>
+                <a href="book-flashcards.html?book=Philosophy&category=Theology" class="book-flashcards-nav-link"
+                    id="navTheology">Theology</a>
+                <a href="book-flashcards.html?book=Philosophy&category=Logic" class="book-flashcards-nav-link"
+                    id="navLogic">Logic</a>
+            </div>
+
+            <!-- Tabs -->
+            <div class="book-flashcards-tabs">
+                <button class="book-flashcards-tab" data-tab="all">All results</button>
+                <button class="book-flashcards-tab active" data-tab="sets">Flashcard sets</button>
+                <button class="book-flashcards-tab" data-tab="qa">Expert Q&A</button>
+            </div>
+
+            <!-- Filters and Results Count -->
+            <div class="book-flashcards-filters">
+                <div class="book-flashcards-filter-group">
+                    <div class="book-flashcards-filter-dropdown">
+                        <button class="book-flashcards-filter-btn">
+                            School: All
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="book-flashcards-filter-dropdown">
+                        <button class="book-flashcards-filter-btn">
+                            Grade: All
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="book-flashcards-results-count" id="resultsCount">1 - 45 of 10K+ results</div>
+            </div>
+
+            <!-- Flashcard Sets Grid -->
+            <div class="book-flashcards-grid" id="flashcardsGrid">
+                <!-- Flashcard sets will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample flashcard sets data
+        const sampleFlashcardSets = [
+            {
+                title: "Foundations Right Relationship with God Exam Study (Dr. Diller)",
+                teacher: true,
+                terms: 37,
+                username: "Dr_Kevin_Diller",
+                avatar: "DK"
+            },
+            {
+                title: "Comm 104 Exam 3 Flashcards",
+                teacher: false,
+                terms: 63,
+                username: "mw00034",
+                avatar: "MW"
+            },
+            {
+                title: "PS Chap 17 Study Questions",
+                teacher: false,
+                terms: 24,
+                username: "kira_trexler",
+                avatar: "KT"
+            },
+            {
+                title: "Week4 Module 4 Chapter 17",
+                teacher: false,
+                terms: 22,
+                username: "jose_b_jimenezl",
+                avatar: "JB"
+            },
+            {
+                title: "Trimester 3 Review Quizlet",
+                teacher: true,
+                terms: 47,
+                username: "MrsYorkKMHS",
+                avatar: "MY"
+            },
+            {
+                title: "Paschal Mystery Final Study Set 1 (of 3)",
+                teacher: true,
+                terms: 43,
+                username: "pstuligross8",
+                avatar: "PS"
+            },
+            {
+                title: "8th Bible Intro. Unit Practice",
+                teacher: true,
+                terms: 32,
+                username: "tjernigan22",
+                avatar: "TJ"
+            },
+            {
+                title: "D265 Critical Thinking: Reasoning and Evidence",
+                teacher: false,
+                terms: 85,
+                username: "jnimitz",
+                avatar: "JN"
+            },
+            {
+                title: "Paschal Mystery, Final Study Guide, 2 of 3",
+                teacher: true,
+                terms: 62,
+                username: "pstuligross8",
+                avatar: "PS"
+            }
+        ];
+
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookTitle = urlParams.get('book') || 'Philosophy';
+        const bookAuthor = urlParams.get('author') || '';
+        const category = urlParams.get('category') || '';
+
+        // Update page title
+        if (category) {
+            document.getElementById('bookTitle').textContent = category + ' Flashcards';
+        } else {
+            document.getElementById('bookTitle').textContent = bookTitle + ' Flashcards';
+        }
+
+        // Update navigation links based on book
+        const bookNavLinks = {
+            'Don Quixote': ['Ethics', 'Theology', 'Logic'],
+            'The Canterbury Tales': ['Medieval Literature', 'Poetry', 'Narrative'],
+            'The Decameron': ['Renaissance', 'Short Stories', 'Classical'],
+            'The Yellow Wallpaper': ['Feminist Literature', 'Gothic', 'Short Stories'],
+            'Frankenstein': ['Gothic', 'Science Fiction', 'Romanticism'],
+            'The Fall of the House of Usher': ['Gothic', 'Horror', 'Short Stories'],
+            'Pride and Prejudice': ['Romance', 'Social Commentary', 'Classic Literature'],
+            'Adventures of Huckleberry Finn': ['Adventure', 'Coming of Age', 'American Literature'],
+            'Wuthering Heights': ['Gothic', 'Romance', 'Tragedy'],
+            'Philosophy': ['Ethics', 'Theology', 'Logic'],
+            'History': ['World History', 'US History', 'European History'],
+            'English': ['Literature', 'Grammar', 'Writing'],
+            'Film and TV': ['Film Studies', 'Television', 'Media'],
+            'Music': ['Music Theory', 'Music History', 'Composition'],
+            'Dance': ['Ballet', 'Modern Dance', 'Dance History'],
+            'Theater': ['Drama', 'Theater History', 'Acting'],
+            'Arts and Humanities': ['All Subjects', 'Browse All', 'Explore'],
+            'French': ['Vocabulary', 'Grammar', 'Conversation'],
+            'Spanish': ['Vocabulary', 'Grammar', 'Conversation'],
+            'German': ['Vocabulary', 'Grammar', 'Conversation'],
+            'Latin': ['Vocabulary', 'Grammar', 'Classical'],
+            'English Language': ['Grammar', 'Writing', 'Vocabulary'],
+            'Languages': ['All Languages', 'Browse All', 'Explore'],
+            'Arithmetic': ['Addition', 'Subtraction', 'Multiplication'],
+            'Geometry': ['Shapes', 'Angles', 'Measurements'],
+            'Algebra': ['Equations', 'Functions', 'Polynomials'],
+            'Statistics': ['Data Analysis', 'Probability', 'Distributions'],
+            'Calculus': ['Derivatives', 'Integrals', 'Limits'],
+            'Math Foundations': ['Basic Math', 'Number Theory', 'Operations'],
+            'Probability': ['Events', 'Distributions', 'Random Variables'],
+            'Math': ['All Topics', 'Browse All', 'Explore'],
+            'Biology': ['Cell Biology', 'Genetics', 'Anatomy'],
+            'Chemistry': ['Organic Chemistry', 'Inorganic Chemistry', 'Biochemistry'],
+            'Physics': ['Mechanics', 'Thermodynamics', 'Electromagnetism'],
+            'Medicine': ['Anatomy', 'Physiology', 'Pathology'],
+            'Computer Science': ['Programming', 'Algorithms', 'Data Structures'],
+            'Engineering': ['Mechanical', 'Electrical', 'Civil'],
+            'Earth Science': ['Geology', 'Meteorology', 'Oceanography'],
+            'Science': ['All Sciences', 'Browse All', 'Explore'],
+            'Psychology': ['Cognitive', 'Social', 'Clinical'],
+            'Business': ['Management', 'Finance', 'Marketing'],
+            'Sociology': ['Social Theory', 'Research Methods', 'Social Issues'],
+            'Economics': ['Microeconomics', 'Macroeconomics', 'Econometrics'],
+            'Law': ['Constitutional Law', 'Criminal Law', 'Civil Law'],
+            'Human Geography': ['Population', 'Culture', 'Urban'],
+            'Political Science': ['Political Theory', 'International Relations', 'Comparative Politics'],
+            'Social Science': ['All Topics', 'Browse All', 'Explore'],
+            'Hobbies': ['Arts & Crafts', 'Collecting', 'Recreation'],
+            'Sports': ['Rules', 'History', 'Statistics'],
+            'Computer Skills': ['Software', 'Hardware', 'Networking'],
+            'Other': ['All Topics', 'Browse All', 'Explore']
+        };
+
+        const links = bookNavLinks[bookTitle] || ['Ethics', 'Theology', 'Logic'];
+        const navLinksContainer = document.getElementById('bookNavLinks');
+        navLinksContainer.innerHTML = links.map(link => {
+            const isActive = category === link;
+            return `<a href="book-flashcards.html?book=${encodeURIComponent(bookTitle)}&author=${encodeURIComponent(bookAuthor)}&category=${encodeURIComponent(link)}" class="book-flashcards-nav-link ${isActive ? 'active' : ''}">${link}</a>`;
+        }).join('');
+
+        // Generate flashcard sets grid
+        const gridContainer = document.getElementById('flashcardsGrid');
+        gridContainer.innerHTML = sampleFlashcardSets.map(set => `
+            <div class="book-flashcard-card">
+                <div class="book-flashcard-badges">
+                    ${set.teacher ? '<span class="book-flashcard-badge">Teacher</span>' : ''}
+                    <span class="book-flashcard-badge terms">${set.terms} terms</span>
+                </div>
+                <h3 class="book-flashcard-title">${set.title}</h3>
+                <div class="book-flashcard-meta">
+                    <div class="book-flashcard-user">
+                        <div class="book-flashcard-avatar">${set.avatar}</div>
+                        <span class="book-flashcard-username">${set.username}</span>
+                    </div>
+                    <button class="book-flashcard-preview-btn">Preview</button>
+                </div>
+            </div>
+        `).join('');
+
+        // Tab switching
+        document.querySelectorAll('.book-flashcards-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.book-flashcards-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Subjects dropdown functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryItems = document.querySelectorAll('.subject-category-item');
+            const itemLists = document.querySelectorAll('.subject-items-list');
+
+            categoryItems.forEach(item => {
+                item.addEventListener('mouseenter', function () {
+                    const category = this.getAttribute('data-category');
+
+                    // Remove active class from all items
+                    categoryItems.forEach(cat => cat.classList.remove('active'));
+
+                    // Add active class to hovered item
+                    this.classList.add('active');
+
+                    // Hide all item lists
+                    itemLists.forEach(list => {
+                        list.style.display = 'none';
+                    });
+
+                    // Show the corresponding item list
+                    const targetList = document.getElementById(category + 'Items');
+                    if (targetList) {
+                        targetList.style.display = 'flex';
+                    }
+                });
+            });
+
+            // Initialize with exams selected
+            const examsCategory = document.querySelector('[data-category="exams"]');
+            if (examsCategory) {
+                examsCategory.classList.add('active');
+            }
+        });
+    </script>
+</body>
+
+</html>

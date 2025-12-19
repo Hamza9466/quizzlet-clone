@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Prep - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../../style/style.css">
+    <style>
+        .exam-prep-page {
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .exam-prep-header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1.5rem 0;
+        }
+
+        .exam-prep-logo {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .exam-prep-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .exam-prep-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .exam-prep-action-btn {
+            background: transparent;
+            border: none;
+            color: #4b5563;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .exam-prep-action-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .exam-prep-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .exam-prep-recommended {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exam-prep-description {
+            color: #1f2937;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .exam-prep-filters {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .exam-prep-filter-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .exam-prep-filter-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .exam-prep-filter-btn.active {
+            background: #1f2937;
+            border-color: #1f2937;
+            color: #ffffff;
+        }
+
+        .exam-prep-section-title {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .exam-prep-set-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .exam-prep-set-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .exam-prep-set-item:hover {
+            background: #f9fafb;
+        }
+
+        .exam-prep-set-icon {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .exam-prep-set-content {
+            flex: 1;
+        }
+
+        .exam-prep-set-title {
+            color: #1f2937;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .exam-prep-set-meta {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .exam-prep-signup-banner {
+            background: #3b82f6;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #ffffff;
+            margin-top: 3rem;
+        }
+
+        .exam-prep-signup-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .exam-prep-signup-text {
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .exam-prep-signup-links {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .exam-prep-signup-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .exam-prep-signup-btn {
+            background: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            color: #1f2937;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .exam-prep-signup-btn:hover {
+            background: #f3f4f6;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .exam-prep-signup-btn-google {
+            background: #ffffff;
+        }
+
+        .exam-prep-signup-btn-email {
+            background: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="exam-prep-page">
+        <!-- Header -->
+        <header class="exam-prep-header">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="exam-prep-logo">Q</div>
+                        <h1 class="exam-prep-title" id="examTitle">Exam Prep for TOEFL iBT®</h1>
+                    </div>
+                    <div class="exam-prep-actions">
+                        <button class="exam-prep-action-btn">
+                            <i class="bi bi-bookmark"></i>
+                            <span>Save</span>
+                        </button>
+                        <button class="exam-prep-action-btn">
+                            <i class="bi bi-upload"></i>
+                        </button>
+                        <button class="exam-prep-action-btn">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="exam-prep-content">
+            <div class="container">
+                <!-- Recommended Badge -->
+                <p class="exam-prep-recommended">Recommended by Quizlet</p>
+
+                <!-- Description -->
+                <p class="exam-prep-description" id="examDescription">
+                    Thousands of expert-verified TOEFL iBT® practice questions and digital flashcards - all designed to help you feel ready for test day.
+                </p>
+
+                <!-- Filters -->
+                <div class="exam-prep-filters">
+                    <button class="exam-prep-filter-btn active">All</button>
+                    <button class="exam-prep-filter-btn">Beginner Vocabulary</button>
+                    <button class="exam-prep-filter-btn">Intermediate Vocabulary</button>
+                    <button class="exam-prep-filter-btn">Advanced Vocabulary</button>
+                    <button class="exam-prep-filter-btn">Word and Sentence Basics</button>
+                    <button class="exam-prep-filter-btn">Phrases and...</button>
+                </div>
+
+                <!-- Content List -->
+                <div class="exam-prep-section-title">For you</div>
+                <ul class="exam-prep-set-list">
+                    <li class="exam-prep-set-item">
+                        <div class="exam-prep-set-icon">
+                            <i class="bi bi-card-text"></i>
+                        </div>
+                        <div class="exam-prep-set-content">
+                            <div class="exam-prep-set-title">TOEFL: Beginner Activities and Hobbies Vocabulary Set 1</div>
+                            <div class="exam-prep-set-meta">47 cards • by Quizlet</div>
+                        </div>
+                    </li>
+                    <li class="exam-prep-set-item">
+                        <div class="exam-prep-set-icon">
+                            <i class="bi bi-card-text"></i>
+                        </div>
+                        <div class="exam-prep-set-content">
+                            <div class="exam-prep-set-title">TOEFL: Beginner Activities and Hobbies Vocabulary Set 2</div>
+                            <div class="exam-prep-set-meta">44 cards • by Quizlet</div>
+                        </div>
+                    </li>
+                    <li class="exam-prep-set-item">
+                        <div class="exam-prep-set-icon">
+                            <i class="bi bi-card-text"></i>
+                        </div>
+                        <div class="exam-prep-set-content">
+                            <div class="exam-prep-set-title">TOEFL: Beginner Anatomy, Health, and Beauty Vocabulary Set 1</div>
+                            <div class="exam-prep-set-meta">55 cards • by Quizlet</div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Sign-up Banner -->
+                <div class="exam-prep-signup-banner">
+                    <h2 class="exam-prep-signup-title">Sign up to view this course content. It's free!</h2>
+                    <p class="exam-prep-signup-text">
+                        By signing up, you accept Quizlet's <a href="privacy-policy.html" class="exam-prep-signup-links">Terms of Service</a> and <a href="privacy-policy.html" class="exam-prep-signup-links">Privacy Policy</a>
+                    </p>
+                    <div class="exam-prep-signup-buttons">
+                        <button class="exam-prep-signup-btn exam-prep-signup-btn-google">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z" fill="#4285F4"/>
+                                <path d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z" fill="#34A853"/>
+                                <path d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z" fill="#FBBC05"/>
+                                <path d="M10 3.97727C11.4682 3.97727 12.7864 4.48182 13.8227 5.47273L16.6909 2.60455C14.9591 0.990909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z" fill="#EA4335"/>
+                            </svg>
+                            <span>Continue with Google</span>
+                        </button>
+                        <button class="exam-prep-signup-btn exam-prep-signup-btn-email">
+                            <i class="bi bi-envelope"></i>
+                            <span>Sign up with email</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update page content based on exam type from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const exam = urlParams.get('exam');
+        
+        const examData = {
+            'IELTS': {
+                title: 'Exam Prep for IELTS®',
+                description: 'Thousands of expert-verified IELTS® practice questions and digital flashcards - all designed to help you feel ready for test day.'
+            },
+            'TOEFL': {
+                title: 'Exam Prep for TOEFL iBT®',
+                description: 'Thousands of expert-verified TOEFL iBT® practice questions and digital flashcards - all designed to help you feel ready for test day.'
+            },
+            'TOEIC': {
+                title: 'Exam Prep for TOEIC®',
+                description: 'Thousands of expert-verified TOEIC® practice questions and digital flashcards - all designed to help you feel ready for test day.'
+            }
+        };
+        
+        if (exam && examData[exam]) {
+            document.getElementById('examTitle').textContent = examData[exam].title;
+            document.getElementById('examDescription').textContent = examData[exam].description;
+        }
+    </script>
+</body>
+
+</html>
+

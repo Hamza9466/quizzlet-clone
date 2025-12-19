@@ -121,15 +121,21 @@
                     <i class="bi bi-plus-circle"></i>
                     <span>New folder</span>
                 </a>
-                <hr class="sidebar-divider">
-                <div class="nav-section-title">Start here</div>
-                <a href="flashcards.html" class="nav-item">
+                <hr class="sidebar-divider" id="startHereDivider">
+                <div class="nav-section-title" id="startHereTitle">Start here</div>
+                <a href="flashcards.html" class="nav-item" id="flashcardsNavItem">
                     <i class="bi bi-card-text"></i>
                     <span>Flashcards</span>
                 </a>
-                <a href="expert-solutions.html" class="nav-item active">
+                <a href="expert-solutions.html" class="nav-item active" id="expertSolutionsNavItem">
                     <i class="bi bi-book"></i>
                     <span>Expert Solutions</span>
+                </a>
+                <hr class="sidebar-divider" id="teacherToolsDivider" style="display: none;">
+                <div class="nav-section-title" id="teacherToolsTitle" style="display: none;">Teacher tools</div>
+                <a href="assign-activity.html" class="nav-item" id="assignActivityNavItem" style="display: none;">
+                    <i class="bi bi-clock"></i>
+                    <span>Assign activity</span>
                 </a>
             </nav>
         </aside>
@@ -490,6 +496,8 @@
     <script src="../../../style/modal.js"></script>
     <!-- Expert Solutions JS -->
     <script src="../../../style/expert-solutions.js"></script>
+    <!-- Teacher Tools JS -->
+    <script src="../../../style/teacher-tools.js"></script>
 </body>
 
 </html>

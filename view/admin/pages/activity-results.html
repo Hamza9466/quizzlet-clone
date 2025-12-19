@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Results - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Theme JS -->
+    <script src="../../../style/theme.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn" onclick="window.location.href='dashboard.html'">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="create-dropdown-wrapper">
+                <button class="btn-create" type="button" id="createDropdownBtn" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <ul class="create-dropdown-menu dropdown-menu" aria-labelledby="createDropdownBtn">
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="flashcards.html">
+                            <i class="bi bi-card-text"></i>
+                            <span>Flashcard set</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="create-dropdown-item dropdown-item" href="#" onclick="showNewFolderModal(event); return false;">
+                            <i class="bi bi-folder"></i>
+                            <span>Folder</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="activity-results-main">
+        <div class="container-fluid" style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+            <!-- Page Header -->
+            <div class="activity-results-header mb-4">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h1 class="activity-results-title mb-2" id="activityTitle">biology chapter 2 activity</h1>
+                        <p class="activity-results-subtitle mb-0" id="activityDetails">
+                            <span id="activityContent">biology chapter 2</span> • 
+                            <span id="activityType">Learn</span> • 
+                            Due <span id="activityDueDate">21 December 2025 at 11:59 pm</span>
+                        </p>
+                    </div>
+                    <button class="activity-results-menu-btn">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Share this activity Section -->
+            <div class="activity-share-section mb-5">
+                <h2 class="activity-section-title mb-4">Share this activity</h2>
+                
+                <div class="activity-share-item mb-4">
+                    <div class="activity-share-label mb-2">Students go to this URL to join</div>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="activity-share-field" id="activityUrl">quizlet.com/join-activity</div>
+                        <button class="activity-share-btn" onclick="copyActivityUrl()">
+                            <i class="bi bi-link-45deg"></i>
+                            <span>Copy link</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="activity-share-item mb-4">
+                    <div class="activity-share-label mb-2">Students enter this code to join</div>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="activity-share-code" id="activityCode">A V L G C 7</div>
+                        <button class="activity-share-btn activity-share-qr-btn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <rect x="2" y="2" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <rect x="12" y="2" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <rect x="2" y="12" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <rect x="12" y="12" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                            <span>Scan code</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="activity-share-divider">
+                    <hr class="activity-divider-line">
+                    <span class="activity-divider-text">OR</span>
+                    <hr class="activity-divider-line">
+                </div>
+
+                <div class="activity-share-buttons">
+                    <button class="activity-share-option-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        <span>Google Classroom</span>
+                    </button>
+                    <button class="activity-share-option-btn">
+                        <i class="bi bi-envelope"></i>
+                        <span>Share with email</span>
+                    </button>
+                    <button class="activity-share-option-btn">
+                        <i class="bi bi-bell"></i>
+                        <span>Remind</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activity results Section -->
+            <div class="activity-results-section">
+                <div class="activity-results-header-section mb-4">
+                    <h2 class="activity-section-title mb-2">Activity results</h2>
+                    <p class="activity-results-description">Track progress here as students complete the assigned activity.</p>
+                </div>
+
+                <!-- Metrics -->
+                <div class="activity-metrics mb-4">
+                    <div class="activity-metric-item">
+                        <span class="activity-metric-value" id="joinedCount">0</span>
+                        <span class="activity-metric-label">joined</span>
+                    </div>
+                    <div class="activity-metric-item">
+                        <span class="activity-metric-value" id="completedCount">0</span>
+                        <span class="activity-metric-label">completed</span>
+                    </div>
+                    <div class="activity-metric-item">
+                        <span class="activity-metric-value" id="inProgressCount">0</span>
+                        <span class="activity-metric-label">in progress</span>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="activity-stat-card">
+                            <div class="activity-stat-label">Average score</div>
+                            <div class="activity-stat-value" id="averageScore">0%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="activity-stat-card">
+                            <div class="activity-stat-label">&lt;50% correct</div>
+                            <div class="activity-stat-value" id="lowScore">0</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="activity-stat-card">
+                            <div class="activity-stat-label">&gt;80% correct</div>
+                            <div class="activity-stat-value" id="highScore">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Get activity details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const title = urlParams.get('title') || 'biology chapter 2 activity';
+        const content = urlParams.get('content') || 'biology chapter 2';
+        const type = urlParams.get('type') || 'Learn';
+        const due = urlParams.get('due') || '12/21/2025 11:59 PM';
+
+        // Format activity type for display
+        const typeMap = {
+            'learn': 'Learn',
+            'flashcards': 'Flashcards',
+            'test': 'Test',
+            'match': 'Match'
+        };
+
+        // Format date for display
+        function formatDateForDisplay(dateString) {
+            const date = new Date(dateString);
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            const hours = date.getHours() % 12 || 12;
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const ampm = date.getHours() >= 12 ? 'pm' : 'am';
+            return `${day} ${month} ${year} at ${hours}:${minutes} ${ampm}`;
+        }
+
+        // Set page content
+        document.getElementById('activityTitle').textContent = title;
+        document.getElementById('activityContent').textContent = content;
+        document.getElementById('activityType').textContent = typeMap[type.toLowerCase()] || type;
+        document.getElementById('activityDueDate').textContent = formatDateForDisplay(due);
+
+        // Generate random code
+        function generateActivityCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+                if (i < 5) code += ' ';
+            }
+            return code;
+        }
+
+        // Set activity code
+        document.getElementById('activityCode').textContent = generateActivityCode();
+
+        // Copy URL function
+        function copyActivityUrl() {
+            const url = document.getElementById('activityUrl').textContent;
+            navigator.clipboard.writeText(`https://${url}`).then(function() {
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-check"></i> <span>Copied!</span>';
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>
+
