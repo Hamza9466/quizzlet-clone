@@ -1,0 +1,431 @@
+.match-header {
+    background: #0A092D;
+    border-bottom: 1px solid #2E3856;
+    padding: 1rem 2rem;
+}
+
+.match-logo-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.match-mode-dropdown-btn {
+    background: #2E3856;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.match-mode-dropdown-btn:hover {
+    background: #3d4757;
+    color: white;
+}
+
+.match-mode-dropdown-btn svg {
+    flex-shrink: 0;
+}
+
+.match-dropdown-menu {
+    background: #2E3856 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 0 !important;
+    margin-top: 0.5rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    min-width: 200px;
+}
+
+.match-dropdown-item {
+    display: flex !important;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem !important;
+    color: white !important;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
+
+.match-dropdown-item:hover,
+.match-dropdown-item:focus {
+    background: #3d4757 !important;
+    color: white !important;
+}
+
+.match-dropdown-item svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.match-dropdown-item span {
+    flex: 1;
+}
+
+.match-dropdown-menu .dropdown-divider {
+    border-color: #586380;
+    margin: 0.5rem 0;
+}
+
+.match-set-title {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.match-score {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+.match-main {
+    background: #0A092D;
+    min-height: calc(100vh - 80px);
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.match-main::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+}
+
+.match-main::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+}
+
+.match-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+}
+
+.match-title {
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.match-instructions {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-match-start {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 200px;
+}
+
+.btn-match-start:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Game Interface */
+.match-game {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0A092D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 1000;
+}
+
+.match-cards-container {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+}
+
+.match-card {
+    background: #2E3856;
+    border: 1px solid #586380;
+    border-radius: 12px;
+    padding: 2rem 3rem;
+    min-width: 200px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.match-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-color: #7c3aed;
+}
+
+.match-card.selected {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+}
+
+.match-card.matched {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Results Screen */
+.match-results-screen {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0A092D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.match-results-content {
+    max-width: 800px;
+    width: 100%;
+    text-align: left;
+    color: white;
+}
+
+.match-congrats-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.match-congrats-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.match-party-popper {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.match-best-time {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.match-leaderboard {
+    margin-bottom: 3rem;
+}
+
+.match-leaderboard-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.match-leaderboard-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: #2E3856;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    border: 2px solid transparent;
+}
+
+.match-leaderboard-item.first-place {
+    border-color: #ec4899;
+}
+
+.match-crown {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.match-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1a1a3e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.match-profile-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #586380;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.match-username {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+}
+
+.match-time {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.match-results-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+
+.btn-match-share {
+    background: #586380;
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-match-share:hover {
+    background: #6b7280;
+    transform: translateY(-2px);
+}
+
+.btn-match-play-again {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-match-play-again:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+@media (max-width: 768px) {
+    .match-title {
+        font-size: 2.5rem;
+    }
+
+    .match-instructions {
+        font-size: 1rem;
+    }
+
+    .match-cards-container {
+        gap: 1rem;
+    }
+
+    .match-card {
+        min-width: 150px;
+        min-height: 100px;
+        padding: 1.5rem 2rem;
+        font-size: 1rem;
+    }
+
+    .match-congrats-title {
+        font-size: 2rem;
+    }
+
+    .match-congrats-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .match-results-buttons {
+        flex-direction: column;
+    }
+
+    .btn-match-share,
+    .btn-match-play-again {
+        width: 100%;
+        justify-content: center;
+    }
+}
+

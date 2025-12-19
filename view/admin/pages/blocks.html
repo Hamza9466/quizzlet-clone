@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocks - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Mode Dropdown CSS -->
+    <link rel="stylesheet" href="../../../style/mode-dropdown.css">
+    <!-- Blocks CSS -->
+    <link rel="stylesheet" href="../../../style/blocks.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Blocks Header -->
+    <header class="blocks-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="blocks-logo-small">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <rect x="2" y="2" width="8" height="8" rx="2" fill="white" />
+                                <rect x="12" y="2" width="8" height="8" rx="2" fill="#3b82f6" />
+                                <rect x="22" y="2" width="8" height="8" rx="2" fill="#3b82f6" />
+                                <rect x="2" y="12" width="8" height="8" rx="2" fill="#1a56db" />
+                                <rect x="12" y="12" width="8" height="8" rx="2" fill="#1a56db" />
+                                <rect x="22" y="12" width="8" height="8" rx="2" fill="#1a56db" />
+                                <rect x="2" y="22" width="8" height="8" rx="2" fill="#1a56db" />
+                                <rect x="12" y="22" width="8" height="8" rx="2" fill="#1a56db" />
+                                <rect x="22" y="22" width="8" height="8" rx="2" fill="#1a56db" />
+                            </svg>
+                        </div>
+                        <div class="dropdown">
+                            <button class="mode-dropdown-btn" type="button"
+                                id="blocksModeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="20" y="6" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="34" y="6" width="8" height="12" rx="2" fill="#60a5fa" />
+                                    <rect x="6" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="20" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="34" y="20" width="8" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="6" y="34" width="12" height="8" rx="2" fill="#3b82f6" />
+                                    <rect x="20" y="34" width="12" height="8" rx="2" fill="#3b82f6" />
+                                    <rect x="34" y="34" width="8" height="8" rx="2" fill="#3b82f6" />
+                                </svg>
+                                <span>Blocks</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <ul class="mode-dropdown-menu dropdown-menu" aria-labelledby="blocksModeDropdown">
+                                <li><a class="mode-dropdown-item dropdown-item" href="flashcard-view.html">
+                                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="8" y="12" width="20" height="24" rx="3" fill="#3b82f6" />
+                                        <rect x="20" y="8" width="20" height="24" rx="3" fill="#60a5fa" />
+                                    </svg>
+                                    <span>Flashcards</span>
+                                </a></li>
+                                <li><a class="mode-dropdown-item dropdown-item" href="learn.html">
+                                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="24" cy="24" r="18" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="3 3" />
+                                        <circle cx="18" cy="24" r="2" fill="#3b82f6" />
+                                        <circle cx="30" cy="24" r="2" fill="#3b82f6" />
+                                        <line x1="18" y1="24" x2="24" y2="18" stroke="#3b82f6" stroke-width="2" />
+                                        <line x1="24" y1="18" x2="30" y2="24" stroke="#3b82f6" stroke-width="2" />
+                                    </svg>
+                                    <span>Learn</span>
+                                </a></li>
+                                <li><a class="mode-dropdown-item dropdown-item" href="test.html">
+                                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="8" y="8" width="28" height="36" rx="2" fill="#3b82f6" />
+                                        <rect x="12" y="14" width="20" height="4" rx="1" fill="#60a5fa" />
+                                        <rect x="12" y="22" width="20" height="4" rx="1" fill="#60a5fa" />
+                                        <rect x="12" y="30" width="16" height="4" rx="1" fill="#60a5fa" />
+                                    </svg>
+                                    <span>Test</span>
+                                </a></li>
+                                <li><a class="mode-dropdown-item dropdown-item" href="blocks.html">
+                                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="6" y="6" width="12" height="12" rx="2" fill="#3b82f6" />
+                                        <rect x="20" y="6" width="12" height="12" rx="2" fill="#3b82f6" />
+                                        <rect x="34" y="6" width="8" height="12" rx="2" fill="#60a5fa" />
+                                        <rect x="6" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                        <rect x="20" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                        <rect x="34" y="20" width="8" height="12" rx="2" fill="#3b82f6" />
+                                        <rect x="6" y="34" width="12" height="8" rx="2" fill="#3b82f6" />
+                                        <rect x="20" y="34" width="12" height="8" rx="2" fill="#3b82f6" />
+                                        <rect x="34" y="34" width="8" height="8" rx="2" fill="#3b82f6" />
+                                    </svg>
+                                    <span>Blocks</span>
+                                </a></li>
+                                <li><a class="mode-dropdown-item dropdown-item" href="blast.html">
+                                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24 6 L28 16 L38 18 L30 26 L32 36 L24 32 L16 36 L18 26 L10 18 L20 16 Z" fill="#3b82f6" />
+                                        <circle cx="24" cy="20" r="3" fill="#60a5fa" />
+                                    </svg>
+                                    <span>Blast</span>
+                                </a></li>
+                                <li><a class="mode-dropdown-item dropdown-item" href="match.html">
+                                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="8" y="12" width="20" height="24" rx="3" fill="#3b82f6" />
+                                        <rect x="20" y="8" width="20" height="24" rx="3" fill="#60a5fa" />
+                                        <line x1="12" y1="20" x2="20" y2="20" stroke="white" stroke-width="1.5" />
+                                    </svg>
+                                    <span>Match</span>
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="mode-dropdown-item dropdown-item" href="dashboard.html">
+                                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6 24 L24 8 L42 24" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8 24 L8 38 C8 40.2091 9.79086 42 12 42 L18 42 C20.2091 42 22 40.2091 22 38 L22 30 C22 27.7909 23.7909 26 26 26 L30 26 C32.2091 26 34 27.7909 34 30 L34 38 C34 40.2091 35.7909 42 38 42 L40 42 C42.2091 42 44 40.2091 44 38 L44 24" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>Home</span>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="text-center">
+                        <p class="blocks-set-title mb-0" id="blocksSetTitle">biology chapter 2</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex justify-content-end align-items-center gap-2">
+                        <button class="btn btn-link text-white p-1">
+                            <i class="bi bi-gear fs-5"></i>
+                        </button>
+                        <button class="btn btn-link text-white p-1" onclick="window.location.href='flashcard-view.html'">
+                            <i class="bi bi-x-lg fs-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="blocks-main">
+        <div class="blocks-content">
+            <!-- Blocks Icon -->
+            <div class="blocks-icon-large">
+                <svg width="120" height="120" viewBox="0 0 32 32" fill="none">
+                    <rect x="2" y="2" width="8" height="8" rx="2" fill="white" />
+                    <rect x="12" y="2" width="8" height="8" rx="2" fill="#3b82f6" />
+                    <rect x="22" y="2" width="8" height="8" rx="2" fill="#3b82f6" />
+                    <rect x="2" y="12" width="8" height="8" rx="2" fill="#1a56db" />
+                    <rect x="12" y="12" width="8" height="8" rx="2" fill="#1a56db" />
+                    <rect x="22" y="12" width="8" height="8" rx="2" fill="#1a56db" />
+                    <rect x="2" y="22" width="8" height="8" rx="2" fill="#1a56db" />
+                    <rect x="12" y="22" width="8" height="8" rx="2" fill="#1a56db" />
+                    <rect x="22" y="22" width="8" height="8" rx="2" fill="#1a56db" />
+                </svg>
+            </div>
+
+            <!-- Title -->
+            <h1 class="blocks-title">Play a game of Blocks</h1>
+
+            <!-- Description -->
+            <p class="blocks-description">
+                Provide correct answers to earn block pieces. Fill the grid and earn points by completing vertical or horizontal lines.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="blocks-buttons">
+                <button class="btn-blocks-options" onclick="showOptions()">
+                    <i class="bi bi-gear"></i>
+                    <span>Options</span>
+                </button>
+                <button class="btn-blocks-play" onclick="startGame()">
+                    <span>Play</span>
+                </button>
+                <button class="btn-blocks-how" onclick="showHowToPlay()">
+                    <i class="bi bi-question-circle"></i>
+                    <span>How to play</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Interface -->
+        <div class="blocks-game" id="blocksGame" style="display: none;">
+            <!-- Score Indicators -->
+            <div class="blocks-game-scores">
+                <div class="blocks-score">
+                    <span class="blocks-score-label">Score</span>
+                    <span class="blocks-score-value" id="currentScore">0</span>
+                </div>
+                <div class="blocks-high-score">
+                    <i class="bi bi-trophy-fill" style="color: #fbbf24;"></i>
+                    <span class="blocks-score-value" id="highScore">0</span>
+                </div>
+            </div>
+
+            <!-- Game Content -->
+            <div class="blocks-game-content">
+                <!-- Blocks Preview Panel (Left) -->
+                <div class="blocks-preview-panel" id="blocksPreviewPanel">
+                    <div class="blocks-preview-title">Place these blocks</div>
+                    <div class="blocks-preview-blocks" id="blocksPreview">
+                        <!-- Blocks will be dynamically generated -->
+                    </div>
+                    <div class="blocks-placed-count" id="blocksPlacedCount">0 / 3 blocks placed</div>
+                </div>
+
+                <!-- Question Panel (Left) - Hidden initially -->
+                <div class="blocks-question-panel" id="blocksQuestionPanel" style="display: none;">
+                    <div class="blocks-question-text" id="blocksQuestion">question 1</div>
+                    <div class="blocks-answer-input-wrapper">
+                        <input type="text" class="blocks-answer-input" id="blocksAnswerInput" 
+                            placeholder="Type your answer" autocomplete="off">
+                        <button class="blocks-input-icon">
+                            <i class="bi bi-keyboard"></i>
+                        </button>
+                    </div>
+                    <button class="blocks-submit-btn" onclick="checkAnswer()">Submit</button>
+                </div>
+
+                <!-- Game Grid (Right) -->
+                <div class="blocks-grid-container">
+                    <div class="blocks-grid" id="blocksGrid">
+                        <!-- Grid cells will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Options Modal -->
+    <div class="blocks-modal-overlay" id="blocksOptionsModal" style="display: none;" onclick="closeOptionsModal(event)">
+        <div class="blocks-options-modal-content" onclick="event.stopPropagation()">
+            <div class="blocks-options-modal-header">
+                <h2 class="blocks-options-modal-title">Options</h2>
+                <button class="blocks-options-modal-close" onclick="closeOptions()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="blocks-options-modal-body">
+                <!-- Study starred terms only -->
+                <div class="blocks-option-item">
+                    <div class="blocks-option-label">Study starred terms only</div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="studyStarredOnly" 
+                            style="background-color: #586380; border-color: #586380;">
+                    </div>
+                </div>
+
+                <div class="blocks-option-divider"></div>
+
+                <!-- Question format section -->
+                <div class="blocks-option-section">
+                    <div class="blocks-option-section-header" onclick="toggleQuestionFormat()">
+                        <span class="blocks-option-section-title">Question format</span>
+                        <span class="blocks-option-section-toggle">
+                            <span id="questionFormatToggleText">Hide</span>
+                            <i class="bi bi-chevron-up" id="questionFormatToggleIcon"></i>
+                        </span>
+                    </div>
+                    <div class="blocks-option-section-content" id="questionFormatContent">
+                        <div class="blocks-option-item blocks-option-item-indented">
+                            <div class="blocks-option-label">Answer with Term</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="answerWithTerm" checked
+                                    style="background-color: #3b82f6; border-color: #3b82f6;">
+                            </div>
+                        </div>
+                        <div class="blocks-option-item blocks-option-item-indented">
+                            <div class="blocks-option-label">Answer with Definition</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="answerWithDefinition" checked
+                                    style="background-color: #3b82f6; border-color: #3b82f6;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blocks-option-divider"></div>
+
+                <!-- Privacy Policy link -->
+                <div class="blocks-option-item">
+                    <a href="#" class="blocks-privacy-link">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How to Play Modal -->
+    <div class="blocks-modal-overlay" id="blocksModal" style="display: none;" onclick="closeModal(event)">
+        <div class="blocks-modal-content" onclick="event.stopPropagation()">
+            <div class="blocks-modal-header">
+                <h2 class="blocks-modal-title">How to play Blocks</h2>
+                <button class="blocks-modal-close" onclick="closeHowToPlay()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="blocks-modal-body">
+                <p class="blocks-modal-text">
+                    Blocks is a relaxing puzzle game that helps you study while you play. Place 3 pieces on the grid, then answer a question correctly to earn three more. Earn points when you form complete rows or columns with your pieces. Try to beat your high score!
+                </p>
+
+                <div class="blocks-modal-section">
+                    <p class="blocks-modal-text">
+                        Select your puzzle pieces and drag them anywhere on the grid.
+                    </p>
+                    <div class="blocks-modal-image">
+                        <img src="../../../assets/admin/images/blocks1.63f10d97.png" alt="Blocks placement example">
+                    </div>
+                </div>
+
+                <div class="blocks-modal-section">
+                    <p class="blocks-modal-text">
+                        When the pieces complete a row or column, the row or column is cleared and you earn points.
+                    </p>
+                    <div class="blocks-modal-image">
+                        <img src="../../../assets/admin/images/blocks2.5b1b40b6.png" alt="Row/Column clearing">
+                    </div>
+                </div>
+
+                <div class="blocks-modal-section">
+                    <p class="blocks-modal-text">
+                        After you place all three pieces, you'll be shown a question from your study material. Type the correct answer to earn three more puzzle pieces.
+                    </p>
+                    <div class="blocks-modal-image">
+                        <img src="../../../assets/admin/images/blocks3.fc7ddf4b.png" alt="Question example">
+                    </div>
+                </div>
+
+                <div class="blocks-modal-section">
+                    <p class="blocks-modal-text">
+                        Select the refresh icon if you'd like to try a different question. If you answer incorrectly, you'll have three tries to answer before the answer is shown and you'll move on to the next question.
+                    </p>
+                    <div class="blocks-modal-image">
+                        <img src="../../../assets/admin/images/blocks4.cc7b763f.png" alt="Question with answer">
+                    </div>
+                </div>
+
+                <div class="blocks-modal-section">
+                    <p class="blocks-modal-text">
+                        Keep playing until you run out of moves and see if you can beat your top score.
+                    </p>
+                    <div class="blocks-modal-image">
+                        <img src="../../../assets/admin/images/blocks5.6664fdae.png" alt="Game board">
+                    </div>
+                </div>
+            </div>
+            <div class="blocks-modal-footer">
+                <button class="blocks-modal-ok-btn" onclick="closeHowToPlay()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Dashboard JS -->
+    <script src="../../../style/dashboard.js"></script>
+    <!-- Blocks JS -->
+    <script src="../../../style/blocks.js"></script>
+</body>
+
+</html>
+

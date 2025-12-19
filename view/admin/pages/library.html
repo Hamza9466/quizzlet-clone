@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your library - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .library-main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .library-header {
+            margin-bottom: 2rem;
+        }
+
+        .library-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+
+        .library-tabs {
+            display: flex;
+            gap: 2rem;
+            border-bottom: 2px solid #a855f7;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .library-tab {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .library-tab:hover {
+            color: #ffffff;
+        }
+
+        .library-tab.active {
+            color: #a855f7;
+        }
+
+        .library-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #a855f7;
+        }
+
+        .library-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .recent-dropdown {
+            position: relative;
+        }
+
+        .recent-btn {
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .recent-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+
+        .recent-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 8px;
+            min-width: 150px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .recent-dropdown-menu.show {
+            display: block;
+        }
+
+        .recent-dropdown-item {
+            padding: 0.75rem 1rem;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .recent-dropdown-item:hover {
+            background: #586380;
+        }
+
+        .recent-dropdown-item.active {
+            background: #3b82f6;
+        }
+
+        .library-search {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .library-search-input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.875rem;
+        }
+
+        .library-search-input::placeholder {
+            color: #6b7280;
+        }
+
+        .library-search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: #333333;
+        }
+
+        .library-search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        .library-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .library-sets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .library-set-card {
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .library-set-card:hover {
+            background: #586380;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .library-set-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .library-set-meta-separator {
+            width: 1px;
+            height: 16px;
+            background: #586380;
+        }
+
+        .library-set-user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .library-set-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .library-set-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .library-folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Tab Content */
+        .library-tab-content {
+            display: none;
+        }
+
+        .library-tab-content.active {
+            display: block;
+        }
+
+        /* Classes Empty State */
+        .classes-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .classes-illustration {
+            margin-bottom: 2rem;
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .classes-card-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .classes-card {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .classes-card:nth-child(1) {
+            top: 0;
+            left: 0;
+            width: 200px;
+            z-index: 4;
+            border: 2px solid #a855f7;
+        }
+
+        .classes-card:nth-child(2) {
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            z-index: 3;
+            border: 2px solid #a855f7;
+        }
+
+        .classes-card:nth-child(3) {
+            top: 40px;
+            left: 40px;
+            width: 200px;
+            z-index: 2;
+            border: 2px solid #a855f7;
+        }
+
+        .classes-card:nth-child(4) {
+            top: 60px;
+            left: 60px;
+            width: 200px;
+            z-index: 1;
+            border: 2px solid #a855f7;
+        }
+
+        .classes-card-icon {
+            width: 24px;
+            height: 24px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .classes-card-line {
+            flex: 1;
+            height: 2px;
+            background: #e5e7eb;
+        }
+
+        .classes-card-checkmarks {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .classes-checkmark {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .classes-checkmark.checked {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        .classes-checkmark.checked::after {
+            content: '✓';
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .classes-empty-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .classes-empty-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .classes-empty-description {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .classes-create-btn {
+            background: #3b82f6;
+            border: none;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .classes-create-btn:hover {
+            background: #2563eb;
+        }
+
+        /* Folders Empty State */
+        .folders-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .folders-illustration {
+            margin-bottom: 2rem;
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .folders-icon-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .folders-icon {
+            position: absolute;
+            font-size: 4rem;
+            color: #ffffff;
+            opacity: 0.3;
+        }
+
+        .folders-icon:nth-child(1) {
+            top: 0;
+            left: 0;
+            z-index: 4;
+            transform: translate(-10px, -10px);
+        }
+
+        .folders-icon:nth-child(2) {
+            top: 20px;
+            left: 20px;
+            z-index: 3;
+            transform: translate(-5px, -5px);
+        }
+
+        .folders-icon:nth-child(3) {
+            top: 40px;
+            left: 40px;
+            z-index: 2;
+        }
+
+        .folders-icon:nth-child(4) {
+            top: 60px;
+            left: 60px;
+            z-index: 1;
+            transform: translate(5px, 5px);
+        }
+
+        .folders-empty-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .folders-empty-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .folders-empty-description {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .folders-create-btn {
+            background: #3b82f6;
+            border: none;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .folders-create-btn:hover {
+            background: #2563eb;
+        }
+
+        /* Practice Tests Empty State */
+        .practice-tests-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .practice-tests-illustration {
+            margin-bottom: 2rem;
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .practice-tests-icon-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .practice-tests-icon {
+            position: absolute;
+            font-size: 4rem;
+            color: #ffffff;
+            opacity: 0.3;
+        }
+
+        .practice-tests-icon:nth-child(1) {
+            top: 0;
+            left: 0;
+            z-index: 4;
+            transform: translate(-10px, -10px);
+        }
+
+        .practice-tests-icon:nth-child(2) {
+            top: 20px;
+            left: 20px;
+            z-index: 3;
+            transform: translate(-5px, -5px);
+        }
+
+        .practice-tests-icon:nth-child(3) {
+            top: 40px;
+            left: 40px;
+            z-index: 2;
+        }
+
+        .practice-tests-icon:nth-child(4) {
+            top: 60px;
+            left: 60px;
+            z-index: 1;
+            transform: translate(5px, 5px);
+        }
+
+        .practice-tests-empty-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .practice-tests-empty-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .practice-tests-empty-description {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .practice-tests-create-btn {
+            background: #3b82f6;
+            border: none;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .practice-tests-create-btn:hover {
+            background: #2563eb;
+        }
+
+        /* Expert Solutions Empty State */
+        .expert-solutions-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .expert-solutions-illustration {
+            margin-bottom: 2rem;
+            position: relative;
+            width: 300px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .expert-solutions-card-stack {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .expert-solution-card {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 1rem;
+            width: 180px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .expert-solution-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+            background: #fbbf24;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .expert-solution-card:nth-child(1) {
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+
+        .expert-solution-card:nth-child(2) {
+            top: 20px;
+            left: 10px;
+            z-index: 2;
+        }
+
+        .expert-solution-card:nth-child(3) {
+            top: 40px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        .expert-solution-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #9ca3af;
+            min-width: 20px;
+        }
+
+        .expert-solution-line {
+            flex: 1;
+            height: 2px;
+            background: #e5e7eb;
+        }
+
+        .expert-solutions-arrow {
+            position: absolute;
+            top: 20px;
+            left: -40px;
+            font-size: 2rem;
+            color: #fbbf24;
+            transform: rotate(-15deg);
+        }
+
+        .expert-solutions-empty-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .expert-solutions-empty-description {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .expert-solutions-create-btn {
+            background: #2E3856;
+            border: 1px solid #586380;
+            color: #ffffff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .expert-solutions-create-btn:hover {
+            background: #586380;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <button class="btn-upgrade" data-i18n="upgrade">
+                Upgrade: free 7-day trial
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <!-- Profile Dropdown Menu -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span data-i18n="achievements">Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="settings">Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span data-i18n="lightMode">Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item no-icon" data-i18n="logOut">Log out</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="privacyPolicy">Privacy policy</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="helpFeedback">Help and feedback</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="upgradeBtn">Upgrade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span data-i18n="home">Home</span>
+                </a>
+                <a href="library.html" class="nav-item active">
+                    <i class="bi bi-folder"></i>
+                    <span data-i18n="yourLibrary">Your library</span>
+                </a>
+                <a href="notifications.html" class="nav-item">
+                    <i class="bi bi-bell"></i>
+                    <span data-i18n="notifications">Notifications</span>
+                </a>
+                <a href="dashboard.html#favorites" class="nav-item">
+                    <i class="bi bi-star"></i>
+                    <span>Favorites</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
+                <div id="foldersList">
+                    <!-- Folders will be loaded here -->
+                </div>
+                <a href="#" class="nav-item" onclick="showNewFolderModal(event)">
+                    <i class="bi bi-plus-circle"></i>
+                    <span data-i18n="newFolder">New folder</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="startHere">Start here</div>
+                <a href="flashcards.html" class="nav-item">
+                    <i class="bi bi-card-text"></i>
+                    <span data-i18n="flashcards">Flashcards</span>
+                </a>
+                <a href="expert-solutions.html" class="nav-item">
+                    <i class="bi bi-book"></i>
+                    <span data-i18n="expertSolutions">Expert Solutions</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="library-main">
+                <!-- Library Header -->
+                <div class="library-header">
+                    <h1 class="library-title">Your library</h1>
+                    
+                    <!-- Navigation Tabs -->
+                    <div class="library-tabs">
+                        <button class="library-tab active">Flashcards</button>
+                        <button class="library-tab">Classes</button>
+                        <button class="library-tab">Folders</button>
+                        <button class="library-tab">Practice Tests</button>
+                        <button class="library-tab">Expert solutions</button>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="library-controls">
+                        <div class="recent-dropdown">
+                            <button class="recent-btn" id="recentBtn">
+                                <span id="recentBtnText">Recent</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <div class="recent-dropdown-menu" id="recentDropdownMenu">
+                                <button class="recent-dropdown-item" data-sort="created">Created</button>
+                                <button class="recent-dropdown-item active" data-sort="recent">Recent</button>
+                                <button class="recent-dropdown-item" data-sort="studied">Studied</button>
+                            </div>
+                        </div>
+                        <div class="library-search">
+                            <i class="bi bi-search library-search-icon"></i>
+                            <input type="text" class="library-search-input" placeholder="Search flashcards" id="librarySearchInput">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Contents -->
+                <!-- Flashcards Tab -->
+                <div class="library-tab-content active" id="flashcardsTab">
+                    <div class="library-content">
+                        <div class="library-section-title" id="sectionTitle">TODAY</div>
+                        <div class="library-sets-grid" id="librarySetsGrid">
+                            <!-- Flashcard sets will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classes Tab -->
+                <div class="library-tab-content" id="classesTab">
+                    <div class="classes-empty-state">
+                        <div class="classes-illustration">
+                            <div class="classes-card-stack">
+                                <div class="classes-card">
+                                    <div class="classes-card-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="classes-card-line"></div>
+                                    <div class="classes-card-checkmarks">
+                                        <div class="classes-checkmark"></div>
+                                        <div class="classes-checkmark checked"></div>
+                                        <div class="classes-checkmark"></div>
+                                    </div>
+                                </div>
+                                <div class="classes-card">
+                                    <div class="classes-card-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="classes-card-line"></div>
+                                    <div class="classes-card-checkmarks">
+                                        <div class="classes-checkmark checked"></div>
+                                        <div class="classes-checkmark"></div>
+                                        <div class="classes-checkmark"></div>
+                                    </div>
+                                </div>
+                                <div class="classes-card">
+                                    <div class="classes-card-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="classes-card-line"></div>
+                                    <div class="classes-card-checkmarks">
+                                        <div class="classes-checkmark"></div>
+                                        <div class="classes-checkmark"></div>
+                                        <div class="classes-checkmark checked"></div>
+                                    </div>
+                                </div>
+                                <div class="classes-card">
+                                    <div class="classes-card-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="classes-card-line"></div>
+                                    <div class="classes-card-checkmarks">
+                                        <div class="classes-checkmark checked"></div>
+                                        <div class="classes-checkmark"></div>
+                                        <div class="classes-checkmark"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="classes-empty-title">You haven't created or joined</div>
+                        <div class="classes-empty-subtitle">any classes</div>
+                        <div class="classes-empty-description">
+                            Create a class to help organise your sets and share them with your classmates
+                        </div>
+                        <button class="classes-create-btn">Join or create a class</button>
+                    </div>
+                </div>
+
+                <!-- Folders Tab -->
+                <div class="library-tab-content" id="foldersTab">
+                    <div class="folders-empty-state" id="foldersEmptyState">
+                        <div class="folders-illustration">
+                            <div class="folders-icon-stack">
+                                <i class="bi bi-folder folders-icon"></i>
+                                <i class="bi bi-folder folders-icon"></i>
+                                <i class="bi bi-folder folders-icon"></i>
+                                <i class="bi bi-folder folders-icon"></i>
+                            </div>
+                        </div>
+                        <div class="folders-empty-title">You haven't created</div>
+                        <div class="folders-empty-subtitle">any folders</div>
+                        <div class="folders-empty-description">
+                            Create a folder to help organise your sets and keep them together
+                        </div>
+                        <button class="folders-create-btn" onclick="showNewFolderModal(event)">Create a folder</button>
+                    </div>
+                    <div class="library-folders-grid" id="libraryFoldersGrid" style="display: none;">
+                        <!-- Folders will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Practice Tests Tab -->
+                <div class="library-tab-content" id="practiceTestsTab">
+                    <div class="practice-tests-empty-state">
+                        <div class="practice-tests-illustration">
+                            <div class="practice-tests-icon-stack">
+                                <i class="bi bi-file-earmark-text practice-tests-icon"></i>
+                                <i class="bi bi-file-earmark-text practice-tests-icon"></i>
+                                <i class="bi bi-file-earmark-text practice-tests-icon"></i>
+                                <i class="bi bi-file-earmark-text practice-tests-icon"></i>
+                            </div>
+                        </div>
+                        <div class="practice-tests-empty-title">You haven't created</div>
+                        <div class="practice-tests-empty-subtitle">any practice tests</div>
+                        <div class="practice-tests-empty-description">
+                            Create a practice test to help you prepare and assess your knowledge
+                        </div>
+                        <button class="practice-tests-create-btn">Create a practice test</button>
+                    </div>
+                </div>
+
+                <!-- Expert Solutions Tab -->
+                <div class="library-tab-content" id="expertSolutionsTab">
+                    <div class="expert-solutions-empty-state">
+                        <div class="expert-solutions-illustration">
+                            <div class="expert-solutions-card-stack">
+                                <i class="bi bi-arrow-right expert-solutions-arrow"></i>
+                                <div class="expert-solution-card">
+                                    <span class="expert-solution-number">1</span>
+                                    <div class="expert-solution-line"></div>
+                                </div>
+                                <div class="expert-solution-card">
+                                    <span class="expert-solution-number">2</span>
+                                    <div class="expert-solution-line"></div>
+                                </div>
+                                <div class="expert-solution-card">
+                                    <span class="expert-solution-number">3</span>
+                                    <div class="expert-solution-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expert-solutions-empty-title">Find step-by-step expert solutions</div>
+                        <button class="expert-solutions-create-btn">Learn more</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+        </div>
+        <div class="footer-language">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle language-btn" type="button"
+                    id="footerLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    English (USA)
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="footerLanguageDropdown">
+                    <li><a class="dropdown-item" href="#">English (UK)</a></li>
+                    <li><a class="dropdown-item" href="#">Español</a></li>
+                    <li><a class="dropdown-item" href="#">Français</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- New Folder Modal -->
+    <div class="new-folder-modal" id="newFolderModal" style="display: none;">
+        <div class="new-folder-modal-overlay" onclick="hideNewFolderModal()"></div>
+        <div class="new-folder-modal-content">
+            <div class="new-folder-icon">
+                <i class="bi bi-folder"></i>
+            </div>
+            <input type="text" class="new-folder-input" id="newFolderInput" placeholder="Name your folder" autocomplete="off">
+            <div class="new-folder-buttons">
+                <button class="new-folder-btn new-folder-btn-cancel" onclick="hideNewFolderModal()">Cancel</button>
+                <button class="new-folder-btn new-folder-btn-create" id="newFolderCreateBtn" onclick="createNewFolder()" disabled>Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Modal JS -->
+    <script src="../../../style/modal.js"></script>
+    <!-- Library JS -->
+    <script src="../../../style/library.js"></script>
+</body>
+
+</html>
+

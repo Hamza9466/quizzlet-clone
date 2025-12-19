@@ -55,6 +55,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Load flashcard sets and update dashboard
     loadFlashcardSets();
+
+    // Handle Home link click
+    const homeNavItem = document.getElementById('homeNavItem');
+    if (homeNavItem) {
+        homeNavItem.addEventListener('click', function (e) {
+            e.preventDefault();
+            showHomePage();
+        });
+    }
+
+    // Check if URL has #favorites hash and show favorites page
+    if (window.location.hash === '#favorites') {
+        setTimeout(() => {
+            showFavoritesPage();
+        }, 100);
+    } else {
+        // Show home page by default
+        showHomePage();
+    }
 });
 
 // Load flashcard sets from localStorage
@@ -290,7 +309,9 @@ function updateRecents(sets) {
         item.className = 'recent-item';
         item.onclick = function (e) {
             e.preventDefault();
-            startFlashcardQuiz(set.id);
+            // Store the flashcard set ID and redirect to flashcard view page
+            localStorage.setItem('currentFlashcardSetId', set.id);
+            window.location.href = 'flashcard-view.html';
         };
         item.innerHTML = `
             <i class="bi bi-card-text recent-icon"></i>
@@ -379,4 +400,154 @@ window.startFlashcardQuiz = function (setId) {
     localStorage.setItem('currentFlashcardSetId', setId);
     window.location.href = 'learn.html';
 };
+
+// Favorites functionality
+function getFavorites() {
+    return JSON.parse(localStorage.getItem('favoriteSets') || '[]');
+}
+
+function saveFavorites(favorites) {
+    localStorage.setItem('favoriteSets', JSON.stringify(favorites));
+}
+
+function isSetFavorited(setId) {
+    const favorites = getFavorites();
+    return favorites.includes(setId);
+}
+
+window.showFavoritesPage = function (e) {
+    if (e) e.preventDefault();
+
+    // Update active nav item
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    const favoritesNav = document.getElementById('favoritesNavItem');
+    if (favoritesNav) {
+        favoritesNav.classList.add('active');
+    }
+
+    // Hide all other sections
+    document.querySelectorAll('.jump-back-section, .recents-section, .game-section, .staff-picks-section, .personalize-section').forEach(section => {
+        if (section) section.style.display = 'none';
+    });
+
+    // Show favorites section
+    const favoritesSection = document.getElementById('favoritesSection');
+    if (favoritesSection) {
+        favoritesSection.style.display = 'block';
+        loadFavorites();
+    }
+};
+
+window.showHomePage = function (e) {
+    if (e) e.preventDefault();
+
+    // Update active nav item
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    const homeNav = document.getElementById('homeNavItem') || document.querySelector('.nav-item[href="#"]');
+    if (homeNav) {
+        homeNav.classList.add('active');
+    }
+
+    // Hide favorites section first
+    const favoritesSection = document.getElementById('favoritesSection');
+    if (favoritesSection) {
+        favoritesSection.style.display = 'none';
+    }
+
+    // Show all home sections
+    const sectionsToShow = document.querySelectorAll('.jump-back-section, .recents-section, .game-section, .staff-picks-section, .personalize-section, .categories-section');
+    sectionsToShow.forEach(section => {
+        if (section) {
+            section.style.display = 'block';
+        }
+    });
+
+    // Remove hash from URL if present
+    if (window.location.hash) {
+        window.history.replaceState(null, null, window.location.pathname);
+    }
+};
+
+function loadFavorites() {
+    const favorites = getFavorites();
+    const flashcardSets = JSON.parse(localStorage.getItem('flashcardSets') || '[]');
+    let favoriteSets = flashcardSets.filter(set => favorites.includes(set.id));
+
+    const favoritesList = document.getElementById('favoritesList');
+    if (!favoritesList) return;
+
+    // If no favorites, show dummy sets
+    if (favoriteSets.length === 0) {
+        favoriteSets = [
+            {
+                id: 'dummy-1',
+                title: 'World Geography',
+                flashcards: Array(45).fill(null)
+            },
+            {
+                id: 'dummy-2',
+                title: 'Spanish Vocabulary',
+                flashcards: Array(120).fill(null)
+            },
+            {
+                id: 'dummy-3',
+                title: 'Biology Terms',
+                flashcards: Array(78).fill(null)
+            },
+            {
+                id: 'dummy-4',
+                title: 'History Dates',
+                flashcards: Array(92).fill(null)
+            },
+            {
+                id: 'dummy-5',
+                title: 'Math Formulas',
+                flashcards: Array(56).fill(null)
+            },
+            {
+                id: 'dummy-6',
+                title: 'Chemistry Elements',
+                flashcards: Array(118).fill(null)
+            }
+        ];
+    }
+
+    favoritesList.innerHTML = favoriteSets.map(set => {
+        const cardCount = set.flashcards ? set.flashcards.length : 0;
+        const isDummy = set.id.startsWith('dummy-');
+        const isFavorited = isDummy ? false : favorites.includes(set.id);
+        return `
+            <a href="flashcard-view.html" class="recent-item" ${isDummy ? 'onclick="event.preventDefault();"' : `onclick="localStorage.setItem('currentFlashcardSetId', '${set.id}')"`}>
+                <i class="bi bi-star-fill recent-icon" style="color: #fbbf24;"></i>
+                <div class="recent-content">
+                    <div class="recent-title">${set.title}</div>
+                    <div class="recent-meta">${cardCount} cards</div>
+                </div>
+                <button class="btn-favorite ${isFavorited ? 'favorited' : ''}" onclick="event.stopPropagation(); event.preventDefault(); ${isDummy ? 'alert(\'Add this set to your library to favorite it\');' : `toggleFavorite('${set.id}')`}">
+                    <i class="bi ${isFavorited ? 'bi-star-fill' : 'bi-star'}"></i>
+                </button>
+            </a>
+        `;
+    }).join('');
+}
+
+window.toggleFavorite = function (setId) {
+    const favorites = getFavorites();
+    const index = favorites.indexOf(setId);
+
+    if (index > -1) {
+        favorites.splice(index, 1);
+    } else {
+        favorites.push(setId);
+    }
+
+    saveFavorites(favorites);
+
+    // Reload favorites if on favorites page
+    const favoritesSection = document.getElementById('favoritesSection');
+    if (favoritesSection && favoritesSection.style.display !== 'none') {
+        loadFavorites();
+    }
+};
+
 

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .notifications-main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .notifications-panel {
+            background: #2E3856;
+            border-radius: 12px;
+            border: 1px solid #586380;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            padding: 1rem 0;
+        }
+
+        .notifications-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .notifications-panel::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 4px;
+        }
+
+        .notifications-panel::-webkit-scrollbar-thumb {
+            background: #586380;
+            border-radius: 4px;
+        }
+
+        .notifications-panel::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #586380;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            position: relative;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .notification-dot {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .notification-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .notification-icon {
+            font-size: 1.5rem;
+        }
+
+        .notification-icon.flame {
+            color: #f97316;
+        }
+
+        .notification-icon-wrapper.ielts {
+            background: #3b82f6;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .notification-icon-wrapper.ielts .ielts-text {
+            font-size: 0.625rem;
+            line-height: 1;
+        }
+
+        .notification-icon-wrapper.ielts .ielts-lines {
+            width: 20px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 1px;
+        }
+
+        .notification-icon-wrapper.ielts::after {
+            content: '🏅';
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            font-size: 0.875rem;
+            background: #ffffff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notification-text {
+            font-size: 0.875rem;
+            color: #ffffff;
+            line-height: 1.5;
+            margin-bottom: 0.25rem;
+        }
+
+        .notification-text strong {
+            font-weight: 600;
+        }
+
+        .notification-time {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .notification-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .notification-menu-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0.25rem;
+            font-size: 1.25rem;
+            transition: color 0.2s ease;
+        }
+
+        .notification-menu-btn:hover {
+            color: #ffffff;
+        }
+
+        .notification-menu-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 1rem;
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            min-width: 200px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .notification-menu-dropdown.show {
+            display: block;
+        }
+
+        .notification-menu-item {
+            padding: 0.75rem 1rem;
+            color: #ffffff;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s ease;
+        }
+
+        .notification-menu-item:hover {
+            background: #586380;
+        }
+
+        .notification-item {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <button class="btn-upgrade" data-i18n="upgrade">
+                Upgrade: free 7-day trial
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <!-- Profile Dropdown Menu -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item active">
+                            <i class="bi bi-trophy"></i>
+                            <span data-i18n="achievements">Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="settings">Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span data-i18n="lightMode">Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item no-icon" data-i18n="logOut">Log out</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="privacyPolicy">Privacy policy</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="helpFeedback">Help and feedback</a>
+                        <a href="#" class="dropdown-item no-icon" data-i18n="upgradeBtn">Upgrade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house-door"></i>
+                    <span data-i18n="home">Home</span>
+                </a>
+                <a href="library.html" class="nav-item">
+                    <i class="bi bi-folder"></i>
+                    <span data-i18n="yourLibrary">Your library</span>
+                </a>
+                <a href="notifications.html" class="nav-item active">
+                    <i class="bi bi-bell"></i>
+                    <span data-i18n="notifications">Notifications</span>
+                </a>
+                <a href="dashboard.html#favorites" class="nav-item">
+                    <i class="bi bi-star"></i>
+                    <span>Favorites</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
+                <div id="foldersList">
+                    <!-- Folders will be loaded here -->
+                </div>
+                <a href="#" class="nav-item" onclick="showNewFolderModal(event)">
+                    <i class="bi bi-plus-circle"></i>
+                    <span data-i18n="newFolder">New folder</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="startHere">Start here</div>
+                <a href="flashcards.html" class="nav-item">
+                    <i class="bi bi-card-text"></i>
+                    <span data-i18n="flashcards">Flashcards</span>
+                </a>
+                <a href="expert-solutions.html" class="nav-item">
+                    <i class="bi bi-book"></i>
+                    <span data-i18n="expertSolutions">Expert Solutions</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="notifications-main">
+                <div class="notifications-panel" id="notificationsPanel">
+                    <!-- Notifications will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+        </div>
+        <div class="footer-language">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle language-btn" type="button"
+                    id="footerLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    English (USA)
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="footerLanguageDropdown">
+                    <li><a class="dropdown-item" href="#">English (UK)</a></li>
+                    <li><a class="dropdown-item" href="#">Español</a></li>
+                    <li><a class="dropdown-item" href="#">Français</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- New Folder Modal -->
+    <div class="new-folder-modal" id="newFolderModal" style="display: none;">
+        <div class="new-folder-modal-overlay" onclick="hideNewFolderModal()"></div>
+        <div class="new-folder-modal-content">
+            <div class="new-folder-icon">
+                <i class="bi bi-folder"></i>
+            </div>
+            <input type="text" class="new-folder-input" id="newFolderInput" placeholder="Name your folder" autocomplete="off">
+            <div class="new-folder-buttons">
+                <button class="new-folder-btn new-folder-btn-cancel" onclick="hideNewFolderModal()">Cancel</button>
+                <button class="new-folder-btn new-folder-btn-create" id="newFolderCreateBtn" onclick="createNewFolder()" disabled>Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Modal JS -->
+    <script src="../../../style/modal.js"></script>
+    <!-- Notifications JS -->
+    <script src="../../../style/notifications.js"></script>
+</body>
+
+</html>
+

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Set - Quizlet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../../style/dashboard.css">
+    <style>
+        .study-mode-card {
+            background: #2E3856;
+            border: 1px solid #586380;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .study-mode-card:hover {
+            background: #586380;
+            border-color: #7c3aed;
+            transform: translateY(-2px);
+        }
+
+        .study-mode-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Flashcard Flip Animation */
+        .flashcard-wrapper {
+            perspective: 1000px;
+            cursor: pointer;
+            width: 100%;
+            min-height: 400px;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard-inner.flipped {
+            transform: rotateX(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .flashcard-back {
+            transform: rotateX(180deg);
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Top Header Bar -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <button class="menu-toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="logo">
+                <span class="logo-q">Q</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" class="search-input" placeholder="Find it faster with a search"
+                    data-i18n-placeholder="searchPlaceholder">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-create">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <button class="btn-upgrade" data-i18n="upgrade">
+                Upgrade: free 7-day trial
+            </button>
+            <div class="profile-icon-wrapper">
+                <div class="profile-icon" id="profileIcon">
+                    <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile" class="profile-img">
+                </div>
+                <!-- Profile Dropdown Menu -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-user-info">
+                        <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                            class="dropdown-avatar">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-username">M_Hamza80</div>
+                            <div class="dropdown-email">hamzahafiz306@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-trophy"></i>
+                            <span data-i18n="achievements">Achievements</span>
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="settings">Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-sun"></i>
+                            <span data-i18n="light">Light mode</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-menu-items">
+                        <a href="#" class="dropdown-item">
+                            <span data-i18n="logOut">Log out</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <span data-i18n="privacyPolicy">Privacy policy</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <span data-i18n="helpAndFeedback">Help and feedback</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <span data-i18n="upgrade">Upgrade</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-house"></i>
+                    <span data-i18n="home">Home</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="bi bi-gear"></i>
+                    <span data-i18n="settings">Settings</span>
+                </a>
+                <a href="dashboard.html#favorites" class="nav-item">
+                    <i class="bi bi-star"></i>
+                    <span>Favorites</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
+                <div id="foldersList">
+                    <!-- Folders will be loaded here -->
+                </div>
+                <a href="#" class="nav-item" onclick="showNewFolderModal(event)">
+                    <i class="bi bi-plus-circle"></i>
+                    <span data-i18n="newFolder">New folder</span>
+                </a>
+                <hr class="sidebar-divider">
+                <div class="nav-section-title" data-i18n="startHere">Start here</div>
+                <a href="flashcards.html" class="nav-item">
+                    <i class="bi bi-card-text"></i>
+                    <span data-i18n="flashcards">Flashcards</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Page Header -->
+            <div class="container-fluid px-0"
+                style="max-width: 65%; margin: 0 auto; padding-left: 2rem; padding-top: 2rem; margin-left: 4.5rem;">
+                <header class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="text-white fw-bold mb-0 fs-3" id="flashcardSetTitle">biology chapter 2</h1>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2">
+                            <i class="bi bi-bookmark"></i>
+                            <span>Save</span>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2">
+                            <i class="bi bi-people"></i>
+                            <span>Groups</span>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-upload"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Study Mode Buttons -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <button class="study-mode-card w-100 p-3 d-flex align-items-center justify-content-center gap-3"
+                            onclick="window.location.href='flashcards.html'">
+                            <div class="study-mode-icon">
+                                <svg width="32" height="32" viewBox="0 0 48 48" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="8" y="12" width="24" height="32" rx="4" fill="#1a56db" />
+                                    <rect x="16" y="8" width="24" height="32" rx="4" fill="#3b82f6" />
+                                </svg>
+                            </div>
+                            <span class="text-white">Flashcards</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="study-mode-card w-100 p-3 d-flex align-items-center justify-content-center gap-3"
+                            onclick="startLearn()">
+                            <div class="study-mode-icon">
+                                <svg width="32" height="32" viewBox="0 0 48 48" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="18" stroke="#3b82f6" stroke-width="2"
+                                        stroke-dasharray="4 4" fill="none" />
+                                    <circle cx="18" cy="20" r="3" fill="#1a56db" />
+                                    <circle cx="30" cy="20" r="3" fill="#1a56db" />
+                                    <line x1="18" y1="20" x2="30" y2="20" stroke="#1a56db" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <span class="text-white">Learn</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="study-mode-card w-100 p-3 d-flex align-items-center justify-content-center gap-3"
+                            onclick="window.location.href='test.html'">
+                            <div class="study-mode-icon">
+                                <svg width="32" height="32" viewBox="0 0 48 48" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="8" y="10" width="24" height="32" rx="2" fill="#1a56db" />
+                                    <rect x="16" y="6" width="24" height="32" rx="2" fill="#3b82f6" />
+                                    <line x1="12" y1="18" x2="24" y2="18" stroke="white" stroke-width="1.5" />
+                                    <line x1="12" y1="22" x2="24" y2="22" stroke="white" stroke-width="1.5" />
+                                    <line x1="12" y1="26" x2="20" y2="26" stroke="white" stroke-width="1.5" />
+                                </svg>
+                            </div>
+                            <span class="text-white">Test</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="study-mode-card w-100 p-3 d-flex align-items-center justify-content-center gap-3"
+                            onclick="window.location.href='blocks.html'">
+                            <div class="study-mode-icon">
+                                <svg width="32" height="32" viewBox="0 0 48 48" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="12" height="12" rx="2" fill="#1a56db" />
+                                    <rect x="20" y="6" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="34" y="6" width="12" height="12" rx="2" fill="white" />
+                                    <rect x="6" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="20" y="20" width="12" height="12" rx="2" fill="#1a56db" />
+                                    <rect x="34" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="6" y="34" width="12" height="12" rx="2" fill="#1a56db" />
+                                    <rect x="20" y="34" width="12" height="12" rx="2" fill="#3b82f6" />
+                                    <rect x="34" y="34" width="12" height="12" rx="2" fill="#1a56db" />
+                                </svg>
+                            </div>
+                            <span class="text-white">Blocks</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="study-mode-card w-100 p-3 d-flex align-items-center justify-content-center gap-3"
+                            onclick="window.location.href='blast.html'">
+                            <div class="study-mode-icon">
+                                <svg width="32" height="32" viewBox="0 0 48 48" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24 8L16 16L24 20L32 16L24 8Z" fill="#3b82f6" />
+                                    <path d="M16 16L16 28L24 32L32 28L32 16L24 20L16 16Z" fill="#1a56db" />
+                                    <path d="M24 32L24 40L32 36L32 28L24 32Z" fill="#3b82f6" />
+                                    <circle cx="24" cy="24" r="3" fill="white" />
+                                </svg>
+                            </div>
+                            <span class="text-white">Blast</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="study-mode-card w-100 p-3 d-flex align-items-center justify-content-center gap-3"
+                            onclick="window.location.href='match.html'">
+                            <div class="study-mode-icon">
+                                <svg width="32" height="32" viewBox="0 0 48 48" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="8" y="12" width="20" height="24" rx="3" fill="#1a56db" />
+                                    <rect x="20" y="8" width="20" height="24" rx="3" fill="#3b82f6" />
+                                    <line x1="12" y1="20" x2="20" y2="20" stroke="white" stroke-width="1.5" />
+                                </svg>
+                            </div>
+                            <span class="text-white">Match</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Flashcard Display Area -->
+                <div class="flashcard-wrapper" id="flashcardWrapper" style="margin-bottom: 1rem;">
+                    <div class="flashcard-inner" id="flashcardInner">
+                        <!-- Front Side (Question) -->
+                        <div class="flashcard-front card"
+                            style="background: #2E3856; border: none; border-radius: 12px; min-height: 400px;">
+                            <div class="card-body d-flex flex-column p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button class="btn btn-link text-white text-decoration-none p-0">
+                                        <i class="bi bi-lightbulb"></i>
+                                        <span class="ms-2">Get a hint</span>
+                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-link text-white p-1" id="editBtn">
+                                            <i class="bi bi-pencil fs-5"></i>
+                                        </button>
+                                        <button class="btn btn-link text-white p-1">
+                                            <i class="bi bi-volume-up fs-5"></i>
+                                        </button>
+                                        <button class="btn btn-link text-white p-1">
+                                            <i class="bi bi-star fs-5"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 d-flex align-items-center justify-content-center text-center">
+                                    <p class="text-white fs-1 fw-semibold mb-0" id="flashcardContent">question 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back Side (Answer) -->
+                        <div class="flashcard-back card"
+                            style="background: #2E3856; border: none; border-radius: 12px; min-height: 400px;">
+                            <div class="card-body d-flex flex-column p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button class="btn btn-link text-white text-decoration-none p-0">
+                                        <i class="bi bi-lightbulb"></i>
+                                        <span class="ms-2">Get a hint</span>
+                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-link text-white p-1" id="editBtnBack">
+                                            <i class="bi bi-pencil fs-5"></i>
+                                        </button>
+                                        <button class="btn btn-link text-white p-1">
+                                            <i class="bi bi-volume-up fs-5"></i>
+                                        </button>
+                                        <button class="btn btn-link text-white p-1">
+                                            <i class="bi bi-star fs-5"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 d-flex align-items-center justify-content-center text-center">
+                                    <p class="text-white fs-1 fw-semibold mb-0" id="flashcardAnswer">answer 1</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Control Bar -->
+                <div class="card" style="background: #2E3856; border: none; border-radius: 12px;">
+                    <div class="card-body p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="text-white">Track progress</span>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="trackProgress" checked
+                                        style="background-color: #586380; border-color: #586380;">
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <button class="btn rounded-circle" id="prevCardBtn"
+                                    style="width: 40px; height: 40px; background: #586380; border: none; color: white;">
+                                    <i class="bi bi-chevron-left"></i>
+                                </button>
+                                <span class="text-white" id="cardCounter">1 / 2</span>
+                                <button class="btn rounded-circle" id="nextCardBtn"
+                                    style="width: 40px; height: 40px; background: #586380; border: none; color: white;">
+                                    <i class="bi bi-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-link text-white p-1">
+                                    <i class="bi bi-play-fill fs-5"></i>
+                                </button>
+                                <button class="btn btn-link text-white p-1">
+                                    <i class="bi bi-shuffle fs-5"></i>
+                                </button>
+                                <button class="btn btn-link text-white p-1">
+                                    <i class="bi bi-gear fs-5"></i>
+                                </button>
+                                <button class="btn btn-link text-white p-1">
+                                    <i class="bi bi-fullscreen fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms List Section -->
+                <div class="terms-list-section mb-4" style="padding-top: 2rem;">
+                    <!-- Creator Info -->
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="creator-avatar">
+                            <img src="../../../assets/website/image/111.f9dd73353feb908.jpg" alt="Profile"
+                                style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                        </div>
+                        <div>
+                            <div class="text-secondary small mb-1" style="font-size: 0.875rem;">Created by</div>
+                            <div class="text-white fw-bold mb-1" style="font-size: 1rem;">M_Hamza80</div>
+                            <div class="text-secondary small" style="font-size: 0.875rem;">Created under 1 min ago</div>
+                        </div>
+                    </div>
+
+                    <!-- Set Title -->
+                    <h2 class="text-white fw-bold mb-4" id="setTitleDisplay" style="font-size: 1.5rem;">chapter2</h2>
+
+                    <!-- Terms Heading -->
+                    <h3 class="text-white fw-bold mb-4" id="termsHeading" style="font-size: 1.25rem;">Terms In this set
+                        (2)</h3>
+
+                    <!-- Terms List -->
+                    <div id="termsList" class="terms-list mb-4">
+                        <div class="term-card card mb-3" style="background: #2E3856; border: none; border-radius: 8px;">
+                            <div class="card-body position-relative" style="padding: 1.25rem 1.5rem;">
+                                <div class="d-flex align-items-center" style="padding-right: 110px; min-height: 50px;">
+                                    <div class="term-answer text-white"
+                                        style="flex: 1; font-size: 1rem; text-align: left;">answer 1</div>
+                                    <div
+                                        style="width: 1px; height: 40px; background: #586380; flex-shrink: 0; margin: 0 1rem;">
+                                    </div>
+                                    <div class="term-question text-white"
+                                        style="flex: 1; font-size: 1rem; text-align: left;">question 1</div>
+                                </div>
+                                <div class="d-flex gap-2 position-absolute" style="top: 1.25rem; right: 1.5rem;">
+                                    <button class="btn btn-link text-white p-0"
+                                        style="font-size: 1.1rem; line-height: 1; opacity: 0.9;"><i
+                                            class="bi bi-star"></i></button>
+                                    <button class="btn btn-link text-white p-0"
+                                        style="font-size: 1.1rem; line-height: 1; opacity: 0.9;"><i
+                                            class="bi bi-volume-up"></i></button>
+                                    <button class="btn btn-link text-white p-0"
+                                        style="font-size: 1.1rem; line-height: 1; opacity: 0.9;"><i
+                                            class="bi bi-pencil"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="term-card card mb-3" style="background: #2E3856; border: none; border-radius: 8px;">
+                            <div class="card-body position-relative" style="padding: 1.25rem 1.5rem;">
+                                <div class="d-flex align-items-center" style="padding-right: 110px; min-height: 50px;">
+                                    <div class="term-answer text-white"
+                                        style="flex: 1; font-size: 1rem; text-align: left;">answer 2</div>
+                                    <div
+                                        style="width: 1px; height: 40px; background: #586380; flex-shrink: 0; margin: 0 1rem;">
+                                    </div>
+                                    <div class="term-question text-white"
+                                        style="flex: 1; font-size: 1rem; text-align: left;">question 2</div>
+                                </div>
+                                <div class="d-flex gap-2 position-absolute" style="top: 1.25rem; right: 1.5rem;">
+                                    <button class="btn btn-link text-white p-0"
+                                        style="font-size: 1.1rem; line-height: 1; opacity: 0.9;"><i
+                                            class="bi bi-star"></i></button>
+                                    <button class="btn btn-link text-white p-0"
+                                        style="font-size: 1.1rem; line-height: 1; opacity: 0.9;"><i
+                                            class="bi bi-volume-up"></i></button>
+                                    <button class="btn btn-link text-white p-0"
+                                        style="font-size: 1.1rem; line-height: 1; opacity: 0.9;"><i
+                                            class="bi bi-pencil"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2 flex-wrap justify-content-start" style="margin-top: 1.5rem;">
+                        <button class="btn btn-outline-secondary d-flex align-items-center gap-2"
+                            style="background: #2E3856; border-color: #586380; color: white;">
+                            <i class="bi bi-pencil"></i>
+                            <span>Add or remove terms</span>
+                        </button>
+                        <button class="btn btn-outline-light" id="hideDefinitionsBtn"
+                            style="background: #2E3856; border-color: #586380; color: white;">
+                            <span>Hide definitions</span>
+                        </button>
+                        <button class="btn btn-primary d-flex align-items-center gap-2"
+                            style="background: #3b82f6; border: none;">
+                            <span>Review with an activity</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Folder Modal -->
+    <div class="new-folder-modal" id="newFolderModal" style="display: none;">
+        <div class="new-folder-modal-overlay" onclick="hideNewFolderModal()"></div>
+        <div class="new-folder-modal-content">
+            <div class="new-folder-icon">
+                <i class="bi bi-folder"></i>
+            </div>
+            <input type="text" class="new-folder-input" id="newFolderInput" placeholder="Name your folder"
+                autocomplete="off">
+            <div class="new-folder-buttons">
+                <button class="new-folder-btn new-folder-btn-cancel" onclick="hideNewFolderModal()">Cancel</button>
+                <button class="new-folder-btn new-folder-btn-create" id="newFolderCreateBtn" onclick="createNewFolder()"
+                    disabled>Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Translations JS -->
+    <script src="../../../style/translations.js"></script>
+    <!-- Modal JS -->
+    <script src="../../../style/modal.js"></script>
+    <!-- Dashboard JS -->
+    <script src="../../../style/dashboard.js"></script>
+    <!-- Flashcard View JS -->
+    <script src="../../../style/flashcard-view.js"></script>
+</body>
+
+</html>

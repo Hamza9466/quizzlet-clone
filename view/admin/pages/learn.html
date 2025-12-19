@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <!-- Dashboard CSS -->
     <link rel="stylesheet" href="../../../style/dashboard.css">
+    <!-- Mode Dropdown CSS -->
+    <link rel="stylesheet" href="../../../style/mode-dropdown.css">
     <!-- Learn CSS -->
     <link rel="stylesheet" href="../../../style/learn.css">
 </head>
@@ -24,16 +26,82 @@
                     <i class="bi bi-lightning-charge-fill"></i>
                 </div>
                 <div class="dropdown">
-                    <button class="btn btn-link learn-dropdown-btn" type="button" id="learnModeDropdown"
+                    <button class="mode-dropdown-btn" type="button" id="learnModeDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <span data-i18n="learn">Learn</span>
+                        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="18" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="3 3" />
+                            <circle cx="18" cy="24" r="2" fill="#3b82f6" />
+                            <circle cx="30" cy="24" r="2" fill="#3b82f6" />
+                            <line x1="18" y1="24" x2="24" y2="18" stroke="#3b82f6" stroke-width="2" />
+                            <line x1="24" y1="18" x2="30" y2="24" stroke="#3b82f6" stroke-width="2" />
+                        </svg>
+                        <span>Learn</span>
                         <i class="bi bi-chevron-down"></i>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="learnModeDropdown">
-                        <li><a class="dropdown-item" href="#" data-i18n="learn">Learn</a></li>
-                        <li><a class="dropdown-item" href="#" data-i18n="flashcards">Flashcards</a></li>
-                        <li><a class="dropdown-item" href="#" data-i18n="write">Write</a></li>
-                        <li><a class="dropdown-item" href="#" data-i18n="test">Test</a></li>
+                    <ul class="mode-dropdown-menu dropdown-menu" aria-labelledby="learnModeDropdown">
+                        <li><a class="mode-dropdown-item dropdown-item" href="flashcard-view.html">
+                            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="12" width="20" height="24" rx="3" fill="#3b82f6" />
+                                <rect x="20" y="8" width="20" height="24" rx="3" fill="#60a5fa" />
+                            </svg>
+                            <span>Flashcards</span>
+                        </a></li>
+                        <li><a class="mode-dropdown-item dropdown-item" href="learn.html">
+                            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="18" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="3 3" />
+                                <circle cx="18" cy="24" r="2" fill="#3b82f6" />
+                                <circle cx="30" cy="24" r="2" fill="#3b82f6" />
+                                <line x1="18" y1="24" x2="24" y2="18" stroke="#3b82f6" stroke-width="2" />
+                                <line x1="24" y1="18" x2="30" y2="24" stroke="#3b82f6" stroke-width="2" />
+                            </svg>
+                            <span>Learn</span>
+                        </a></li>
+                        <li><a class="mode-dropdown-item dropdown-item" href="test.html">
+                            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="8" width="28" height="36" rx="2" fill="#3b82f6" />
+                                <rect x="12" y="14" width="20" height="4" rx="1" fill="#60a5fa" />
+                                <rect x="12" y="22" width="20" height="4" rx="1" fill="#60a5fa" />
+                                <rect x="12" y="30" width="16" height="4" rx="1" fill="#60a5fa" />
+                            </svg>
+                            <span>Test</span>
+                        </a></li>
+                        <li><a class="mode-dropdown-item dropdown-item" href="blocks.html">
+                            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="6" y="6" width="12" height="12" rx="2" fill="#3b82f6" />
+                                <rect x="20" y="6" width="12" height="12" rx="2" fill="#3b82f6" />
+                                <rect x="34" y="6" width="8" height="12" rx="2" fill="#60a5fa" />
+                                <rect x="6" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                <rect x="20" y="20" width="12" height="12" rx="2" fill="#3b82f6" />
+                                <rect x="34" y="20" width="8" height="12" rx="2" fill="#3b82f6" />
+                                <rect x="6" y="34" width="12" height="8" rx="2" fill="#3b82f6" />
+                                <rect x="20" y="34" width="12" height="8" rx="2" fill="#3b82f6" />
+                                <rect x="34" y="34" width="8" height="8" rx="2" fill="#3b82f6" />
+                            </svg>
+                            <span>Blocks</span>
+                        </a></li>
+                        <li><a class="mode-dropdown-item dropdown-item" href="blast.html">
+                            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 6 L28 16 L38 18 L30 26 L32 36 L24 32 L16 36 L18 26 L10 18 L20 16 Z" fill="#3b82f6" />
+                                <circle cx="24" cy="20" r="3" fill="#60a5fa" />
+                            </svg>
+                            <span>Blast</span>
+                        </a></li>
+                        <li><a class="mode-dropdown-item dropdown-item" href="match.html">
+                            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="12" width="20" height="24" rx="3" fill="#3b82f6" />
+                                <rect x="20" y="8" width="20" height="24" rx="3" fill="#60a5fa" />
+                                <line x1="12" y1="20" x2="20" y2="20" stroke="white" stroke-width="1.5" />
+                            </svg>
+                            <span>Match</span>
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="mode-dropdown-item dropdown-item" href="dashboard.html">
+                            <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 24 L24 8 L42 24" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 24 L8 38 C8 40.2091 9.79086 42 12 42 L18 42 C20.2091 42 22 40.2091 22 38 L22 30 C22 27.7909 23.7909 26 26 26 L30 26 C32.2091 26 34 27.7909 34 30 L34 38 C34 40.2091 35.7909 42 38 42 L40 42 C42.2091 42 44 40.2091 44 38 L44 24" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Home</span>
+                        </a></li>
                     </ul>
                 </div>
             </div>

@@ -83,21 +83,28 @@
         <!-- Left Sidebar -->
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
+                <a href="#" class="nav-item active" id="homeNavItem" onclick="showHomePage(event)">
                     <i class="bi bi-house-door"></i>
                     <span data-i18n="home">Home</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="library.html" class="nav-item">
                     <i class="bi bi-folder"></i>
                     <span data-i18n="yourLibrary">Your library</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="notifications.html" class="nav-item">
                     <i class="bi bi-bell"></i>
                     <span data-i18n="notifications">Notifications</span>
                 </a>
+                <a href="#" class="nav-item" id="favoritesNavItem" onclick="showFavoritesPage(event)">
+                    <i class="bi bi-star"></i>
+                    <span>Favorites</span>
+                </a>
                 <hr class="sidebar-divider">
                 <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
-                <a href="#" class="nav-item">
+                <div id="foldersList">
+                    <!-- Folders will be loaded here -->
+                </div>
+                <a href="#" class="nav-item" onclick="showNewFolderModal(event)">
                     <i class="bi bi-plus-circle"></i>
                     <span data-i18n="newFolder">New folder</span>
                 </a>
@@ -107,7 +114,7 @@
                     <i class="bi bi-card-text"></i>
                     <span data-i18n="flashcards">Flashcards</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="expert-solutions.html" class="nav-item">
                     <i class="bi bi-book"></i>
                     <span data-i18n="expertSolutions">Expert Solutions</span>
                 </a>
@@ -116,6 +123,14 @@
 
         <!-- Main Content -->
         <main class="dashboard-main">
+            <!-- Favorites Section -->
+            <section class="favorites-section" id="favoritesSection" style="display: none;">
+                <h2 class="section-title">Your Favorites</h2>
+                <div class="favorites-list" id="favoritesList">
+                    <!-- Favorites will be loaded here -->
+                </div>
+            </section>
+
             <!-- Jump back in Section -->
             <section class="jump-back-section">
                 <h2 class="section-title" data-i18n="jumpBackIn">Jump back in</h2>
@@ -133,21 +148,21 @@
             <section class="recents-section">
                 <h2 class="section-title" data-i18n="recents">Recents</h2>
                 <div class="recents-list">
-                    <a href="#" class="recent-item">
+                    <a href="flashcard-view.html" class="recent-item">
                         <i class="bi bi-card-text recent-icon"></i>
                         <div class="recent-content">
                             <div class="recent-title">World flags</div>
                             <div class="recent-meta">59 cards • by Quizlet</div>
                         </div>
                     </a>
-                    <a href="#" class="recent-item">
+                    <a href="flashcard-view.html" class="recent-item">
                         <i class="bi bi-card-text recent-icon"></i>
                         <div class="recent-content">
                             <div class="recent-title">Communication & Language Vocabulary, 1. Readi...</div>
                             <div class="recent-meta">100 cards • by quizlette77757375</div>
                         </div>
                     </a>
-                    <a href="#" class="recent-item">
+                    <a href="flashcard-view.html" class="recent-item">
                         <i class="bi bi-card-text recent-icon"></i>
                         <div class="recent-content">
                             <div class="recent-title">hjhj</div>
@@ -181,7 +196,8 @@
                         <h3 class="card-title">Communication & Language Vocabulary, 1. Reading: Craft and Structure, SAT
                             Reading and Writing</h3>
                         <p class="card-subtitle">Get more moves by answering correctly</p>
-                        <button class="btn-play-blocks">Play Blocks</button>
+                        <button class="btn-play-blocks" onclick="window.location.href='blocks.html'">Play
+                            Blocks</button>
                     </div>
                     <div class="game-blocks">
                         <img src="../../../assets/admin/images/blocks_new.png" alt="Game Blocks" class="blocks-image">
@@ -262,7 +278,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Hello In different languages</h3>
                         <p class="card-subtitle">Blast correct answers before time's up</p>
-                        <button class="btn-play-blocks">Play Blast</button>
+                        <button class="btn-play-blocks" onclick="window.location.href='blast.html'">Play Blast</button>
                     </div>
                     <div class="game-blocks">
                         <img src="../../../assets/admin/images/blast_new.png" alt="Blast Game" class="blocks-image">
@@ -312,10 +328,29 @@
         </div>
     </footer>
 
+    <!-- New Folder Modal -->
+    <div class="new-folder-modal" id="newFolderModal" style="display: none;">
+        <div class="new-folder-modal-overlay" onclick="hideNewFolderModal()"></div>
+        <div class="new-folder-modal-content">
+            <div class="new-folder-icon">
+                <i class="bi bi-folder"></i>
+            </div>
+            <input type="text" class="new-folder-input" id="newFolderInput" placeholder="Name your folder"
+                autocomplete="off">
+            <div class="new-folder-buttons">
+                <button class="new-folder-btn new-folder-btn-cancel" onclick="hideNewFolderModal()">Cancel</button>
+                <button class="new-folder-btn new-folder-btn-create" id="newFolderCreateBtn" onclick="createNewFolder()"
+                    disabled>Create</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Translations JS -->
     <script src="../../../style/translations.js"></script>
+    <!-- Modal JS -->
+    <script src="../../../style/modal.js"></script>
     <!-- Dashboard JS -->
     <script src="../../../style/dashboard.js"></script>
 </body>

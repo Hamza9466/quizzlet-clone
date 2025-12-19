@@ -89,17 +89,24 @@
                     <i class="bi bi-house-door"></i>
                     <span data-i18n="home">Home</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="library.html" class="nav-item">
                     <i class="bi bi-folder"></i>
                     <span data-i18n="yourLibrary">Your library</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="notifications.html" class="nav-item">
                     <i class="bi bi-bell"></i>
                     <span data-i18n="notifications">Notifications</span>
                 </a>
+                <a href="dashboard.html#favorites" class="nav-item">
+                    <i class="bi bi-star"></i>
+                    <span>Favorites</span>
+                </a>
                 <hr class="sidebar-divider">
                 <div class="nav-section-title" data-i18n="yourFolders">Your folders</div>
-                <a href="#" class="nav-item">
+                <div id="foldersList">
+                    <!-- Folders will be loaded here -->
+                </div>
+                <a href="#" class="nav-item" onclick="showNewFolderModal(event)">
                     <i class="bi bi-plus-circle"></i>
                     <span data-i18n="newFolder">New folder</span>
                 </a>
@@ -109,7 +116,7 @@
                     <i class="bi bi-card-text"></i>
                     <span data-i18n="flashcards">Flashcards</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="expert-solutions.html" class="nav-item">
                     <i class="bi bi-book"></i>
                     <span data-i18n="expertSolutions">Expert Solutions</span>
                 </a>
@@ -263,10 +270,27 @@
     <!-- Hidden file input for image upload -->
     <input type="file" id="imageUploadInput" accept="image/*" style="display: none;">
 
+    <!-- New Folder Modal -->
+    <div class="new-folder-modal" id="newFolderModal" style="display: none;">
+        <div class="new-folder-modal-overlay" onclick="hideNewFolderModal()"></div>
+        <div class="new-folder-modal-content">
+            <div class="new-folder-icon">
+                <i class="bi bi-folder"></i>
+            </div>
+            <input type="text" class="new-folder-input" id="newFolderInput" placeholder="Name your folder" autocomplete="off">
+            <div class="new-folder-buttons">
+                <button class="new-folder-btn new-folder-btn-cancel" onclick="hideNewFolderModal()">Cancel</button>
+                <button class="new-folder-btn new-folder-btn-create" id="newFolderCreateBtn" onclick="createNewFolder()" disabled>Create</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Translations JS -->
     <script src="../../../style/translations.js"></script>
+    <!-- Modal JS -->
+    <script src="../../../style/modal.js"></script>
     <!-- Dashboard JS -->
     <script src="../../../style/dashboard.js"></script>
     <!-- Flashcards JS -->

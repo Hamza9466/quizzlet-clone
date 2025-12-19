@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = cardHTML;
         const cardElement = tempDiv.firstElementChild;
-        
+
         flashcardsList.appendChild(cardElement);
         cardCounter++;
-        
+
         // Apply translations to new card
         if (typeof applyLanguage !== 'undefined') {
             const savedLanguage = localStorage.getItem('language') || 'en-uk';
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Delete card
-    window.deleteCard = function(btn) {
+    window.deleteCard = function (btn) {
         const cardItem = btn.closest('.flashcard-item');
         if (cardItem) {
             cardItem.remove();
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Move card (placeholder)
-    window.moveCard = function(btn) {
+    window.moveCard = function (btn) {
         // Drag and drop functionality can be added here
         console.log('Move card');
     };
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Suggestions toggle
     const suggestionsToggle = document.querySelector('.suggestions-toggle .toggle-switch');
     if (suggestionsToggle) {
-        suggestionsToggle.addEventListener('click', function() {
+        suggestionsToggle.addEventListener('click', function () {
             this.classList.toggle('active');
         });
     }
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const editableByDropdown = document.getElementById('editableByDropdown');
 
     if (openAccessModal && manageAccessModal) {
-        openAccessModal.addEventListener('click', function(e) {
+        openAccessModal.addEventListener('click', function (e) {
             e.preventDefault();
             manageAccessModal.classList.add('show');
         });
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (saveAccessBtn) {
-        saveAccessBtn.addEventListener('click', function(e) {
+        saveAccessBtn.addEventListener('click', function (e) {
             e.preventDefault();
             closeAccessModal();
         });
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close modal when clicking outside
     if (manageAccessModal) {
-        manageAccessModal.addEventListener('click', function(e) {
+        manageAccessModal.addEventListener('click', function (e) {
             if (e.target === manageAccessModal) {
                 closeAccessModal();
             }
@@ -186,18 +186,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update dropdown button text when option is selected
     const accessOptions = document.querySelectorAll('.access-option');
     accessOptions.forEach(option => {
-        option.addEventListener('click', function(e) {
+        option.addEventListener('click', function (e) {
             e.preventDefault();
             const value = this.getAttribute('data-value');
             const text = this.textContent.trim();
             const dropdown = this.closest('.dropdown');
             const button = dropdown.querySelector('.access-dropdown-btn');
             const span = button.querySelector('span');
-            
+
             if (span) {
                 span.textContent = text;
             }
-            
+
             // Update help text for editable by
             if (dropdown.id === 'editableByDropdown') {
                 const helpText = dropdown.parentElement.querySelector('.access-help-text');
@@ -211,19 +211,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Image upload functionality
-    window.uploadImage = function(btn) {
+    window.uploadImage = function (btn) {
         const fileInput = document.getElementById('imageUploadInput');
         if (fileInput) {
-            fileInput.onchange = function(e) {
+            fileInput.onchange = function (e) {
                 const file = e.target.files[0];
                 if (file && file.type.startsWith('image/')) {
                     const reader = new FileReader();
-                    reader.onload = function(event) {
+                    reader.onload = function (event) {
                         const imageUrl = event.target.result;
-                        
+
                         // Update button to show image
                         const existingImg = btn.querySelector('.uploaded-image');
-                        
+
                         if (existingImg) {
                             existingImg.src = imageUrl;
                         } else {
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             img.src = imageUrl;
                             img.className = 'uploaded-image';
                             img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; border-radius: 4px;';
-                            
+
                             // Replace button content with image
                             btn.innerHTML = '';
                             btn.appendChild(img);
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             btn.style.minWidth = '100px';
                             btn.style.height = '120px';
                         }
-                        
+
                         // Reset file input
                         fileInput.value = '';
                     };
@@ -255,52 +255,52 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Save flashcard set function
-    window.saveFlashcardSet = function() {
+    window.saveFlashcardSet = function () {
         // Find title input by data attribute or placeholder
         const titleInput = document.querySelector('input[data-i18n-placeholder="enterTitle"]') ||
-                          document.querySelector('input[placeholder*="title" i]') ||
-                          document.querySelector('input[placeholder*="Title" i]') ||
-                          document.getElementById('setTitle');
-        
+            document.querySelector('input[placeholder*="title" i]') ||
+            document.querySelector('input[placeholder*="Title" i]') ||
+            document.getElementById('setTitle');
+
         // Find description input
         const descriptionInput = document.querySelector('textarea[data-i18n-placeholder="addDescription"]') ||
-                                document.querySelector('textarea[placeholder*="description" i]') ||
-                                document.getElementById('setDescription');
-        
+            document.querySelector('textarea[placeholder*="description" i]') ||
+            document.getElementById('setDescription');
+
         const flashcardsList = document.getElementById('flashcardsList');
-        
+
         // Check if title exists and has value
         if (!titleInput) {
             console.error('Title input not found');
             alert('Title input field not found. Please check the form.');
             return;
         }
-        
+
         const titleValue = titleInput.value ? titleInput.value.trim() : '';
         if (!titleValue) {
             alert('Please enter a title for your flashcard set');
             titleInput.focus();
             return;
         }
-        
+
         const title = titleValue;
         const description = descriptionInput ? (descriptionInput.value ? descriptionInput.value.trim() : '') : '';
-        
+
         // Collect all flashcard data
         const flashcardItems = flashcardsList.querySelectorAll('[data-card-number]');
         const flashcards = [];
-        
+
         flashcardItems.forEach((item) => {
             const termField = item.querySelector('textarea[data-i18n-placeholder="enterTerm"]');
             const definitionField = item.querySelector('textarea[data-i18n-placeholder="enterDefinition"]');
             const imageBtn = item.querySelector('.image-upload-btn');
-            const imageSrc = imageBtn && imageBtn.querySelector('.uploaded-image') 
-                ? imageBtn.querySelector('.uploaded-image').src 
+            const imageSrc = imageBtn && imageBtn.querySelector('.uploaded-image')
+                ? imageBtn.querySelector('.uploaded-image').src
                 : null;
-            
+
             const term = termField ? termField.value.trim() : '';
             const definition = definitionField ? definitionField.value.trim() : '';
-            
+
             if (term || definition) {
                 flashcards.push({
                     term: term,
@@ -309,12 +309,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         });
-        
+
         if (flashcards.length === 0) {
             alert('Please add at least one flashcard');
             return;
         }
-        
+
         // Create flashcard set object
         const flashcardSet = {
             id: Date.now().toString(),
@@ -324,30 +324,30 @@ document.addEventListener('DOMContentLoaded', function () {
             createdAt: new Date().toISOString(),
             lastStudied: new Date().toISOString()
         };
-        
+
         // Get existing flashcard sets from localStorage
         let flashcardSets = JSON.parse(localStorage.getItem('flashcardSets') || '[]');
-        
+
         // Add new set at the beginning
         flashcardSets.unshift(flashcardSet);
-        
+
         // Keep only last 20 sets
         if (flashcardSets.length > 20) {
             flashcardSets = flashcardSets.slice(0, 20);
         }
-        
+
         // Save to localStorage
         localStorage.setItem('flashcardSets', JSON.stringify(flashcardSets));
-        
+
         // Redirect to dashboard
         window.location.href = 'dashboard.html';
     };
-    
+
     // Add event listeners to Create buttons
     setTimeout(() => {
         const createBtns = document.querySelectorAll('.btn-create-set');
         createBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 window.saveFlashcardSet();
             });
