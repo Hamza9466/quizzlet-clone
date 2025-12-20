@@ -291,6 +291,81 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Subjects dropdown hover functionality - CSS only */
+        .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        /* Show exams by default */
+        .subjects-items-column #examsItems {
+            display: flex;
+        }
+
+        /* When hovering over a category, hide all lists first, then show the matching one */
+        .subjects-menu-content:has(.subject-category-item[data-category="exams"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="exams"]:hover) #examsItems {
+            display: flex !important;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="literature"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="literature"]:hover) #literatureItems {
+            display: flex !important;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="arts"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="arts"]:hover) #artsItems {
+            display: flex !important;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="languages"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="languages"]:hover) #languagesItems {
+            display: flex !important;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="math"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="math"]:hover) #mathItems {
+            display: flex !important;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="science"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="science"]:hover) #scienceItems {
+            display: flex !important;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="social"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="social"]:hover) #socialItems {
+            display: flex !important;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="other"]:hover) .subjects-items-column .subject-items-list {
+            display: none;
+        }
+
+        .subjects-menu-content:has(.subject-category-item[data-category="other"]:hover) #otherItems {
+            display: flex !important;
+        }
     </style>
 </head>
 
@@ -552,24 +627,23 @@
                     <path d="M16 4L20 12L28 14L20 16L16 24L12 16L4 14L12 12L16 4Z" fill="#ec4899" />
                     <path d="M16 14L18 18L22 19L18 20L16 24L14 20L10 19L14 18L16 14Z" fill="#ef4444" />
                 </svg>
-                <h1 class="book-flashcards-title" id="bookTitle">Philosophy Flashcards</h1>
+                <h1 class="book-flashcards-title">Philosophy Flashcards</h1>
             </div>
 
             <!-- Navigation Links -->
-            <div class="book-flashcards-nav-links" id="bookNavLinks">
-                <a href="book-flashcards.html?book=Philosophy&category=Ethics" class="book-flashcards-nav-link"
-                    id="navEthics">Ethics</a>
-                <a href="book-flashcards.html?book=Philosophy&category=Theology" class="book-flashcards-nav-link"
-                    id="navTheology">Theology</a>
-                <a href="book-flashcards.html?book=Philosophy&category=Logic" class="book-flashcards-nav-link"
-                    id="navLogic">Logic</a>
+            <div class="book-flashcards-nav-links">
+                <a href="book-flashcards.html?book=Philosophy&category=Ethics"
+                    class="book-flashcards-nav-link">Ethics</a>
+                <a href="book-flashcards.html?book=Philosophy&category=Theology"
+                    class="book-flashcards-nav-link">Theology</a>
+                <a href="book-flashcards.html?book=Philosophy&category=Logic" class="book-flashcards-nav-link">Logic</a>
             </div>
 
             <!-- Tabs -->
             <div class="book-flashcards-tabs">
-                <button class="book-flashcards-tab" data-tab="all">All results</button>
-                <button class="book-flashcards-tab active" data-tab="sets">Flashcard sets</button>
-                <button class="book-flashcards-tab" data-tab="qa">Expert Q&A</button>
+                <button class="book-flashcards-tab">All results</button>
+                <button class="book-flashcards-tab active">Flashcard sets</button>
+                <button class="book-flashcards-tab">Expert Q&A</button>
             </div>
 
             <!-- Filters and Results Count -->
@@ -588,12 +662,134 @@
                         </button>
                     </div>
                 </div>
-                <div class="book-flashcards-results-count" id="resultsCount">1 - 45 of 10K+ results</div>
+                <div class="book-flashcards-results-count">1 - 45 of 10K+ results</div>
             </div>
 
             <!-- Flashcard Sets Grid -->
-            <div class="book-flashcards-grid" id="flashcardsGrid">
-                <!-- Flashcard sets will be populated by JavaScript -->
+            <div class="book-flashcards-grid">
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge">Teacher</span>
+                        <span class="book-flashcard-badge terms">37 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">Foundations Right Relationship with God Exam Study (Dr. Diller)
+                    </h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">DK</div>
+                            <span class="book-flashcard-username">Dr_Kevin_Diller</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge terms">63 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">Comm 104 Exam 3 Flashcards</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">MW</div>
+                            <span class="book-flashcard-username">mw00034</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge terms">24 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">PS Chap 17 Study Questions</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">KT</div>
+                            <span class="book-flashcard-username">kira_trexler</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge terms">22 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">Week4 Module 4 Chapter 17</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">JB</div>
+                            <span class="book-flashcard-username">jose_b_jimenezl</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge">Teacher</span>
+                        <span class="book-flashcard-badge terms">47 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">Trimester 3 Review Quizlet</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">MY</div>
+                            <span class="book-flashcard-username">MrsYorkKMHS</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge">Teacher</span>
+                        <span class="book-flashcard-badge terms">43 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">Paschal Mystery Final Study Set 1 (of 3)</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">PS</div>
+                            <span class="book-flashcard-username">pstuligross8</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge">Teacher</span>
+                        <span class="book-flashcard-badge terms">32 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">8th Bible Intro. Unit Practice</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">TJ</div>
+                            <span class="book-flashcard-username">tjernigan22</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge terms">85 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">D265 Critical Thinking: Reasoning and Evidence</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">JN</div>
+                            <span class="book-flashcard-username">jnimitz</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
+                <div class="book-flashcard-card">
+                    <div class="book-flashcard-badges">
+                        <span class="book-flashcard-badge">Teacher</span>
+                        <span class="book-flashcard-badge terms">62 terms</span>
+                    </div>
+                    <h3 class="book-flashcard-title">Paschal Mystery, Final Study Guide, 2 of 3</h3>
+                    <div class="book-flashcard-meta">
+                        <div class="book-flashcard-user">
+                            <div class="book-flashcard-avatar">PS</div>
+                            <span class="book-flashcard-username">pstuligross8</span>
+                        </div>
+                        <button class="book-flashcard-preview-btn">Preview</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -601,180 +797,40 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Sample flashcard sets data
-        const sampleFlashcardSets = [
-            {
-                title: "Foundations Right Relationship with God Exam Study (Dr. Diller)",
-                teacher: true,
-                terms: 37,
-                username: "Dr_Kevin_Diller",
-                avatar: "DK"
-            },
-            {
-                title: "Comm 104 Exam 3 Flashcards",
-                teacher: false,
-                terms: 63,
-                username: "mw00034",
-                avatar: "MW"
-            },
-            {
-                title: "PS Chap 17 Study Questions",
-                teacher: false,
-                terms: 24,
-                username: "kira_trexler",
-                avatar: "KT"
-            },
-            {
-                title: "Week4 Module 4 Chapter 17",
-                teacher: false,
-                terms: 22,
-                username: "jose_b_jimenezl",
-                avatar: "JB"
-            },
-            {
-                title: "Trimester 3 Review Quizlet",
-                teacher: true,
-                terms: 47,
-                username: "MrsYorkKMHS",
-                avatar: "MY"
-            },
-            {
-                title: "Paschal Mystery Final Study Set 1 (of 3)",
-                teacher: true,
-                terms: 43,
-                username: "pstuligross8",
-                avatar: "PS"
-            },
-            {
-                title: "8th Bible Intro. Unit Practice",
-                teacher: true,
-                terms: 32,
-                username: "tjernigan22",
-                avatar: "TJ"
-            },
-            {
-                title: "D265 Critical Thinking: Reasoning and Evidence",
-                teacher: false,
-                terms: 85,
-                username: "jnimitz",
-                avatar: "JN"
-            },
-            {
-                title: "Paschal Mystery, Final Study Guide, 2 of 3",
-                teacher: true,
-                terms: 62,
-                username: "pstuligross8",
-                avatar: "PS"
-            }
-        ];
-
-        // Get parameters from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const bookTitle = urlParams.get('book') || 'Philosophy';
-        const bookAuthor = urlParams.get('author') || '';
-        const category = urlParams.get('category') || '';
-
-        // Update page title
-        if (category) {
-            document.getElementById('bookTitle').textContent = category + ' Flashcards';
-        } else {
-            document.getElementById('bookTitle').textContent = bookTitle + ' Flashcards';
-        }
-
-        // Update navigation links based on book
-        const bookNavLinks = {
-            'Don Quixote': ['Ethics', 'Theology', 'Logic'],
-            'The Canterbury Tales': ['Medieval Literature', 'Poetry', 'Narrative'],
-            'The Decameron': ['Renaissance', 'Short Stories', 'Classical'],
-            'The Yellow Wallpaper': ['Feminist Literature', 'Gothic', 'Short Stories'],
-            'Frankenstein': ['Gothic', 'Science Fiction', 'Romanticism'],
-            'The Fall of the House of Usher': ['Gothic', 'Horror', 'Short Stories'],
-            'Pride and Prejudice': ['Romance', 'Social Commentary', 'Classic Literature'],
-            'Adventures of Huckleberry Finn': ['Adventure', 'Coming of Age', 'American Literature'],
-            'Wuthering Heights': ['Gothic', 'Romance', 'Tragedy'],
-            'Philosophy': ['Ethics', 'Theology', 'Logic'],
-            'History': ['World History', 'US History', 'European History'],
-            'English': ['Literature', 'Grammar', 'Writing'],
-            'Film and TV': ['Film Studies', 'Television', 'Media'],
-            'Music': ['Music Theory', 'Music History', 'Composition'],
-            'Dance': ['Ballet', 'Modern Dance', 'Dance History'],
-            'Theater': ['Drama', 'Theater History', 'Acting'],
-            'Arts and Humanities': ['All Subjects', 'Browse All', 'Explore'],
-            'French': ['Vocabulary', 'Grammar', 'Conversation'],
-            'Spanish': ['Vocabulary', 'Grammar', 'Conversation'],
-            'German': ['Vocabulary', 'Grammar', 'Conversation'],
-            'Latin': ['Vocabulary', 'Grammar', 'Classical'],
-            'English Language': ['Grammar', 'Writing', 'Vocabulary'],
-            'Languages': ['All Languages', 'Browse All', 'Explore'],
-            'Arithmetic': ['Addition', 'Subtraction', 'Multiplication'],
-            'Geometry': ['Shapes', 'Angles', 'Measurements'],
-            'Algebra': ['Equations', 'Functions', 'Polynomials'],
-            'Statistics': ['Data Analysis', 'Probability', 'Distributions'],
-            'Calculus': ['Derivatives', 'Integrals', 'Limits'],
-            'Math Foundations': ['Basic Math', 'Number Theory', 'Operations'],
-            'Probability': ['Events', 'Distributions', 'Random Variables'],
-            'Math': ['All Topics', 'Browse All', 'Explore'],
-            'Biology': ['Cell Biology', 'Genetics', 'Anatomy'],
-            'Chemistry': ['Organic Chemistry', 'Inorganic Chemistry', 'Biochemistry'],
-            'Physics': ['Mechanics', 'Thermodynamics', 'Electromagnetism'],
-            'Medicine': ['Anatomy', 'Physiology', 'Pathology'],
-            'Computer Science': ['Programming', 'Algorithms', 'Data Structures'],
-            'Engineering': ['Mechanical', 'Electrical', 'Civil'],
-            'Earth Science': ['Geology', 'Meteorology', 'Oceanography'],
-            'Science': ['All Sciences', 'Browse All', 'Explore'],
-            'Psychology': ['Cognitive', 'Social', 'Clinical'],
-            'Business': ['Management', 'Finance', 'Marketing'],
-            'Sociology': ['Social Theory', 'Research Methods', 'Social Issues'],
-            'Economics': ['Microeconomics', 'Macroeconomics', 'Econometrics'],
-            'Law': ['Constitutional Law', 'Criminal Law', 'Civil Law'],
-            'Human Geography': ['Population', 'Culture', 'Urban'],
-            'Political Science': ['Political Theory', 'International Relations', 'Comparative Politics'],
-            'Social Science': ['All Topics', 'Browse All', 'Explore'],
-            'Hobbies': ['Arts & Crafts', 'Collecting', 'Recreation'],
-            'Sports': ['Rules', 'History', 'Statistics'],
-            'Computer Skills': ['Software', 'Hardware', 'Networking'],
-            'Other': ['All Topics', 'Browse All', 'Explore']
-        };
-
-        const links = bookNavLinks[bookTitle] || ['Ethics', 'Theology', 'Logic'];
-        const navLinksContainer = document.getElementById('bookNavLinks');
-        navLinksContainer.innerHTML = links.map(link => {
-            const isActive = category === link;
-            return `<a href="book-flashcards.html?book=${encodeURIComponent(bookTitle)}&author=${encodeURIComponent(bookAuthor)}&category=${encodeURIComponent(link)}" class="book-flashcards-nav-link ${isActive ? 'active' : ''}">${link}</a>`;
-        }).join('');
-
-        // Generate flashcard sets grid
-        const gridContainer = document.getElementById('flashcardsGrid');
-        gridContainer.innerHTML = sampleFlashcardSets.map(set => `
-            <div class="book-flashcard-card">
-                <div class="book-flashcard-badges">
-                    ${set.teacher ? '<span class="book-flashcard-badge">Teacher</span>' : ''}
-                    <span class="book-flashcard-badge terms">${set.terms} terms</span>
-                </div>
-                <h3 class="book-flashcard-title">${set.title}</h3>
-                <div class="book-flashcard-meta">
-                    <div class="book-flashcard-user">
-                        <div class="book-flashcard-avatar">${set.avatar}</div>
-                        <span class="book-flashcard-username">${set.username}</span>
-                    </div>
-                    <button class="book-flashcard-preview-btn">Preview</button>
-                </div>
-            </div>
-        `).join('');
-
-        // Tab switching
-        document.querySelectorAll('.book-flashcards-tab').forEach(tab => {
-            tab.addEventListener('click', function () {
-                document.querySelectorAll('.book-flashcards-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Subjects dropdown functionality
+        // Subjects dropdown hover functionality
         document.addEventListener('DOMContentLoaded', function () {
             const categoryItems = document.querySelectorAll('.subject-category-item');
             const itemLists = document.querySelectorAll('.subject-items-list');
+            const dropdownToggle = document.querySelector('#subjectsDropdown');
+            const subjectsWrapper = document.querySelector('.subjects-dropdown-wrapper');
 
+            // Make dropdown show on hover
+            if (dropdownToggle && subjectsWrapper) {
+                let dropdownInstance = null;
+                let hoverTimeout = null;
+
+                // Show dropdown on hover
+                subjectsWrapper.addEventListener('mouseenter', function () {
+                    clearTimeout(hoverTimeout);
+                    if (!dropdownInstance) {
+                        dropdownInstance = new bootstrap.Dropdown(dropdownToggle, {
+                            trigger: 'manual'
+                        });
+                    }
+                    dropdownInstance.show();
+                });
+
+                // Hide dropdown when mouse leaves
+                subjectsWrapper.addEventListener('mouseleave', function () {
+                    hoverTimeout = setTimeout(function () {
+                        if (dropdownInstance) {
+                            dropdownInstance.hide();
+                        }
+                    }, 200);
+                });
+            }
+
+            // Handle category item hover
             categoryItems.forEach(item => {
                 item.addEventListener('mouseenter', function () {
                     const category = this.getAttribute('data-category');
